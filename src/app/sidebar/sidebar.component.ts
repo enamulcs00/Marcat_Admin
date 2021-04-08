@@ -99,7 +99,7 @@ export class SidebarComponent implements OnInit {
   }
   goToEndorsement() {
     if (this.roles == 'celebrity') {
-
+      this.router.navigate(['endorsedProduct']);
     } else {
       this.router.navigate(['endorsement']);
     }

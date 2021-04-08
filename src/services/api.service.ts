@@ -851,6 +851,11 @@ export class ApiService {
   }
 
 
+  postTranlastions(body): Observable<any> {
+    // console.log("hello");
+    return this.http.post(this.BASE_URL + "/admin/translation/6064bc2c1b5c5e46e0007f61", body, this.getHeaders());
+  }
+
 
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {
