@@ -102,35 +102,16 @@ export class ManageCelebrityComponent implements OnInit {
   }
 
   acceptVendor(id) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "What will be the Commission percentage for the Celeberity",
-      icon: "info",
-      showCancelButton: true,
-      input: 'number',
-      confirmButtonColor: "#3085D6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-      cancelButtonText: "Cancel",
-      allowOutsideClick: true
-    }).then(result => {
-      if (result.isConfirmed) {
-        if (result.value) {
-          let body = {
-            id: id,
-            sellerProfileStatus: 1,
-            commission: result.value,
-          }
-          this.acceptReject(body)
-        } else {
-          this.commonService.errorToast('Please add commission.')
-        }
-      } else {
-        console.log("nothing changed");
 
-      }
+    let body = {
+      id: id,
+      sellerProfileStatus: 1,
 
-    })
+    }
+    this.acceptReject(body)
+
+
+
   }
   viewDocument(id) {
     this.router.navigate(['document'], { queryParams: { 'id': id, 'role': 'celebrity' } })
@@ -171,7 +152,7 @@ export class ManageCelebrityComponent implements OnInit {
 
   }
   changeUserfeatured(id, status) {
-    debugger
+
     let temp = id
     for (let i = 0; i <= this.vendorList.length; i++) {
       if (this.vendorList[i]._id == temp) {

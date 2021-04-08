@@ -98,7 +98,12 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   goToEndorsement() {
-    this.router.navigate(['endorsement']);
+    if (this.roles == 'celebrity') {
+
+    } else {
+      this.router.navigate(['endorsement']);
+    }
+
   }
 
   goToCelebritymanagement() {

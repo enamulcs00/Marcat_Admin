@@ -82,8 +82,10 @@
             <li (click)="goTocategory()" *ngIf="roles=='admin' || (roles=='subAdmin' &&
                 this.user.permissions.category.read==true)">Category</li>
 
-            <ng-container *ngIf="roles=='admin' || roles=='subAdmin'; else elseTemplate">
-
+            <ng-container
+                *ngIf="roles=='admin' || (roles=='subAdmin' && this.user.permissions.adminEndorsment.read==true); else elseTemplate">
+                <li> <a [routerLink]="['/admin-endorment']" routerLinkActive="router-link-active">Admin Endorsment</a>
+                </li>
             </ng-container>
             <ng-template #elseTemplate>
                 <li (click)="goToEndorsement()" *ngIf="celebrityType!=2">

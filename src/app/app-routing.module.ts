@@ -91,6 +91,7 @@ import { PromoCodeManagementComponent } from './promo-code-management/promo-code
 import { EditPromoCodeComponent } from './edit-promo-code/edit-promo-code.component';
 import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list.component';
 import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
+import { AdminEndormentComponent } from './admin-endorment/admin-endorment.component';
 
 const routes: Routes = [
   // {
@@ -339,6 +340,16 @@ const routes: Routes = [
   {
     path: 'transaltions',
     component: GetTranslationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'transaltions',
+    component: GetTranslationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin-endorment',
+    component: AdminEndormentComponent,
     canActivate: [AuthGuard]
   },
   {

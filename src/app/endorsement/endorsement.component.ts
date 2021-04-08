@@ -154,6 +154,13 @@ export class EndorsementComponent implements OnInit {
   }
 
 
+
+  goToproduct(i) {
+    this.router.navigate(['endorsmentProduct'], { queryParams: { "id": i } })
+  }
+
+
+
   acceptRequest(id, status) {
 
     let body = {
@@ -267,10 +274,6 @@ export class EndorsementComponent implements OnInit {
 
   }
 
-
-  goToproduct(i) {
-    this.router.navigate(['endorsmentProduct'], { queryParams: { "id": i } })
-  }
 
 
 

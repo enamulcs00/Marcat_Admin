@@ -105,6 +105,7 @@ import { EditPromoCodeComponent } from './edit-promo-code/edit-promo-code.compon
 import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list.component';
 import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
 import { GetTranslationsComponent } from './get-translations/get-translations.component';
+import { AdminEndormentComponent } from './admin-endorment/admin-endorment.component';
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -207,6 +208,7 @@ import { GetTranslationsComponent } from './get-translations/get-translations.co
     SubAdminListComponent,
     SubAdminAddComponent,
     GetTranslationsComponent,
+    AdminEndormentComponent,
 
 
 
