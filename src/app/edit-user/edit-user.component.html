@@ -1,0 +1,135 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Edit User </h1>
+                    <a (click)="goTomanageUser()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <form [formGroup]="editUserForm">
+                        <ul>
+                            <li>
+                                <label>First Name<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="First Name" formControlName="firstName"
+                                        name="name">
+                                    <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
+                                        <div *ngIf="f.firstName.errors.required">
+                                            First Name is required.
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Last Name<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="Last Name" formControlName="lastName"
+                                        name="name">
+                                    <div *ngIf="submitted && f.lastName.errors" class="custom-invalid">
+                                        <div *ngIf="f.adlastNamedress.errors.required">
+                                            Last Name is required.
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Email<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="User Email" formControlName="UserEmail"
+                                        name="name" name="name">
+                                    <div *ngIf="submitted && f.UserEmail.errors" class="custom-invalid">
+                                        <div *ngIf="f.UserEmail.errors.required">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="f.UserEmail.errors.email">
+                                            Valid Email is required.
+                                        </div>
+                                    </div>
+                                </mat-form-field>
+                            </li>
+
+                            <li>
+                                <label> Phone number <span class="red">*</span></label>
+                                <div class="cardList">
+                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
+                                        <input matInput type="text" placeholder="" id="firstInput"
+                                            formControlName="userCountryCode" name="countryCode" name="name">
+                                        <div *ngIf="submitted && f.userCountryCode.errors" class="custom-invalid">
+                                            <div *ngIf="f.userCountryCode.errors.required">
+                                                Country Code is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
+                                        <input matInput type="text" placeholder="Phone Number"
+                                            formControlName="UserPhoneNumber" id="secondInput" name="name" name="name">
+
+
+                                        <div *ngIf="submitted && f.UserPhoneNumber.errors" class="custom-invalid">
+                                            <div *ngIf="f.UserPhoneNumber.errors.required">
+                                                Phone Number is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </li>
+
+                            <li>
+                                <label>Number of Order <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" readonly formControlName="numberOfOrder"
+                                        placeholder="Number of Order" name="numberOfOrder">
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Completed Order <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" readonly formControlName="completedOrder"
+                                        placeholder="Completed Order" name="name" name="name">
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Rejected Order <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" readonly formControlName="rejectedOrder"
+                                        placeholder="Rejected Order" name="name" name="name">
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Total amount paid <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" readonly formControlName="totalAmountPaid"
+                                        placeholder="Total Amount Paid" name="name" name="name">
+
+                                </mat-form-field>
+                            </li>
+
+                        </ul>
+                        <div class="update_button">
+                            <button mat-button (click)="updateUser()">
+                                Update
+                            </button>
+                            <button mat-button class="cancel_button">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-----End input fields------>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Sub-Category</h1>
+                    <div class="top_subheading_add">
+                     <!-- <a (click)="goTosubcategory()"><span>+</span>Sub Category</a> -->
+                        <a (click)="gotoaddsubcategory()"><span>+</span>Add Sub Category</a>
+                    </div>
+                </div>
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>All</option>
+                            <option>Name</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Sr. No.</th>                           
+                            <th>Image</th>                           
+                            <th>Sub-Category Name</th>  
+                            <th>Created Date</th>  
+                            <th class="action_bx">Action</th>
+                        </tr>
+                        <tr>
+                        <td>1.</td>
+                            
+                        <td class="product_img">
+                            <figure>
+                                <img src="../../assets/images/makeup.png" alt="">
+                            </figure>
+                        </td>
+                            <td>Test</td>                              
+                            <td>20, June 2019</td>                              
+                            <td>
+                                <div class="action">
+                                   <ul>
+                                        <li class="show" (click)="gotoviewsubcategory()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)=" gotoeditsubcategory()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                                
+                            <td class="product_img">
+                                <figure>
+                                    <img src="../../assets/images/makeup.png" alt="">
+                                </figure>
+                            </td>
+                                <td>Test</td>  
+                                <td>20, June 2019</td>                            
+                                <td>
+                                    <div class="action">
+                                        <ul>
+                                            <li class="show" (click)="gotoviewsubcategory()"><i class="fa fa-eye"></i></li>
+                                            <li class="edit" (click)=" gotoeditsubcategory()"><i class="fa fa-pencil fa-fw"></i></li>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                    
+                                <td class="product_img">
+                                    <figure>
+                                        <img src="../../assets/images/makeup.png" alt="">
+                                    </figure>
+                                </td>
+                                    <td>Test</td>  
+                                    <td>20, June 2019</td>                            
+                                    <td>
+                                        <div class="action">
+                                            <ul>
+                                                <li class="show" (click)="gotoviewsubcategory()"><i class="fa fa-eye"></i></li>
+                                                <li class="edit" (click)=" gotoeditsubcategory()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                        
+                                    <td class="product_img">
+                                        <figure>
+                                            <img src="../../assets/images/makeup.png" alt="">
+                                        </figure>
+                                    </td>
+                                        <td>Test</td>  
+                                        <td>20, June 2019</td>                            
+                                        <td>
+                                            <div class="action">
+                                                <ul>
+                                                    <li class="show" (click)="gotoviewsubcategory()"><i class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)=" gotoeditsubcategory()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                    <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                    </table>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+  </div>
+        </div>
+    </div>
+</div>

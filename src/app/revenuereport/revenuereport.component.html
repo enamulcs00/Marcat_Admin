@@ -1,0 +1,210 @@
+<div id="wrapper" *ngIf="roles=='admin' || roles=='subAdmin'">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Report of Revenue</h1>
+
+                    <div class="input_divs2 input_button input_button2">
+                        <button mat-button (click)="goToreveuegraph()">View Revenue Graph</button>
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="allOrders" class="tab-pane fade in active">
+                        <div class="inner_content">
+                            <div class="outer_table">
+                                <div class="search_fields">
+                                    <div class="filters Booking_status">
+                                        <mat-form-field class="example-full-width">
+                                            <!-- <mat-label>Filter<span class="red">*</span></mat-label> -->
+                                            <mat-select placeholder="Filter" [(ngModel)]="topSeller"
+                                                (selectionChange)="filterSelected($event)">
+                                                <mat-option *ngIf="flag==true" value="0">
+                                                    Remove Filter
+                                                </mat-option>
+
+                                                <mat-option value="1">
+                                                    Top Seller
+                                                </mat-option>
+                                                <mat-option value="2">
+                                                    Least Seller
+                                                </mat-option>
+
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="search_inner_fiels">
+                                        <div class="filters Booking_status">
+                                            <div class="search_with_icons">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Search</mat-label>
+                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                                </mat-form-field>
+                                                <button mat-button matSuffix mat-icon-button> <i
+                                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                        (click)="searchMethod()"></i>
+                                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                        (click)="clearSearch()"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div *ngIf="flagData">
+                                    <h2>No Data Found</h2>
+                                </div>
+                                <div *ngIf="!flagData" class="table-responsive">
+                                    <table>
+                                        <tr>
+                                            <th>Sr.no</th>
+                                            <th>Seller</th>
+                                            <th>Email</th>
+                                            <th>Number of Sale</th>
+                                            <th>Total Price</th>
+                                            <th>Total Tax</th>
+                                            <th>Total Commission Earned</th>
+
+                                        </tr>
+                                        <tr *ngFor="let item of revenueReport; let i=index">
+                                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                            <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
+                                            <td>{{item.seller.email}}</td>
+                                            <td>{{item.count}}</td>
+                                            <td>{{item.totalPrice|number}}</td>
+                                            <td>{{item.tax|number}}</td>
+                                            <td>{{item.commission|number}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <!-----start pagination-->
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                                (page)="pageEvent = revenueReportListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+                            <!-----end pagination-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wrapper" *ngIf="roles!='admin'">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Report of Revenue</h1>
+
+                    <!-- <div class="input_divs2 input_button input_button2">
+                         <button mat-button (click)="goToreveuegraph()">View Revenue Graph</button> -->
+                    <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> 
+                    </div> -->
+                </div>
+                <div class="tab-content">
+                    <div id="allOrders" class="tab-pane fade in active">
+                        <div class="inner_content">
+                            <div class="outer_table">
+                                <div class="search_fields">
+                                    <div class="filters Booking_status">
+                                        <mat-form-field class="example-full-width">
+                                            <!-- <mat-label>Filter<span class="red">*</span></mat-label> -->
+                                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                                (selectionChange)="filterSelected($event)">
+                                                <mat-option *ngIf="flag==true" value="">
+                                                    Remove Filter
+                                                </mat-option>
+
+                                                <mat-option value="active">
+                                                    Active
+                                                </mat-option>
+                                                <mat-option value="inactive">
+                                                    Inactive
+                                                </mat-option>
+
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="search_inner_fiels">
+                                        <div class="filters Booking_status">
+                                            <div class="search_with_icons">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Search</mat-label>
+                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                                </mat-form-field>
+                                                <button mat-button matSuffix mat-icon-button> <i
+                                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                        (click)="searchMethod()"></i>
+                                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                        (click)="clearSearch()"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div *ngIf="flagData">
+                                    <h2>No Data Found</h2>
+                                </div>
+
+                                <div *ngIf="!flagData" class="table-responsive">
+                                    <table>
+                                        <tr>
+                                            <th>Sr.no</th>
+                                            <th>Product Name</th>
+                                            <th>Product Category</th>
+                                            <th>Product Price</th>
+                                            <th>Is Endorsed</th>
+                                            <th>Total Tax</th>
+                                            <th>Total Sale</th>
+                                            <th>Total Commission Earned</th>
+
+                                        </tr>
+                                        <tr *ngFor="let item of revenueReportVendor; let i=index">
+                                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                            <td>{{item.products.name}} </td>
+                                            <td>{{item.products.category.name}} </td>
+                                            <td>{{item.products.price}} </td>
+                                            <td>{{item.products.isEndorse}} </td>
+
+                                            <td>{{item.totalPrice|number}}</td>
+                                            <td>{{item.tax|number}}</td>
+                                            <td>{{item.commission|number}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <!-----start pagination-->
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                                (page)="pageEvent = revenueReportListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+                            <!-----end pagination-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

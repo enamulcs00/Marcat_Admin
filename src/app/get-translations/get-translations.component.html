@@ -1,0 +1,288 @@
+<app-navbar></app-navbar>
+<div id="wrapper">
+
+   <div id="content-wrapper">
+      <div id="content" class="content-box">
+         <app-sidebar></app-sidebar>
+         <div class="container-fluid">
+            <mat-card class="ml-auto mr-auto ">
+               <mat-card-content>
+                  <form [formGroup]="dataForm">
+                     <ng-container>
+                        <div class="table-responsive mt-3">
+                           <table class="table">
+                              <thead>
+                                 <tr>
+                                    <th>String</th>
+                                    <th>English</th>
+                                    <th>Arabic</th>
+
+
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <ng-container *ngIf="hasKey">
+
+
+                                    <tr formGroupName="buy_now">
+                                       <td>{{dataForm.get('buy_now').value.name}}</td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="name" class="form-control" type="text">
+                                             <!-- <label class="custom-control-label" for="customCheck3"></label> -->
+                                          </div>
+
+
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="name_ar" class="form-control" type="text">
+                                             <!-- <label class="custom-control-label" for="customCheck4"></label> -->
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="sub_total">
+                                       <td>{{dataForm.get('buy_now').value.name}}</td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck5" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck5"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck6" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck6"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="vendor">
+                                       <td>{{dataForm.get('buy_now').value.name}}</td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck8" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck8"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck9" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck9"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="celebrity">
+                                       <td>{{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck10" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck10"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck11" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck11"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="category">
+                                       <td>{{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck12" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck12"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck13" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck13"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="brand">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck14" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck14"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck15" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck15"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="inventory">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck16" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck16"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck17" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck17"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="banner">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck18" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck18"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck19" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck19"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="discount">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck20" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck20"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck21" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck21"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="orderList">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck22" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck22"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck23" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck23"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="setting">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck24" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck24"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck25" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck25"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+
+                                    <tr formGroupName="reviews">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck28" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck28"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck29" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck29"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="subadmin">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck28" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck28"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck29" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck29"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr formGroupName="revenue">
+                                       <td> {{dataForm.get('buy_now').value.name}} </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="read" class="custom-control-input"
+                                                id="customCheck28" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck28"></label>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="custom-control custom-checkbox">
+                                             <input formControlName="write" class="custom-control-input"
+                                                id="customCheck29" type="checkbox">
+                                             <label class="custom-control-label" for="customCheck29"></label>
+                                          </div>
+                                       </td>
+                                    </tr>
+
+                                 </ng-container>
+                              </tbody>
+
+                           </table>
+                        </div>
+                     </ng-container>
+
+
+
+                     <button mat-raised-button color="primary">Submit</button>
+
+
+
+                  </form>
+               </mat-card-content>
+
+            </mat-card>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,84 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Vendor Sales Report</h1>
+                    <div class="right_side_buttons">
+                        <a (click)="back()">Go Back</a>
+
+                    </div>
+                </div>
+                <div class="outer_table">
+                    <div class="search_fields">
+                        <div class="filters Booking_status">
+                            <label>Filter</label>
+                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                <option *ngIf="flag==true" value="">Remove Filter</option>
+                                <option *ngIf="flag==false" value=""></option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <label>Search</label>
+                                <div class="search_with_icons">
+                                    <mat-form-field [floatLabel]="'never'">
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                        (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+
+                                <th>Sr no</th>
+                                <th>Vendor Name</th>
+                                <th>Vendor Address</th>
+                                <th>Vendor Phone Number </th>
+                                <th>Vendor Email ID</th>
+                                <th>Vendor Product List</th>
+                                <th>Total revenue generated</th>
+                                <th>Sales Graph</th>
+                            </tr>
+                            <tr *ngFor="let item of vendorList; let i=index">
+
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>
+                                <td>{{item.countryCode}}-{{item.phone}}</td>
+                                <td>{{item.email}}</td>
+                                <td class="Booking_status" (click)="goToproduct(i)">
+                                    <a class="accept_button">View List</a></td>
+                                <td>{{item.totalRevenue|number}}</td>
+                                <td class="Booking_status">
+
+                                    <a class="accept_button" (click)="goToreportGraph(item._id)">View Report Graph</a>
+
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = vendorSalesReportListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>

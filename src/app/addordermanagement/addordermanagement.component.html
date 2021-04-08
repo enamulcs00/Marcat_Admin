@@ -1,0 +1,72 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Add Order</h1>
+                    <a (click)="goToordermanagement()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Customer Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Ordered Items<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Customer Contact<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Booking Status<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                                        {{food.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Booking Notes<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'" class="example-full-width textarea_kandil" >
+                                <textarea matInput placeholder=""></textarea>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Expected Time<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
+                                        {{Ready.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </div>
+                <!-----End input fields------>
+                <div class="update_button">
+                    <button mat-button>
+                        <span><i class="fa fa-window-restore"></i>
+                        </span>
+                        Add
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

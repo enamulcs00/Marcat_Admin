@@ -1,0 +1,44 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>View User</h1>
+                    <a (click)="goTomanageUser()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled value="Rohit">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Email<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled value="rohit@gmail.com">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Phone Number<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled value="0987654321">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Status<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled value="enabled">
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </div>
+                <!-----End input fields------>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+.card {
+    width: 32%;
+    min-height: 100px;
+    margin-right: 40px;
+}
+
+.dashboard_boxs {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.left_heading h3 {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: normal;
+    color: #000;
+}
+
+.bottom_numbers p {
+    font-size: 18px;
+    line-height: normal;
+    font-weight: 400;
+}
+
+.charts {
+    margin-top: 5rem;
+}
+
+// .card.border-left-warning.shadow {
+//     margin-right: 0px;
+// }
+
+.charts {
+    margin-top: 50px;
+}
+
+.charts ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+    flex-wrap: wrap;
+}
+
+.charts ul li {
+    width: 48.3%;
+    height: auto;
+    overflow: hidden;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 4px;
+    margin-bottom: 50px;
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15) !important;
+}
+
+.chart_title {
+    border-bottom: 2px solid #a4abb847;
+    margin-bottom: 3rem;
+}
+
+.chart_title p {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 0 6px;
+}
+
+.outer_table table {
+    width: 124%;
+}
+
+select {
+    padding: 5px 3px;
+}
+
+.filters.Booking_status select {
+    padding: 8px 12px;
+}
+
+.sub_heading {
+    margin-bottom: 0rem;
+}
+
+
+
+
+
+
+
+.chart_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+.chart_title .filters {
+    width: 300px;
+    margin: 0;
+    float: right;
+    text-align: right;
+}
+
+@media(max-width:1500px) {
+    .charts ul li {
+        width: 49%;
+        height: auto;
+    }
+
+    .left_heading h3 {
+        font-size: 18px;
+    }
+}

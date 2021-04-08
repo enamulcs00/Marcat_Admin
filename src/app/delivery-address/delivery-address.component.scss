@@ -1,0 +1,42 @@
+.address {
+    width: 800px;
+    margin: 10px 5px;
+
+
+}
+
+
+
+.card {
+    max-width: 500px;
+    margin: 50px 100px !important;
+
+}
+
+.complete_address {
+    float: left;
+    padding: 0px 20px;
+}
+
+.edit {
+    float: right;
+}
+
+.edit_card {
+    box-shadow: 5px 5px #c3c3c5;
+}
+
+
+.card1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 20px 5px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+    box-shadow: 5px 5px #c3c3c5;
+}

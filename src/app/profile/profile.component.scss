@@ -1,0 +1,99 @@
+.add_business_detail ul.nav {
+    display: -webkit-box;
+    display: flex;
+    width: 100%;
+    max-width:100%;justify-content: inherit;background: #fff;    margin-bottom: 25px;padding: 25px;  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);}
+    .add_business_detail ul.nav li{width: auto;margin-bottom: 0;}
+    .add_business_detail ul.nav li a{color: #000;border-radius: 0;padding: 12px 32px;  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);margin-right: 35px;}
+    .add_business_detail .nav>li>a:hover, .nav>li>a:focus {
+        text-decoration: none;
+        color: #fff;
+    background-color: #b9c9e0;
+    }
+    .businiess_outer{width: 100%;display: inline-block;vertical-align: middle;}
+    .profile_image_detail {
+        width: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        background: #404553;
+        padding: 40px 20px;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+    .profile_image_detail img{max-width: 120px;}
+    .profile_image_detail h2 {
+        color: #fff;
+        padding: 15px 0 0px;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    .personal_deatil {
+        background: #fff;
+        padding: 30px;
+        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.11);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+    .personal_deatil ul{width: 100%;display: inline-block;vertical-align: middle;}
+    .personal_deatil ul li{width: 50%;display: inline-block;vertical-align: middle ;
+        margin-bottom: 15px;font-size: 18px;}
+        .personal_deatil ul li.company_logo{width: 100%;display: inline-block;vertical-align: middle ;text-align: center;
+          }
+          .personal_deatil ul li.company_logo img{padding: 10px 0 25px;}
+    .follow_all ul li {
+        width: auto;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 15px;
+    }
+    .follow_all ul {
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+    }
+    .follow_all {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .follow_all ul li.follow_button a {
+        background: #ff9350;
+        padding: 4px 10px;
+        border-radius: 2px;
+        color: #fff;
+    }
+    .follow_all ul li a {
+        background: #fff;
+        padding: 8px 10px;
+        border-radius: 2px;
+        color: #404553;
+        font-size: 14px;
+    }
+    .follow_all ul li.follow_button a span{padding-right: 5px;}
+    .add_business_detail .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{background-color: #404553;color: #fff;}
+
+  
+    
+    .social_icon ul li {
+        margin: 10px;
+    }
+    .social_icon ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin:10px 0;
+    }
+
+    .apple_store_link ul li {
+        margin: 0 10px;
+    }
+    .apple_store_link ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

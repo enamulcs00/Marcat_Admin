@@ -1,0 +1,41 @@
+.add_user_list ul li.social_links_name {
+    width: 100%;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    color: #404553;
+    margin:10px 0 15px;
+}
+.add_user_list ul li input.mat-input-element {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+
+// #firstInput {
+//   width: 20%;
+//   display: inline-block;
+//   float: left;
+//   border-bottom-right-radius: 0;
+//   border-top-right-radius: 0;
+// }
+// #secondInput {
+//   width: 80%;
+//   display: inline-block;
+//   float: left;
+//   border-bottom-left-radius: 0;
+//   border-top-left-radius: 0;
+//   border-left:0px;
+// }
+.custom-invalid{
+        color: red;
+        display: block;
+
+}
+
+ .cardList {
+  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }

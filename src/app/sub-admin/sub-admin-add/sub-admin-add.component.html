@@ -1,0 +1,433 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="login_div2">
+                <div class="container-fluid">
+                    <div class="sub_heading">
+                        <h2>{{title}} Sub-Admin </h2>
+                        <div class="input_divs2 input_button input_button2">
+                            <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="conta_iner">
+                        <div>
+                            <form [formGroup]="addAdminForm">
+                                <div class="form-body">
+                                    <div class="card-body">
+                                        <div class="row p-t-20">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">First Name</label>
+                                                    <input type="text" formControlName="firstName" id="firstName"
+                                                        class="form-control" placeholder="John doe">
+                                                    <div class="text-danger" *ngIf="(addAdminForm.get('firstName').touched ||
+                      submitted) && addAdminForm.get('firstName').hasError('required')">
+                                                        <small> Please enter First name</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Last Name</label>
+                                                    <input type="text" formControlName="lastName" id="firstName"
+                                                        class="form-control" placeholder="John doe">
+                                                    <div class="text-danger" *ngIf="(addAdminForm.get('lastName').touched ||
+                      submitted) && addAdminForm.get('lastName').hasError('required')">
+                                                        <small> Please enter Last name</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!--/row-->
+                                        <div class="row ">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Contact No</label>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <input type="text" formControlName="countryCode"
+                                                                id="firstName" class="form-control"
+                                                                placeholder="Country Code.">
+                                                            <div class="text-danger" *ngIf=" (addAdminForm.get('countryCode').touched ||
+                      submitted)&&addAdminForm.get('countryCode').hasError('required')">
+                                                                <small> Please enter country code</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input type="number" formControlName="phone" id="firstName"
+                                                                class="form-control" placeholder="Contact No.">
+                                                            <div class="text-danger" *ngIf="(addAdminForm.get('phone').touched ||
+                      submitted) && addAdminForm.get('phone').hasError('required')">
+                                                                <small> Please enter phone</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Email</label>
+                                                    <input type="email" id="email" formControlName="email"
+                                                        class="form-control form-control-danger"
+                                                        placeholder="example@gmail.com">
+                                                    <div class="text-danger" *ngIf="(addAdminForm.get('email').touched ||
+                      submitted) && addAdminForm.get('email').hasError('required')">
+                                                        <small> Please enter email</small>
+                                                    </div>
+                                                    <div class="text-danger" *ngIf="(addAdminForm.get('email').touched ||
+                      submitted) && addAdminForm.get('email').hasError('email')">
+                                                        <small> Please enter a valid e-mail</small>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        <!--/row-->
+
+
+                                        <div class="table-responsive mt-3">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>View</th>
+                                                    <th>Add/Edit</th>
+
+
+                                                </tr>
+                                                <tbody>
+
+                                                    <tr formGroupName="users">
+                                                        <td>Users Management</td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck3"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck3"></label>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck4"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck4"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="product">
+                                                        <td>Product Management</td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck5"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck5"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck6"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck6"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="vendor">
+                                                        <td>Vendor Management</td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck8"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck8"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck9"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck9"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="celebrity">
+                                                        <td>Celebrity Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck10"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck10"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck11"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck11"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="category">
+                                                        <td>Category Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck12"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck12"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck13"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck13"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="brand">
+                                                        <td> Brand Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck14"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck14"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck15"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck15"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="inventory">
+                                                        <td> Inventory Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck16"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck16"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck17"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck17"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="banner">
+                                                        <td> Banner Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck18"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck18"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck19"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck19"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="discount">
+                                                        <td> Discount </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck20"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck20"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck21"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck21"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="orderList">
+                                                        <td> Order Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck22"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck22"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck23"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck23"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="setting">
+                                                        <td> Settings </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck24"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck24"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck25"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck25"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr formGroupName="reviews">
+                                                        <td> Review Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck28"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck28"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck29"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck29"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="subadmin">
+                                                        <td> Sub-Admin Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck28"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck28"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck29"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck29"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr formGroupName="revenue">
+                                                        <td> Revenue Management </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="read"
+                                                                    class="custom-control-input" id="customCheck28"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck28"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input formControlName="write"
+                                                                    class="custom-control-input" id="customCheck29"
+                                                                    type="checkbox">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck29"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="form-actions " *ngIf="flagComp!='view'">
+                                            <button type="submit" (click)="save()" class="btn btn-success mr-3">
+                                                <i class="fa fa-check"></i> {{flagComp=='edit'? 'Update':'Save'}}
+                                            </button>
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

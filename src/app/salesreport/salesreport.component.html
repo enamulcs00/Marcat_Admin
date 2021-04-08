@@ -1,0 +1,120 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Report of sales</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goTosalesgraph()">View Sales Graph</a>
+                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="allOrders" class="tab-pane fade in active">
+                        <div class="inner_content">
+                            <div class="outer_table">
+                                <div class="search_fields">
+                                    <div class="filters Booking_status">
+                                        <label>Filter</label>
+                                        <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                            <option *ngIf="flag==true" value="">Remove Filter</option>
+                                            <option *ngIf="flag==false" value=""></option>
+                                            <option *ngFor="let item of filterList" value="{{item.value}}">
+                                                {{item.viewValue}}
+                                            </option>
+                                            <!-- <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option> -->
+                                            <!-- <option value="lastName"></option> -->
+                                        </select>
+                                    </div>
+                                    <div class="search_inner_fiels">
+                                        <div class="filters Booking_status">
+                                            <label>Search</label>
+                                            <div class="search_with_icons">
+                                                <mat-form-field [floatLabel]="'never'">
+                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                                </mat-form-field>
+                                                <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                    (click)="searchMethod()"></i>
+                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                    (click)="clearSearch()"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>Product Name</th>
+                                            <th>Product category</th>
+                                            <th>Product sub category</th>
+
+                                            <th>ISBN Number</th>
+                                            <th>SKU Number</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>User name</th>
+                                            <th>User Address</th>
+                                            <th>Order Date</th>
+                                            <th>Expected Delivery Date</th>
+                                            <th>Delivery Date</th>
+                                            <th>Status</th>
+                                            <!-- <th class="action_bx">Action</th> -->
+                                        </tr>
+
+
+
+                                        <tr *ngFor="let item of salesList; let i=index">
+                                            <td>{{item.orderId}}</td>
+                                            <td>{{item.productId.name}}</td>
+                                            <td>{{item.productId.category.name}}</td>
+                                            <td>{{item.productId.subCategory.name}}</td>
+                                            <td>{{item.productId.isbn}}</td>
+                                            <td>{{item.productId.sku}}</td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>{{item.totalAmount|number}}</td>
+                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
+                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}
+                                                {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
+                                                {{item.deliveryAddress.postalCode}}</td>
+                                            <td>{{item.createdAt|date}}</td>
+                                            <td>{{item.deliveryDate==null?"Date not assigned yet":item.deliveryDate|date}}
+                                            </td>
+                                            <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
+                                            </td>
+                                            <td>
+                                                {{item.status}}
+
+                                            </td>
+                                            <td>
+                                                <!-- <div class="action">
+                                                      <ul>
+                                                          <li class="show" (click)="goToviewOrder(item._id)"><i
+                                                                  class="fa fa-eye"></i></li>
+                                                          <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li> -->
+                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> 
+                                                      </ul>
+                                                  </div> -->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-----start pagination-->
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                                (page)="pageEvent = productListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+                            <!-----end pagination-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

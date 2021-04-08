@@ -1,0 +1,35 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>USER PRIVACY AND POLICY</h1>
+                    <div class="top_subheading_add">
+                        <!-- <a (click)="goToaddcategory()"><span>+</span>Add Category</a> -->
+                        <!-- <a class="add_excelsheet">Import excel sheet</a> -->
+                    </div>
+                </div>
+             
+                 <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
+<div class="form-group has-feedback" 
+      [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }">
+	<ckeditor [(ngModel)]="mycontent" 
+            #myckeditor="ngModel"
+            name="myckeditor"
+            required
+            [config]="ckeConfig" 
+            debounce="500" 
+            (paste)="onPaste($event)"
+            (change)="onChange($event)">
+	</ckeditor>
+  <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div>
+</div>
+<button [disabled]="myForm.invalid" class="btn btn-primary">Save</button>
+</form>
+  </div>
+        </div>
+    </div>
+   
+</div>

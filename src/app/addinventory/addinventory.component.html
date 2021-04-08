@@ -1,0 +1,121 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Update Inventory</h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <button class="btn_back" mat-button (click)="goToinventory()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <form [formGroup]="updateInventoryForm">
+                    <!-----start input fields------>
+                    <div class="add_user_list">
+                        <ul>
+                            <li>
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Product Id <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Product Id" formControlName="productId"
+                                        name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('productId').hasError('required')">
+                                        Product Id is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Product Name <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Product Name" formControlName="productName"
+                                        name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('productName').hasError('required')">
+                                        Product Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Normal Stock <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Normal Stock" formControlName="normalStock"
+                                        name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('normalStock').hasError('required')">
+                                        Normal Stock is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Over Stock <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Over Stock" formControlName="overStock"
+                                        placeholder="" name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('overStock').hasError('required')">
+                                        Over Stock is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Current Quantity <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Current Quantity"
+                                        formControlName="currentQuantity" placeholder="" name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('currentQuantity').hasError('required')">
+                                        Current Quantity is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Price <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Price" formControlName="price"
+                                        placeholder="" name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('price').hasError('required')">
+                                        Price is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Minimun purchase Quantity <span class="red">*</span></mat-label>
+                                    <input readonly matInput type="text" placeholder="Minimun purchase Quantity"
+                                        formControlName="minimumPurchaseQuantity" placeholder="" name="name">
+                                    <mat-error
+                                        *ngIf="updateInventoryForm.get('minimumPurchaseQuantity').hasError('required')">
+                                        Minimun purchase Quantity is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Updated Quantity <span class="red">*</span></mat-label>
+                                    <input matInput type="number" placeholder="Updated Quantity"
+                                        formControlName="updateQuantity" placeholder="" name="name">
+                                    <mat-error *ngIf="updateInventoryForm.get('updateQuantity').hasError('required')">
+                                        Updated Quantity is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-----End input fields------>
+                    <div class="update_button">
+                        <button mat-button (click)="onSubmit()">
+                            <span><i class="fa fa-window-restore"></i>
+                            </span>
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

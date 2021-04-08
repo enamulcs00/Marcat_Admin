@@ -1,0 +1,55 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Add Category</h1>
+                    <div class="top_subheading_add">
+                  <a (click)="goTocategory()">Back To List</a>
+                    </div>
+                </div>
+                <div class="flex_subcategory">
+               <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Category Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="Category Name" name="name" value="">
+                            </mat-form-field>
+                        </li>
+                        <li class="Booking_status">
+                            <label>SubCategory<span class="red">*</span></label>
+                             <select>
+                            <option>Choose SubCategory</option>
+                            <option>ABC</option>
+                            <option>CDE</option>
+                        </select>
+                       
+                        </li>
+                         <li> 
+                        <div class="border">
+                             <figure class="ipload_img_vehicle">
+                               <!-- <img src="../../images/ga"> -->
+                            </figure>
+                            <h5>Upload Category Image</h5>
+                            <input type="file" id="file-input" class="upload_file">
+                            </div>
+                        </li>
+                       
+                        </ul>
+                        <div class="update_button">
+                            <button mat-button>
+                                <span><i class="fa fa-window-restore"></i>
+                                </span>
+                                Add
+                            </button>
+                        </div>
+                        </div>
+                       
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

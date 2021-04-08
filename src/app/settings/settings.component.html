@@ -1,0 +1,444 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Settings</h1>
+
+                </div>
+                <div class="add_user_list">
+                    <form [formGroup]="updateSetting">
+                        <ul class="card forShadow">
+                            <li class="social_links_name"> Social Links Information</li>
+
+                            <li>
+                                <mat-form-field>
+                                    <mat-label>Facebook</mat-label>
+                                    <input matInput type="text" formControlName="facebook" placeholder="Facebook"
+                                        name="name">
+                                    <mat-error *ngIf="updateSetting.get('facebook').hasError('required')">
+                                        Facebook link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+                            <li>
+
+                                <mat-form-field>
+                                    <mat-label>Twitter</mat-label>
+                                    <input matInput type="text" placeholder="Twitter" formControlName="twitter"
+                                        name="name">
+                                    <mat-error *ngIf="updateSetting.get('twitter').hasError('required')">
+                                        Twitter link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+                            <li>
+
+                                <mat-form-field>
+                                    <mat-label>Instagram</mat-label>
+                                    <input matInput type="text" formControlName="instagram" placeholder="Instagram"
+                                        name="name">
+                                    <mat-error *ngIf="updateSetting.get('instagram').hasError('required')">
+                                        Instagram link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+                            <li>
+
+                                <mat-form-field>
+                                    <mat-label>LinkedIn</mat-label>
+                                    <input matInput type="text" formControlName="linkedIn" placeholder="LinkedIn"
+                                        name="name">
+                                    <mat-error *ngIf="updateSetting.get('linkedIn').hasError('required')">
+                                        LinkedIn link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+
+
+                            <li>
+
+                                <mat-form-field>
+                                    <mat-label>App Store Link</mat-label>
+                                    <input matInput type="text" placeholder="App Store Link"
+                                        formControlName="appStoreLink" name="name">
+                                    <mat-error *ngIf="updateSetting.get('appStoreLink').hasError('required')">
+                                        App Store link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+                            <li>
+
+                                <mat-form-field>
+                                    <mat-label>Google Play Link</mat-label>
+                                    <input matInput type="text" formControlName="googlePlayLink"
+                                        placeholder="Google Play Link" name="name">
+                                    <mat-error *ngIf="updateSetting.get('googlePlayLink').hasError('required')">
+                                        Google Play link is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </li>
+
+
+
+                            <li class="col-md-4">
+                                <label>Tax Percentage<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="number" placeholder="" name="name" formControlName="tax">
+                                </mat-form-field>
+                            </li>
+
+                            <li class="col-md-4">
+                                <label>Apply Tax<span class="red">*</span></label>
+                                <div>
+                                    <input type="checkbox" placeholder="" name="name" formControlName="applyTax">
+                                    {{updateSetting.controls['applyTax'].value==true?"Applied":""}}
+                                </div>
+
+                            </li>
+                            <li class="col-md-2">
+                                <button mat-button class="button" *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.setting.write==true)" (click)="updateTax()">Update Settings</button>
+                            </li>
+                        </ul>
+                    </form>
+
+
+                    <ul class="card forShadow">
+
+
+                        <li class="row">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label>Shipping Rates<span class="red">*</span></label>
+                                </div>
+
+                                <div class="col-md-2 pb-2">
+                                    <div *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.setting.write==true)" class="top_subheading_add">
+                                        <button mat-button (click)="openPopUp()" data-toggle="modal"
+                                            data-target="#largeModal"><i class="fa fa-plus"></i> Add
+                                            Shipping
+                                            Rate</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <table>
+                                    <tr>
+
+                                        <th>Country</th>
+                                        <th>Price range</th>
+                                        <th>Shipping charges in this range</th>
+                                        <th>Shipping charges below this range</th>
+                                        <th>Shipping charges above this range</th>
+                                        <th *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.setting.write==true)">Action</th>
+
+                                    </tr>
+                                    <tr *ngFor="let item of shippingChargesList; let i=index">
+                                        <td>{{item.country}}</td>
+                                        <td>{{item.minPrice}}-{{item.maxPrice}}</td>
+                                        <td>{{item.rangePrice}}</td>
+                                        <td>{{item.belowPrice}}</td>
+                                        <td>{{item.abovePrice}}</td>
+                                        <td *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.setting.write==true)">
+                                            <!-- <a href="javascript:;" data-toggle="modal"
+                                                (click)="editShippingCharge(item._id)" data-target=" #editlargeModal">
+                                                <i class="fa fa-edit"></i>
+                                            </a> -->
+                                            <button style="background-color: transparent !important;"
+                                                (click)="editShippingCharge(item._id)" data-toggle="modal"
+                                                data-target="#editlargeModal"> <i class="fa fa-edit"></i></button>
+                                            <button (click)="deleteShippingCharge(item._id)"> <i
+                                                    class="fa fa-trash"></i></button>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Add shipping Charges Modal Start From here -->
+
+<div id="largeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Shipping rate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="zoneFormGroup">
+                    <ul>
+
+                        <li>
+
+
+
+
+                            <mat-form-field>
+                                <mat-label>Country<span class="red">*</span></mat-label>
+                                <input matInput type="text" list="browsers" (keyup)="onKey($event.target.value)"
+                                    aria-label="Number" matInput formControlName="selectedCountry">
+                                <datalist id="browsers">
+                                    <option *ngFor="let body of showCountryList" value="{{body.name}}">
+                                        {{body.name}}
+                                    </option>
+                                </datalist>
+
+                                <mat-error *ngIf="zoneFormGroup.get('selectedCountry').hasError('required')">
+                                    Country is <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+
+                            <!-- <div class="custom-invalid"
+                                *ngIf="submitted && zoneFormGroup.controls['selectedCountry'].hasError('required')">
+                                Country is <strong>required</strong>
+                            </div> -->
+
+
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field>
+                                <mat-label>Shipping charges below this range<span class="red">*</span></mat-label>
+
+                                <input matInput matInput type="number" placeholder="" formControlName="belowMinValue"
+                                    name="name">
+
+
+                                <mat-error *ngIf="zoneFormGroup.get('belowMinValue').hasError('required')">
+                                    Shipping charges below this range is <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </li>
+                        <li>
+
+                            <div class="row">
+                                <div class="col-5">
+                                    <mat-form-field>
+                                        <mat-label>Product min value<span class="red">*</span></mat-label>
+                                        <input matInput type="number" class="form-controll" placeholder=""
+                                            formControlName="minValue" name="name">
+
+
+                                        <mat-error *ngIf="zoneFormGroup.get('minValue').hasError('required')">
+                                            Product min value is <strong>required</strong>
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-5 offset-lg-1">
+                                    <mat-form-field>
+                                        <mat-label>Product max value<span class="red">*</span></mat-label>
+                                        <input matInput type="number" placeholder="" formControlName="maxValue"
+                                            name="name">
+
+
+                                        <mat-error *ngIf="zoneFormGroup.get('maxValue').hasError('required')">
+                                            Product max value is <strong>required</strong>
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field>
+                                <mat-label>Shipping charges in this range<span class="red">*</span></mat-label>
+
+                                <input matInput type="number" placeholder="" formControlName="rangePrice" name="name">
+
+
+                                <mat-error *ngIf="zoneFormGroup.get('rangePrice').hasError('required')">
+                                    Shipping charges in this range is <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </li>
+
+
+                        <li class="row">
+                            <mat-form-field>
+                                <mat-label>Price above max value<span class="red">*</span></mat-label>
+
+                                <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
+                                    name="name">
+
+
+                                <mat-error *ngIf="zoneFormGroup.get('aboveMaxValue').hasError('required')">
+                                    Price above max value is <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </li>
+
+
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button class="button" (click)="saveZone()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MOdal ends here -->
+
+
+<!--edit shipping Charges Modal Start From here -->
+
+<div id="editlargeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Shipping rate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="zoneEditFormGroup">
+                    <ul>
+                        <!-- <li>
+                            <label>Zone Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" formControlName="zoneName">
+                            </mat-form-field>
+                        </li> -->
+                        <li>
+                            <label>Country<span class="red">*</span></label>
+                            <input readonly matInput formControlName="selectedCountry" id="browser">
+
+                            <!-- <select (selectionChange)="countrySelected($event.value)">
+                            <input class="form-controll" placeholder="Search Product"
+                                (keyup)="onKeyInCountry($event.target.value)">
+                            <option>None</option>
+                            <option *ngFor="let body of countryList" [value]="body.code">{{body.name}}
+                            </option>
+                        </select> -->
+
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field>
+                                <mat-label>Shipping charges below this range<span class="red">*</span></mat-label>
+                                <input matInput type="number" placeholder="" formControlName="belowMinValue"
+                                    name="name">
+                                <mat-error *ngIf="zoneEditFormGroup.get('belowMinValue').hasError('required')">
+                                    Shipping charges below this range is <strong>required</strong>
+                                </mat-error>
+
+
+                            </mat-form-field>
+                            <div>
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-5">
+                                    <mat-form-field>
+                                        <mat-label>Product min value<span class="red">*</span></mat-label>
+                                        <input type="number" matInput class="form-controll" placeholder=""
+                                            formControlName="minValue" name="name">
+
+                                        <mat-error *ngIf="zoneEditFormGroup.get('minValue').hasError('required')">
+                                            Product min value is <strong>required</strong>
+                                        </mat-error>
+
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-5 ">
+                                    <mat-form-field>
+                                        <mat-label>Product max value<span class="red">*</span></mat-label>
+                                        <input matInput type="number" placeholder="" formControlName="maxValue"
+                                            name="name">
+                                        <mat-error *ngIf="zoneEditFormGroup.get('maxValue').hasError('required')">
+                                            Product max value is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field>
+                                <label>Shipping charges in this range<span class="red">*</span></label>
+                                <div>
+                                    <input matInput type="number" placeholder="" formControlName="rangePrice"
+                                        name="name">
+
+                                    <mat-error *ngIf="zoneEditFormGroup.get('rangePrice').hasError('required')">
+                                        Shipping charges in this range is <strong>required</strong>
+                                    </mat-error>
+
+
+                                </div>
+                            </mat-form-field>
+
+                        </li>
+
+
+                        <li class="row">
+                            <mat-form-field>
+                                <mat-label>Price above max value<span class="red">*</span></mat-label>
+                                <div>
+                                    <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
+                                        name="name">
+
+
+                                    <mat-error *ngIf="zoneEditFormGroup.get('aboveMaxValue').hasError('required')">
+                                        Price above max value is <strong>required</strong>
+                                    </mat-error>
+
+                                </div>
+                            </mat-form-field>
+
+                        </li>
+
+
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button data-dismiss="modal" class="button" (click)="updateShippingRate()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MOdal ends here -->

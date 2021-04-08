@@ -1,0 +1,142 @@
+<div id="wrapper">
+	<app-navbar></app-navbar>
+	<div id="content-wrapper" class="">
+		<div id="content">
+			<app-sidebar></app-sidebar>
+			<div class="container-fluid">
+				<div class="sub_heading">
+					<h1>{{name}} Purchase History</h1>
+					<!-- <button (click)="goTomanageUser()">Back To List</button> -->
+					<div class="input_divs2 input_button input_button2">
+
+						<button class="btn_back" mat-button (click)="goTomanageUser()"><i class="fa fa-long-arrow-left"
+								aria-hidden="true"></i></button>
+					</div>
+
+				</div>
+				<div class="tab-content">
+					<div id="allOrders" class="tab-pane fade in active">
+						<div class="inner_content">
+							<div class="outer_table">
+								<div class="search_fields">
+									<div class="filters Booking_status mr-3">
+										<mat-form-field>
+											<mat-label>Filter</mat-label>
+											<mat-select [(ngModel)]="filter" (change)="filterSelected($event)">
+												<mat-option *ngIf="flag==true" value="">Remove Filter</mat-option>
+
+												<mat-option *ngFor="let item of optionList" value="{{item}}">{{item}}
+												</mat-option>
+											</mat-select>
+										</mat-form-field>
+									</div>
+									<div class="search_inner_fiels">
+										<div class="filters Booking_status">
+
+											<div class="search_with_icons">
+												<mat-form-field class="example-full-width">
+													<mat-label>Search</mat-label>
+
+													<input matInput type="text" [(ngModel)]="search" placeholder="">
+												</mat-form-field>
+												<button mat-button matSuffix mat-icon-button> <i
+														*ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+														(click)="searchSubmit()"></i>
+													<i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+														(click)="clearSearch()"></i>
+												</button>
+											</div>
+											<!-- <div class="search_with_icons">
+												<mat-form-field [floatLabel]="'never'">
+													<input matInput type="text" name="search" [(ngModel)]="search"
+														placeholder="">
+												</mat-form-field>
+												<a>
+													<i *ngIf="flagSearch==true" class="fa fa-search"
+														(click)="searchSubmit()" aria-hidden="true"></i></a>
+												<a>
+													<i *ngIf="flagSearch==false" class="fa fa-times"
+														(click)="clearSearch()" aria-hidden="true"></i></a>
+											</div> -->
+										</div>
+
+									</div>
+								</div>
+								<div *ngIf="flagData==true">
+									<h1>No Data Found</h1>
+
+								</div>
+								<div *ngIf="flagData==false" class="table-responsive divAboveTable">
+									<table>
+										<tr>
+											<th>Sr.no</th>
+											<th>Order Id</th>
+											<th>Product Name</th>
+											<th>Product category</th>
+
+
+											<th>Order Price</th>
+											<th>Seller Name</th>
+											<th>Quantity</th>
+											<th>Price</th>
+
+											<th>User Address</th>
+											<th>Order Date</th>
+											<th>Delivery Date</th>
+											<th>Status</th>
+											<!-- <th class="action_bx">Action</th> -->
+										</tr>
+										<tr *ngFor="let item of orderHistoryList;   index as i ">
+											<td *ngIf="flagUserList==false">{{i+1}}</td>
+											<td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+											<td>{{item.orderId}}</td>
+											<td>{{item.product.name}}</td>
+											<td>{{item.product.category.name}}</td>
+
+											<td>{{item.finalAmount}}</td>
+											<td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
+											<td>{{item.product.productQuantity}}</td>
+											<td>{{item.finalAmount}}</td>
+
+											<td>{{item.deliveryAddress.name }},{{item.deliveryAddress.apartment}},{{item.deliveryAddress.city}},{{item.deliveryAddress.state}}
+											</td>
+											<td>{{item.createdAt | date}}</td>
+											<td>{{item.deliveryDate}}</td>
+											<td>{{item.status}}
+											</td>
+											<!-- 					
+						<td>
+							<div class="action">
+								<ul>
+									<li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i></li>
+									<li class="edit" (click)="goToeditOrder()"><i class="fa fa-pencil fa-fw"></i></li>
+									<li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+								</ul>
+							</div>
+						</td> -->
+										</tr>
+
+
+
+									</table>
+									<!-----start pagination-->
+									<mat-paginator [length]="length" [pageSize]="pageSize"
+										[pageSizeOptions]="[5, 10, 25, 100]"
+										(page)="pageEvent = orderHistoryListAfterPageSizeChanged($event)">
+
+									</mat-paginator>
+									<!-----end pagination-->
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+</div>

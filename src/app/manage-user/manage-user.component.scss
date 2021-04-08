@@ -1,0 +1,27 @@
+.outer_table table {
+    width: 130%;
+}
+
+table th:first-child {
+    width: 120px !important;
+}
+
+@media (max-width:2000px) {}
+
+@media (max-width:1700px) {
+
+    .divAboveTable {
+        height: 300px;
+        overflow-y: scroll;
+    }
+
+}
+
+@media (max-width:1500px) {
+
+    .divAboveTable {
+        height: 235px;
+        overflow-y: scroll;
+    }
+
+}

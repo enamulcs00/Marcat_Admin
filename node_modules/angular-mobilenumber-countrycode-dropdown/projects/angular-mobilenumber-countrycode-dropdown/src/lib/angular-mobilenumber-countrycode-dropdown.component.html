@@ -1,0 +1,4 @@
+<select (change)="onSelectCountryCode($event)">
+  <option [value]="null">Select Country code</option>
+  <option *ngFor="let code of countryCodeList" [value]="stringify(code)">{{code.country}} ({{code.code}})</option>
+</select>

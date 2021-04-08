@@ -1,0 +1,40 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid imports">
+                <div class="sub_heading import_sub">
+                    <h1>Reporting</h1>
+                    <!-- <a (click)="goToaddpartnercatelog()">Export New</a> -->
+                </div>
+                <div class="charts">
+                    <ul>
+                        <li>
+                            <div class="chart_title">
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="chart_title">
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

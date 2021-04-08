@@ -1,0 +1,111 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Manage Reviews</h1>
+
+                </div>
+                <div class="outer_table">
+
+                    <div class="search_fields">
+                        <div class="filters Booking_status">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Filter</mat-label>
+                                <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                    (selectionChange)="filterSelected($event.value)">
+                                    <mat-option *ngIf="flag==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value='1'>1 <i class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                    <mat-option value='2'>2 <i class="fa fa-star" aria-hidden="true"></i><i
+                                            class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                    <mat-option value='3'>3 <i class="fa fa-star" aria-hidden="true"></i><i
+                                            class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                            aria-hidden="true"></i></mat-option>
+                                    <mat-option value='4'>4 <i class="fa fa-star" aria-hidden="true"></i><i
+                                            class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                            aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                                    </mat-option>
+                                    <mat-option value='5'>5 <i class="fa fa-star" aria-hidden="true"></i><i
+                                            class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                            aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <div class="search_with_icons">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Search</mat-label>
+
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                            class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="flagData==true">
+                        <h2>No Data Found</h2>
+                    </div>
+                    <div *ngIf="flagData==false" class="table-responsive">
+                        <table>
+                            <tr>
+
+                                <th>User Name</th>
+                                <th>User Email</th>
+                                <th>Rating </th>
+                                <th>Review </th>
+                                <th>Product Name</th>
+                                <th>Vendor name</th>
+                                <th *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.reviews.write==true)">Action</th>
+                            </tr>
+                            <tr *ngFor="let item of reviewList; let i=index">
+
+                                <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+                                <td>{{item.user.email}}</td>
+
+                                <td>{{item.rating}}</td>
+                                <td>{{item.review}}</td>
+                                <td>{{item.product.name}}</td>
+                                <td>{{item.product.seller.firstName}} {{item.product.seller.lastName}}</td>
+                                <td *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.reviews.write==true)">
+                                    <div class="action">
+                                        <ul>
+                                            <li class="delete"><a (click)="deleteReview(item._id)"><i
+                                                        class="fa fa-trash-o fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = reviewListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

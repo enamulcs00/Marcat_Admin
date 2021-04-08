@@ -1,0 +1,42 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Notifications</h1>
+                    <div class="right_side_buttons">
+                        <a (click)="back()">Go Back</a>
+
+                    </div>
+                </div>
+
+                <div class="outer_table">
+
+                    <div class="alert" *ngFor="let item of notificationList; let i=index">
+                        <div class=" comman_alert">
+                            <p> <span class="icon_order">
+                                    <i class="material-icons" *ngIf="item.notiType==22">update</i>
+                                    <i class="material-icons" *ngIf="item.notiType==24">star</i>
+                                    <i class="material-icons" *ngIf="item.notiType==23">info_outline</i>
+                                    <i class="material-icons" *ngIf="item.notiType==26">warning</i>
+                                    <i class="material-icons" *ngIf="item.notiType==21">check</i>
+                                </span></p>
+                            <h5>
+                                <h3 class="notification_date">{{item.date |date}}</h3>
+                                <h4 class="order_name">{{item.message}}</h4>
+
+                            </h5>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

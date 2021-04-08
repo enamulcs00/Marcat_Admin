@@ -1,0 +1,96 @@
+.Booking_status select {
+
+    padding: 13px 25px 13px 17px;}
+
+
+    table th:first-child {
+        width: 150px !important;
+    }
+
+
+
+    /* alerts */
+
+.alert {
+
+    padding: 20px 15px !important;
+    line-height: 20px;
+    font-weight: 300;
+    color: #000;
+    box-shadow: none;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+}
+.alert:last-of-type{border: none;}
+
+.alert .alert-icon {
+    display: block;
+    float: left;
+    margin-right: 1.071rem;
+}
+.filters {
+    margin-right: 0;
+    width: 300px;
+    float: right;
+    text-align: right;
+}
+
+.comman_alert {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+
+}
+
+span.icon_order {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    background: #f7f7f7;
+    padding: 30px;
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.comman_alert p {
+    width: 60px;
+
+    
+}
+.order_name {
+    color: #5c5c5c;
+    font-weight: 500;
+    padding-top: 5px;
+    font-size: 16px;
+}
+.comman_alert h5{width: 100%; flex-direction: column;padding-left: 25px;}
+
+
+
+.material-icons {
+  
+    font-size: 30px;}
+
+  
+    span.notification_time {
+        padding: 0 5px;
+    }
+
+    .notification_date {
+        font-weight: normal;
+        font-size: 13px;
+        
+        color: #b7b9cc;
+    }
+
+    i.material-icons {
+        /* position: absolute; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+        /* width: 100%; */
+        /* height: 100%; */
+    }

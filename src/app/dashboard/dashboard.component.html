@@ -1,0 +1,324 @@
+<div id="wrapper">
+
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="inner_data">
+                    <div class="dashboard_boxs">
+
+
+                        <div class="card border-left-success shadow">
+                            <div class="card-body" [routerLink]="['/product']" routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Products </h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.totalProduct}}</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-left-dark shadow">
+                            <div class="card-body" [routerLink]="['/ordermanagement']"
+                                routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Sales</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.totalSales}}</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-line-chart fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card border-left-info shadow">
+                            <div class="card-body" [routerLink]="['/revenuereport']"
+                                routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Revenue</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.revenue|number}}</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-money fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="dashboard_boxs mt-5" *ngIf="roles=='admin'">
+
+
+                        <div class="card border-left-warning shadow">
+                            <div class="card-body" [routerLink]="['/venderManagement']"
+                                routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Vendors </h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.totalVendors}}</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-left-danger shadow">
+                            <div class="card-body" [routerLink]="['/manageCelebrity']"
+                                routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Celebrity</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.totalCelebrity}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="right_card">
+                                    <i class="fa fa-user fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-left-primary shadow">
+                            <div class="card-body" [routerLink]="['/manageUser']" routerLinkActive="router-link-active">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Users</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.totalUser}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="right_card">
+                                    <i class="fa fa-user fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="charts">
+                    <ul>
+                        <li>
+                            <div class="chart_title">
+                                <p>Sales</p>
+                                <div class="filters Booking_status">
+                                    <mat-form-field>
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select [(ngModel)]="periodSale" (selectionChange)="periodChanged($event)">
+                                            <!-- <option>Daily</option> -->
+                                            <mat-option value="weekly">Weekly</mat-option>
+                                            <mat-option value="monthly">Monthly</mat-option>
+                                            <mat-option value="yearly">Yearly</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="user_charts" *ngIf="chartReady">
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartDataSale" [labels]="barChartLabelSale"
+                                    [options]="barChartOptionsSale" [plugins]="barChartPluginsSale"
+                                    [legend]="barChartLegendSale" [chartType]="barChartTypeSale">
+                                </canvas>
+                            </div>
+                        </li>
+
+                        <!-- <li *ngIf="roles=='admin'">
+                            <div class="chart_title">
+                                <p>Vendors</p>
+                                <div class="filters Booking_status">
+                                    <mat-form-field>
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select [(ngModel)]="vendorFilter" (change)="vendorPeriodChanged($event)">
+                                          
+                                            <mat-option value="weekly">Weekly</mat-option>
+                                            <mat-option value="monthly">Monthly</mat-option>
+                                            <mat-option value="yearly">Yearly</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="user_charts" *ngIf="chartReady">
+                               
+                                <canvas baseChart [datasets]="barChartDataVendor" [labels]="barChartLabelVendor"
+                                    [options]="barChartOptionsVendor" [plugins]="barChartPluginsVendor"
+                                    [legend]="barChartLegendVendor" [chartType]="barChartTypeVendor">
+                                </canvas>
+                            </div>
+                        </li> -->
+                        <li>
+                            <div class="chart_title">
+                                <p>Revenue</p>
+                                <div class="filters Booking_status">
+                                    <mat-form-field>
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select [(ngModel)]="revenueFilter"
+                                            (selectionChange)="revenuePeriodChanged($event)">
+                                            <!-- <option>Daily</option> -->
+                                            <mat-option value="weekly">Weekly</mat-option>
+                                            <mat-option value="monthly">Monthly</mat-option>
+                                            <mat-option value="yearly">Yearly</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="user_charts" *ngIf="chartReady">
+
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartDataRevenue" [labels]="barChartLabelrevenue"
+                                    [options]="barChartOptionsRevenue" [plugins]="barChartPluginsRevenue"
+                                    [legend]="barChartLegendRevenue" [chartType]="barChartTypeRevenue">
+                                </canvas>
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div class="chart_title">
+                                <p>Current Order listing</p>
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+
+                <div class="current_Admins">
+                    <div class="sub_heading">
+                        <h1>Current Sales </h1>
+                        <!-- <div class="top_subheading_add">
+                            <a (click)="goToaddinventory()"><span>+</span>Add Inventory</a>
+                        </div> -->
+                    </div>
+                    <div class="outer_table">
+                        <div class="search_fields">
+                            <div class="filters Booking_status">
+                                <mat-form-field>
+                                    <mat-label>Filter</mat-label>
+                                    <mat-select [(ngModel)]="filterBy" (selectionChange)="filterSelected($event)">
+                                        <mat-option *ngIf="flag==true" value="">Remove Filter</mat-option>
+                                        <mat-option *ngIf="flag==false" value="">
+                                        </mat-option>
+                                        <mat-option *ngFor="let item of filterList" value="{{item.value}}">
+                                            {{item.viewValue}}
+                                        </mat-option>
+
+                                        <!-- <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option> -->
+                                        <!-- <option value="lastName"></option> -->
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="search_inner_fiels">
+                                <div class="filters Booking_status">
+
+                                    <div class="search_with_icons">
+                                        <mat-form-field>
+                                            <mat-label>Search</mat-label>
+                                            <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                        </mat-form-field>
+                                        <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                            (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Product Name</th>
+                                    <th>Product category</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>User name</th>
+                                    <th>User Address</th>
+                                    <th>Order Date</th>
+                                    <th>Expected Delivery Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Status</th>
+                                    <th class="action_bx">Action</th>
+                                </tr>
+
+
+
+                                <tr *ngFor="let item of salesListData; let i=index">
+                                    <td>{{item.orderId}}</td>
+                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.product.category.name}}</td>
+
+
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.finalAmount|number}}</td>
+                                    <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+                                    <td>{{item.deliveryAddress.name}} {{item.deliveryAddress.apartment}}
+                                        {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
+                                        {{item.deliveryAddress.postalCode}}</td>
+                                    <td>{{item.createdAt|date}}</td>
+                                    <td>{{item.deliveryDate==null?"Date not assigned yet":item.deliveryDate|date}}
+                                    </td>
+                                    <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
+                                    </td>
+                                    <td>
+                                        {{item.status}}
+
+                                    </td>
+
+                                    <td>
+                                        <div class="action">
+                                            <ul>
+                                                <li class="show" (click)="goToviewOrder(item._id)"><i
+                                                        class="fa fa-eye"></i></li>
+                                                <!-- <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li> -->
+                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-----start pagination-->
+                    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                        (page)="pageEvent = productListAfterPageSizeChanged($event)">
+                    </mat-paginator>
+                    <!-----end pagination-->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
