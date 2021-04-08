@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@ang
 })
 export class GetTranslationsComponent implements OnInit {
   dataForm: FormGroup;
-  data: FormArray;
+  
   hasKey: boolean = false;
   // sample={
   //   "name": "Phone Number",
@@ -23,7 +23,9 @@ export class GetTranslationsComponent implements OnInit {
     this.getTransaltion()
 
 
-    this.dataForm = this.formBuilder.group({});
+    this.dataForm = this.formBuilder.group({
+      check:['']
+    });
   }
 
 
@@ -44,6 +46,7 @@ export class GetTranslationsComponent implements OnInit {
   }
 
   createGroup(data) {
+    debugger
     for (let i in data) {
       console.log(data[i].value);
       this.dataForm.addControl(i, this.formBuilder.group({
@@ -58,11 +61,21 @@ export class GetTranslationsComponent implements OnInit {
 
 
     }
-    console.log('check', Object.keys(this.dataForm.value).length);
+    console.log('check', this.dataForm.value);
     this.hasKey = Object.keys(this.dataForm.value).length > 0 ? true : false
 
 
 
+  }
+
+  save(){
+    debugger
+    console.log(this.dataForm.value);
+    
+    if(this.dataForm.valid){
+      console.log(this.dataForm);
+      
+    }
   }
 
   createFormGroup(data): FormGroup {
