@@ -84,15 +84,15 @@ export class AdminEndormentComponent implements OnInit {
   }
 
   getEndorsement() {
-    let body = {
-      isApproved: this.isApproved,
-      filter: this.filterBy,
-      search: this.search,
-      page: this.page,
-      count: this.pageSize
-    }
+    // let body = {
+    //   isApproved: this.isApproved,
+    //   filter: this.filterBy,
+    //   search: this.search,
+    //   page: this.page,
+    //   count: this.pageSize
+    // }
     this.progress = true
-    this.apiService.getEndorsedProduct(body).subscribe(res => {
+    this.apiService.getEndorsementAdmin().subscribe(res => {
       console.log(res);
       if (res.success) {
         this.progress = false
@@ -156,7 +156,7 @@ export class AdminEndormentComponent implements OnInit {
 
   }
 
-  vendorListAfterPageSizeChanged(e): any {
+  endorsementList(e): any {
     console.log(e);
     if (e.pageIndex == 0) {
       this.page = 1;

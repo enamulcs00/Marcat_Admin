@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1></h1>
-                    <!-- <div class="input_divs2 input_button ">
-                        <button mat-button (click)="goToaddProduct()"><span>+</span>Add Product</button>
+                    <div class="input_divs2 input_button ">
+                        <button mat-button (click)="goTo()"><span>+</span>Add Endorsement</button>
 
 
 
-                    </div> -->
+                    </div>
                     <div class="input_divs2 input_button input_button2">
                         <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
@@ -40,26 +40,26 @@
                                 </mat-select>
                             </mat-form-field>
                         </div> -->
-                        <!-- <div class="filters Booking_status">
+                        <div class="filters Booking_status">
                             <mat-form-field class="example-full-width">
-                                <mat-label>Product Approval</mat-label>
+                                <mat-label></mat-label>
 
-                                <mat-select placeholder="Filter" [(ngModel)]="isApproved"
+                                <mat-select placeholder="Filter" [(ngModel)]="status"
                                     (selectionChange)="approvedSelected($event)">
                                     <mat-option *ngIf="flagapproval==true" value="">
                                         Remove Filter
                                     </mat-option>
 
                                     <mat-option value="true">
-                                        Approved
+                                        Active
                                     </mat-option>
                                     <mat-option value="inactive">
-                                        not Approved
+                                        Inactive
                                     </mat-option>
 
                                 </mat-select>
                             </mat-form-field>
-                        </div> -->
+                        </div>
                         <div class="search_fields">
 
 
@@ -85,7 +85,7 @@
                     <div *ngIf="flagData==true">
                         <h1>No Data Found</h1>
                     </div>
-                    <div *ngIf="flagData==false" class="table-responsive divAboveTable">
+                    <div class="table-responsive divAboveTable">
                         <table>
                             <tr>
                                 <th>Product Name</th>
@@ -96,23 +96,20 @@
                                 <th>Action</th>
                             </tr>
 
-                            <tr *ngFor="let product of productList;  let i = index">
+                            <tr *ngFor="let product of endorsementProductList;  let i = index">
 
 
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.category.name }}</td>
-                                <td>{{produtc.prci}}</td>
-
-
-
-
+                                <td>{{ product.price }}</td>
+                                <td>{{ celeberity }}</td>
+                                <td>{{ celebrity.firstName }} {{ celebrity.lastName }}</td>
 
                             </tr>
                         </table>
                         <!-----start pagination-->
                         <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
-                            [pageSizeOptions]="pageSizeOptions"
-                            (page)="pageEvent = vendorProductListAfterPageSizeChanged($event)">
+                            [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = endorsementList($event)">
                         </mat-paginator>
                         <!-----end pagination-->
                     </div>

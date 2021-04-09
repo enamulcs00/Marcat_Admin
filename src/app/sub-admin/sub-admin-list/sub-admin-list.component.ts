@@ -26,10 +26,12 @@ export class SubAdminListComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   flagData: boolean;
+  user: any;
 
   constructor(private apiService: ApiService, private router: Router, private commonService: CommonService) {
 
     this.imageUrl = this.commonService.imageUrl
+    this.user = JSON.parse(this.apiService.getUser())
   }
 
   ngOnInit(): void {

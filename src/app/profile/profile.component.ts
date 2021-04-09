@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   imageUrl: any
   user: any;
   roles: any;
+  deliveryType: any
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private commonService: CommonService) {
     this.user = JSON.parse(this.apiService.getUser())
   }
@@ -28,7 +29,18 @@ export class ProfileComponent implements OnInit {
       console.log("Profile Data", res.data)
       this.profileData = res.data
       this.layout = this.profileData.layout
+
     });
+
+  }
+
+  filterSelected(e) {
+    console.log(e);
+    let body = {
+      'deliveryType': this.deliveryType
+    }
+
+    this.apiService.editUser(body)
 
   }
 

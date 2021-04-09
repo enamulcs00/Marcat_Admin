@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Sub-Admin Management</h1>
-                    <div *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                    <div *ngIf="user.roles== 'admin'  || (user.roles=='subAdmin' &&
                 this.user.permissions.subadmin.write==true)" class="input_divs2 input_button input_button2">
                         <button mat-button [routerLink]="['/sub-admin-add']" [queryParams]="{check: 'add'}">Add
                             Sub-admin</button>
@@ -67,7 +67,7 @@
                                     <th>Email</th>
                                     <th>Roles</th>
                                     <th>Status</th>
-                                    <th *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                                    <th *ngIf="user.roles== 'admin'  || (user.roles=='subAdmin' &&
                 this.user.permissions.subadmin.write==true)">Action</th>
                                 </tr>
                             </thead>
@@ -85,7 +85,7 @@
                                             [checked]="item.status=='1'? true:false">
                                         </mat-slide-toggle>
                                     </td>
-                                    <td *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                                    <td *ngIf="user.roles== 'admin'  || (user.roles=='subAdmin' &&
                 this.user.permissions.subadmin.write==true)">
                                         <div class="action">
                                             <ul>

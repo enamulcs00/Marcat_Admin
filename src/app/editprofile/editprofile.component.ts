@@ -28,6 +28,8 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   countryCode: any;
   phone: any;
   showProfilePic
+  deliveryType: any;
+  user: any;
 
   constructor(private fb: FormBuilder, private commonService: CommonService, private apiService: ApiService, private route: ActivatedRoute, private urlService: UrlService) {
     this.sub = this.route
@@ -50,9 +52,11 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
       this.countryCode = this.profileData.countryCode
       this.phone = this.profileData.phone
       this.showProfilePic = this.profileData.profilePic
-
+      this.deliveryType = this.profileData.deliveryType
       this.setValue()
     });
+
+    this.user = JSON.parse(this.apiService.getUser())
 
   }
 
@@ -68,6 +72,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       profilePic1: ['',],
+      deliveryType: [''],
 
       profilePic: []
     });
@@ -94,6 +99,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
     this.updateProfileForm.controls['countryCode'].setValue(this.countryCode)
     this.updateProfileForm.controls['phone'].setValue(this.phone)
     this.updateProfileForm.controls['profilePic1'].setValue(this.showProfilePic)
+    this.updateProfileForm.controls['deliveryType'].setValue(this.deliveryType)
 
   }
 
@@ -113,7 +119,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    
+
 
     this.submitted = true
 
@@ -131,6 +137,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
         data.append('address', this.updateProfileForm.get('address').value),
         data.append('countryCode', this.updateProfileForm.get('countryCode').value),
         data.append('phone', this.updateProfileForm.get('phone').value),
+        data.append('deliveryType', this.updateProfileForm.get('deliveryType').value),
 
         this.apiService.updateProfile(data).subscribe((res) => {
           console.log(res);

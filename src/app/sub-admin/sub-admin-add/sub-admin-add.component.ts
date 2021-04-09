@@ -173,6 +173,9 @@ export class SubAdminAddComponent implements OnInit {
         this.addAdminForm.get('setting').setValue(res.data.permissions.setting);
         this.addAdminForm.get('subadmin').setValue(res.data.permissions.subadmin);
         this.addAdminForm.get('revenue').setValue(res.data.permissions.revenue);
+        if (this.flagComp == 'edit') {
+          this.addAdminForm.get('email').disable()
+        }
         if (this.flagComp == 'view') {
           this.addAdminForm.disable();
         }

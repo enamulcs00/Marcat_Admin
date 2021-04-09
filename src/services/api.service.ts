@@ -91,6 +91,7 @@ export class ApiService {
       updateUserAddress: 'app/address',
       deleteDocument: 'admin/deleteDocument',
       subadmin: 'admin/admin',
+      getEndorsementAdmin: 'admin/getEndorse',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -846,14 +847,19 @@ export class ApiService {
   }
 
   getTranslations(): Observable<any> {
-    // console.log("hello");
+    // implemented by prabhjot
     return this.http.get(this.BASE_URL + "/admin/translation", this.getHeaders());
   }
 
 
   postTranlastions(body): Observable<any> {
-    // console.log("hello");
+    // implemented by prabhjot
     return this.http.post(this.BASE_URL + "/admin/translation/6064bc2c1b5c5e46e0007f61", body, this.getHeaders());
+  }
+
+
+  getEndorsementAdmin(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.getEndorsementAdmin, this.getHeaders());
   }
 
 
