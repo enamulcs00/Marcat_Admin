@@ -92,6 +92,10 @@ import { EditPromoCodeComponent } from './edit-promo-code/edit-promo-code.compon
 import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list.component';
 import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
 import { AdminEndormentComponent } from './admin-endorment/admin-endorment.component';
+import { AddEndorsementComponent } from './add-endorsement/add-endorsement.component';
+import { GeofenceListComponent } from './geofence/geofence-list/geofence-list.component';
+import { AddGeofenceComponent } from './geofence/add-geofence/add-geofence.component';
+import { EditGeofenceComponent } from './geofence/edit-geofence/edit-geofence.component';
 
 const routes: Routes = [
   // {
@@ -312,6 +316,13 @@ const routes: Routes = [
     component: ViewProductComponent,
     canActivate: [AuthGuard]
   },
+  
+  
+  {
+    path: 'updateEndorsement',
+    component: AddEndorsementComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'editOrder',
     component: EditOrderComponent,
@@ -322,6 +333,22 @@ const routes: Routes = [
     component: ViewOrderComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'geo-fence-List',
+    component: GeofenceListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-geo-fence',
+    component: AddGeofenceComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-geo-fence',
+    component: EditGeofenceComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'view',
     component: ViewVendorComponent,

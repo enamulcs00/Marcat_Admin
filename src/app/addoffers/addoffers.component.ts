@@ -53,6 +53,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   tempArray: any[];
   images: any = [];
   progress: boolean;
+  geofenceList: any;
 
 
   constructor(private router: Router, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
@@ -150,8 +151,25 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
   today
   endTommorow
-  ngOnInit() {
 
+
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
+  }
+  ngOnInit() {
+    this.getAllGeofence()
 
     this.today = moment(new Date()).format('YYYY-MM-DD');
     let currentDate = new Date().getDate();
@@ -167,6 +185,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       type: ['', Validators.required],
       dicountOn: ['', Validators.required],
       name: ['', [Validators.required,]],
+      availableLocation:['',Validators.required],
       name_ar: ['', Validators.required],
       gender: ['', Validators.required],
       bannerImage: ['',]
@@ -674,7 +693,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
     }
     body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.addDiscountForm.get('availableLocation').value))
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -700,7 +719,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
     body.append('image', this.images, this.images.name);
     body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.addDiscountForm.get('availableLocation').value))
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -723,7 +742,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
     body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.addDiscountForm.get('availableLocation').value))
     body.append('image', this.images, this.images.name);
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
@@ -749,6 +768,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
 
     body.append('name', this.addDiscountForm.controls['name'].value);
+    body.append('availableLocation', JSON.stringify(this.addDiscountForm.get('availableLocation').value))
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
     body.append('image', this.images, this.images.name);
     body.append('type', this.addDiscountForm.controls['type'].value);
@@ -767,6 +787,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   addbanner(body) {
 
     this.tempArray = []
+    
     this.tempArray.push(body);
     //  console.log(body)
     body.forEach((value, key) => {

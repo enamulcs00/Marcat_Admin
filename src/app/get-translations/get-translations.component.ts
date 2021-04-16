@@ -37,7 +37,7 @@ export class GetTranslationsComponent implements OnInit {
     this.service.getTranslations().subscribe((d => {
 
       // console.log('check data of translations', d.data);
-      let data1 = d.data[0].data;
+      let data1 = d.data.data;
       this.createGroup(data1)
     }))
   }

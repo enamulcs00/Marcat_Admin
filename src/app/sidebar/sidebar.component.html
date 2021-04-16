@@ -84,7 +84,7 @@
 
             <ng-container
                 *ngIf="roles=='admin' || (roles=='subAdmin' && this.user.permissions.adminEndorsment.read==true); else elseTemplate">
-                <li> <a [routerLink]="['/admin-endorment']" routerLinkActive="router-link-active">Admin Endorsment</a>
+                <li> <a [routerLink]="['/admin-endorment']" routerLinkActive="router-link-active">Admin Endorsement</a>
                 </li>
             </ng-container>
             <ng-template #elseTemplate>
@@ -139,12 +139,17 @@
                 this.user.permissions.reviews.read==true)" (click)="goTomanageReviews()">Review
                 Management</li>
             <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
-                this.user.permissions.subadmin.read==true)" [routerLink]="['/sub-admin-list']">Mangage
+                this.user.permissions.subadmin.read==true)" [routerLink]="['/sub-admin-list']">Manage
                 Sub-admin</li>
             <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
-                this.user.permissions.subadmin.read==true)" [routerLink]="['/transaltions']">Mangage
-                Translations</li>
-        </ul>
+                this.user.permissions.stringLiterals.read==true)" [routerLink]="['/transaltions']">Manage
+                Translations</li> 
+                <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.geofenceManagement.read==true)" [routerLink]="['/geo-fence-List']">Geo-fence Management</li>
+            </ul>
+
+           
+            
     </div>
 
     <!-- <div id="core4" class="core">

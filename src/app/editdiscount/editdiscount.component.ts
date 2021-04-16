@@ -60,6 +60,7 @@ export class EditdiscountComponent implements OnInit {
   imageUrl: string;
   urlImage: boolean;
   progress: boolean;
+  geofenceList: any;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private fb: FormBuilder, private urlService: UrlService, private commonService: CommonService) {
@@ -181,6 +182,7 @@ export class EditdiscountComponent implements OnInit {
       type: ['', Validators.required],
       dicountOn: ['',],
       name: ['', [Validators.required, Validators.maxLength(25)]],
+      availableLocation:['',Validators.required],
       name_ar: ['',],
       gender: ['', Validators.required],
       bannerImage: ['',]
@@ -196,6 +198,7 @@ export class EditdiscountComponent implements OnInit {
       this.editDiscountForm.get('dicountOn').setValue('product');
 
     }
+    this.getAllGeofence()
     this.editDiscountForm.get('bannerImage').disable()
 
 
@@ -246,6 +249,25 @@ export class EditdiscountComponent implements OnInit {
 
 
 
+  }
+
+
+  
+  
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
   }
 
 
@@ -302,6 +324,8 @@ export class EditdiscountComponent implements OnInit {
 
         this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD"));
         this.editDiscountForm.controls['disount'].setValue(this.discountDetails.discount);
+        this.editDiscountForm.controls['availableLocation'].setValue(this.discountDetails.availableLocation);
+        
         this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
         this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
         this.editDiscountForm.controls['gender'].setValue(this.discountDetails.gender);
@@ -921,7 +945,7 @@ export class EditdiscountComponent implements OnInit {
       body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
     }
     body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value))
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -949,7 +973,7 @@ export class EditdiscountComponent implements OnInit {
     if (this.images) {
       body.append('image', this.images, this.images.name);
     } body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value))
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -973,7 +997,7 @@ export class EditdiscountComponent implements OnInit {
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value))
     if (this.images) {
       body.append('image', this.images, this.images.name);
     } body.append('type', this.editDiscountForm.controls['type'].value);
@@ -998,7 +1022,7 @@ export class EditdiscountComponent implements OnInit {
     body.append('subCategory', this.selectedSubCategory);
     body.append('brand', this.selectedBrand);
     body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
+    body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value))
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     if (this.images) {

@@ -38,12 +38,14 @@ export class ProfileSetUpComponent implements OnInit {
   sub: any;
   roles: any;
   progress: boolean;
+  geofenceList: any;
   constructor(private fb: FormBuilder, private route: Router, private cd: ChangeDetectorRef, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
 
     this.readCountryCode();
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
-    this.getCategoryList()
+    this.getCategoryList();
+    this.getAllGeofence()
 
     this.sub = this.router
       .queryParams
@@ -98,6 +100,7 @@ export class ProfileSetUpComponent implements OnInit {
       phone: ['', Validators.required],
       address: ['', Validators.required],
       bio: ['', Validators.maxLength(220)],
+      availableLocation:['',Validators.required],
       Specialities: ['', Validators.required],
       celebrityType: ['', Validators.required],
       profilePhoto: [''],
@@ -157,6 +160,24 @@ export class ProfileSetUpComponent implements OnInit {
     this.country = address.address_components[length - 1].long_name;
 
   }
+
+
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
+  }
+  
 
 
   onFileChange(e) {
@@ -247,6 +268,7 @@ export class ProfileSetUpComponent implements OnInit {
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.setUpProfile.get('countryCode').value)
       formData.append('categories', JSON.stringify(this.selectedCategoryId))
+      formData.append('availableLocation', JSON.stringify(this.setUpProfile.get('availableLocation').value))
       formData.append('celebrityType', this.setUpProfile.get('celebrityType').value)
       formData.append('gender', this.setUpProfile.get('gender').value)
       formData.append('lat', this.lat)

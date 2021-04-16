@@ -1,0 +1,94 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Add Products</h1>
+                    <div class="input_divs2 input_button input_button2">
+
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <!-----start input fields------>
+                <form [formGroup]="endorsementForm">
+                    <div class="add_user_list">
+                        <ul>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                                    <mat-select (selectionChange)="vendorSelected($event.value)" formControlName="id">
+                                        <mat-option *ngFor="let body of vendorList" [value]="body._id">
+                                            {{body.firstName}} {{body.lastName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="endorsementForm.get('id').hasError('required')">
+                                        Vendor is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Select Product <span class="red">*</span></mat-label>
+                                    <mat-select formControlName="product">
+                                        <mat-option *ngFor="let body of productList" [value]="body._id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="endorsementForm.get('product').hasError('required')">
+                                        Product is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Select Celebrity<span class="red">*</span></mat-label>
+
+
+                                    <mat-select formControlName="celebrity">
+                                        <mat-option *ngFor="let body of celebList" [value]="body._id">{{body.firstName}}
+                                            {{body.lastName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="endorsementForm.get('celebrity').hasError('required')">
+                                        Celebrity is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Commission<span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Arabic Name" formControlName="commission"
+                                        placeholder="" name="name">
+                                    <mat-error *ngIf="endorsementForm.get('commission').hasError('required')">
+                                        Commission is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+
+                        </ul>
+                        <div class="update_button">
+                            <button mat-button (click)="onSubmit()">
+                                <span><i class="fa fa-window-restore"></i>
+                                </span>
+                                Add Endorsement
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+                <!-----End input fields------>
+                <div class="loader_bg" *ngIf="progress">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

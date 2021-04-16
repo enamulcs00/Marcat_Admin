@@ -68,11 +68,9 @@ export class SubAdminAddComponent implements OnInit {
     this.addAdminForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-
       users: this.fb.group({
         read: [false],
         write: [false],
@@ -139,6 +137,18 @@ export class SubAdminAddComponent implements OnInit {
         read: [false],
         write: [false],
       }),
+      stringLiterals: this.fb.group({
+        read: [false],
+        write: [false],
+      }),
+      adminEndorsment: this.fb.group({
+        read: [false],
+        write: [false],
+      }),
+      geofenceManagement: this.fb.group({
+        read: [false],
+        write: [false],
+      })
 
 
 

@@ -72,12 +72,14 @@ export class EditVendorComponent implements OnInit {
   document = [];
   urls = [];
   document2 = [];
+  geofenceList: any;
   constructor(private route: Router, private router: ActivatedRoute, private cd: ChangeDetectorRef, private commonService: CommonService, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(this.apiService.getUser());
     console.log("USer", this.userDetails);
     this.roles = this.userDetails.roles
     this.imageUrl = this.urlService.imageUrl
     this.getCategoryList()
+    this.getAllGeofence()
 
     this.sub = this.router
       .queryParams
@@ -89,6 +91,22 @@ export class EditVendorComponent implements OnInit {
 
     this.readCountryCode()
 
+  }
+
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
   }
 
   ngOnInit() {
@@ -103,6 +121,7 @@ export class EditVendorComponent implements OnInit {
       phone: ['', Validators.required],
       bio: [''],
       address: ['', Validators.required],
+      availableLocation:['',Validators.required],
       celebrityType: ['', Validators.required],
       profilePhoto: ['',],
       category: ['', Validators.required]
@@ -233,6 +252,7 @@ export class EditVendorComponent implements OnInit {
 
         }
         this.editVendor.get('email').setValue(res.data.email),
+        this.editVendor.get('availableLocation').setValue(res.data.availableLocation),
           this.editVendor.controls['email'].disable({ onlySelf: true });
         this.editVendor.get('countryCode').setValue(res.data.countryCode),
           this.editVendor.get('phone').setValue(res.data.phone),
@@ -371,6 +391,7 @@ export class EditVendorComponent implements OnInit {
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.editVendor.get('countryCode').value)
       formData.append('categories', JSON.stringify(selectedCategory))
+      formData.append('availableLocation', JSON.stringify(this.editVendor.get('availableLocation').value))
       if (this.profileRole != 'merchant') {
         formData.append('celebrityType', this.editVendor.get('celebrityType').value)
       }

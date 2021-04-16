@@ -46,6 +46,7 @@ export class EditProductComponent implements OnInit {
   tempSelectedCategoryId: any;
   progress: boolean;
   productData: any;
+  geofenceList: any;
 
 
 
@@ -69,6 +70,8 @@ export class EditProductComponent implements OnInit {
         this.id = params['id'];
 
       });
+
+      this.getAllGeofence()
 
   }
 
@@ -105,6 +108,7 @@ export class EditProductComponent implements OnInit {
       highlights_ar: [''],
       // seller: [''],
       isfeatured: ['', Validators.required],
+      availableLocation:['',Validators.required],
       brand: ['', [Validators.required,]],
       price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
@@ -130,6 +134,25 @@ export class EditProductComponent implements OnInit {
 
   }
 
+
+
+  
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
+  }
+
   getProduct(id) {
 
     this.progress = true
@@ -151,7 +174,7 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-    debugger
+    
     this.selectedSubcategory = []
     this.selectedCategory = data.category._id
     this.productId = data.productId
@@ -163,6 +186,7 @@ export class EditProductComponent implements OnInit {
 
 
     this.editProductForm.get('subCategory').setValue(this.selectedSubcategory)
+    this.editProductForm.get('availableLocation').setValue( data.availableLocation)
 
     this.editProductForm.get('name').setValue(data.name);
     this.editProductForm.get('name_ar').setValue(data.name_ar);
@@ -394,6 +418,7 @@ export class EditProductComponent implements OnInit {
       body.append('price', this.editProductForm.controls['price'].value);
       body.append('category', this.editProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.editProductForm.controls['subCategory'].value));
+      body.append('availableLocation', JSON.stringify(this.editProductForm.controls['availableLocation'].value));
       body.append('brand', this.editProductForm.controls['brand'].value);
       body.append('purchaseQuantity', this.editProductForm.controls['purchaseQuantity'].value);
       body.append('productQuantity', this.editProductForm.controls['quantity'].value);

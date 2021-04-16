@@ -106,6 +106,11 @@ import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list
 import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
 import { GetTranslationsComponent } from './get-translations/get-translations.component';
 import { AdminEndormentComponent } from './admin-endorment/admin-endorment.component';
+import { AddEndorsementComponent } from './add-endorsement/add-endorsement.component';
+import { AgmCoreModule } from '@agm/core';
+import { GeofenceListComponent } from './geofence/geofence-list/geofence-list.component';
+import { AddGeofenceComponent } from './geofence/add-geofence/add-geofence.component';
+import { EditGeofenceComponent } from './geofence/edit-geofence/edit-geofence.component';
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -209,6 +214,12 @@ import { AdminEndormentComponent } from './admin-endorment/admin-endorment.compo
     SubAdminAddComponent,
     GetTranslationsComponent,
     AdminEndormentComponent,
+    AddEndorsementComponent,
+    GeofenceListComponent,
+    AddGeofenceComponent,
+    EditGeofenceComponent
+    
+    
 
 
 
@@ -223,6 +234,9 @@ import { AdminEndormentComponent } from './admin-endorment/admin-endorment.compo
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
     NgOtpInputModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBCNuSINklJM6YkiIYG9ixuWviIkJtCD5U'
+    }),
     NgMultiSelectDropDownModule.forRoot(),
     // TranslateModule.forRoot({
     //   loader: {

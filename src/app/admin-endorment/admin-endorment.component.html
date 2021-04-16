@@ -6,16 +6,16 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1></h1>
-                    <div class="input_divs2 input_button ">
-                        <button mat-button (click)="goTo()"><span>+</span>Add Endorsement</button>
+                    <div class="input_divs2 input_button input_button2 ">
+                        <button mat-button [routerLink]="['/updateEndorsement']" [queryParams]="{check: 'add'}" routerLinkActive="router-link-active" ><span>+</span>Add Endorsement</button>
 
 
 
                     </div>
-                    <div class="input_divs2 input_button input_button2">
+                    <!-- <div class="input_divs2 input_button input_button2">
                         <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="outer_table">
@@ -40,7 +40,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div> -->
-                        <div class="filters Booking_status">
+                        <!-- <div class="filters Booking_status">
                             <mat-form-field class="example-full-width">
                                 <mat-label></mat-label>
 
@@ -59,7 +59,7 @@
 
                                 </mat-select>
                             </mat-form-field>
-                        </div>
+                        </div> -->
                         <div class="search_fields">
 
 
@@ -93,18 +93,44 @@
                                 <th>Price </th>
                                 <th>Celebrity Name </th>
                                 <th>Commission </th>
+
                                 <th>Action</th>
                             </tr>
 
                             <tr *ngFor="let product of endorsementProductList;  let i = index">
 
 
-                                <td>{{ product.name }}</td>
+                                <td>{{ product.prod.name }}</td>
                                 <td>{{ product.category.name }}</td>
-                                <td>{{ product.price }}</td>
-                                <td>{{ celeberity }}</td>
-                                <td>{{ celebrity.firstName }} {{ celebrity.lastName }}</td>
-
+                                <td>{{ product.prod.price }}</td>
+                                <td>{{ product.celeb.firstName }} {{ product.celeb.lastName }}</td>
+                                <td>{{ product.commission }}</td>
+                             
+                                <td *ngIf="user.roles== 'admin'  || (user.roles=='subAdmin' &&
+                                this.user.permissions.subadmin.write==true)">
+                                                        <div class="action">
+                                                            <ul>
+                                                                <!-- <li class="show" (click)="goToviewSubadmin(product._id)"><i
+                                                                        class="fa fa-eye"></i></li> -->
+                
+                                                                <!-- <li class="edit" (click)="goToEdit(product._id)"><i
+                                                                        class="fa fa-pencil fa-fw"></i>
+                                                                </li> -->
+                                                                <li class="delete" (click)="deleteEndorsment(product._id)"><i
+                                                                        class="fa fa-trash-o fa-fw"></i></li>
+                                                            </ul>
+                
+                
+                                                        </div>
+                                                        <!-- 
+                                                        <a (click)="goToEdit(item._id)" class="btn btn-primary"><i
+                                                                _ngcontent-axh-c146="" class="fa fa-pencil fa-fw"></i>
+                                                        </a>
+                                                        <button class="btn btn-danger ml-2"
+                                                            (click)="userDeleteModal(userDelete, item._id)"><i
+                                                                class="fa fa-trash-o fa-fw"></i>
+                                                        </button> -->
+                                                    </td>
                             </tr>
                         </table>
                         <!-----start pagination-->
@@ -126,3 +152,6 @@
         </div>
     </div>
 </div>
+
+
+

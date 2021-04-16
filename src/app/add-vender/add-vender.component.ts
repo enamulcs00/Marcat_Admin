@@ -41,13 +41,14 @@ export class AddVenderComponent implements OnInit {
   roles: any;
   submitted: boolean;
   progress: boolean;
+  geofenceList: any;
   constructor(private fb: FormBuilder, private route: Router, private cd: ChangeDetectorRef, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
 
     this.readCountryCode();
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
     this.getCategoryList()
-
+    this.getAllGeofence()
 
     this.sub = this.router
       .queryParams
@@ -103,6 +104,7 @@ export class AddVenderComponent implements OnInit {
       address: ['', Validators.required],
       bio: ['',],
       Specialities: ['', Validators.required],
+      availableLocation:['',Validators.required],
       celebrityType: ['', Validators.required],
       profilePhoto: [''],
       gender: ['', Validators.required]
@@ -161,6 +163,24 @@ export class AddVenderComponent implements OnInit {
     this.country = address.address_components[length - 1].long_name;
 
   }
+
+
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
+  }
+  
 
 
   onFileChange(e) {
@@ -256,6 +276,8 @@ export class AddVenderComponent implements OnInit {
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.setUpProfile.get('countryCode').value)
       formData.append('categories', JSON.stringify(this.setUpProfile.get('Specialities').value))
+      formData.append('availableLocation', JSON.stringify(this.setUpProfile.get('availableLocation').value))
+     
       formData.append('gender', this.setUpProfile.get('gender').value)
       formData.append('lat', this.lat)
       formData.append('lng', this.lng)
@@ -270,7 +292,7 @@ export class AddVenderComponent implements OnInit {
         if (res.success) {
           this.commonService.successToast(res.message);
           this.progress = false
-          debugger
+          
           if (this.roles == 'merchant') {
             this.route.navigate(['/venderManagement']);
           } else {

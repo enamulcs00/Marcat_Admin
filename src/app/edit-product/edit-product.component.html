@@ -269,6 +269,19 @@
 
                                 </mat-form-field>
                             </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Select region<span class="red">*</span></mat-label>
+                                    <mat-select placeholder="Placeholder" formControlName="availableLocation" multiple>
+                                        <mat-option *ngFor="let item of geofenceList" [value]="item._id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editProductForm.get('availableLocation').hasError('required')">
+                                      Please select a region 
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
 
 
                             <li>

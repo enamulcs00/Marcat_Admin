@@ -39,6 +39,7 @@ export class AddproductComponent implements OnInit {
   sellerId: any;
   selectedSubcategory: any;
   productId: string;
+  geofenceList: any;
 
 
 
@@ -54,7 +55,10 @@ export class AddproductComponent implements OnInit {
     } else {
       this.sellerId = this.user._id
       this.getAllCategory(this.sellerId)
+     
     }
+
+    this.getAllGeofence();
 
   }
 
@@ -95,6 +99,7 @@ export class AddproductComponent implements OnInit {
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['', [Validators.required]],
+      availableLocation:['',Validators.required],
       // isbnNumber: ['', [Validators.required, Validators.min(0)]],
       // isbnNumber: ['', [Validators.required, Validators.min(0)]],
       specification: this.fb.array([]),
@@ -142,6 +147,23 @@ export class AddproductComponent implements OnInit {
       this.productId = timestamp + 'ME'
       console.log(this.productId);
     }
+  }
+
+
+  getAllGeofence() {
+    let body = {
+      page: 1,
+      count: 999999999
+    }
+
+    this.apiService.getAllGeofence(body).subscribe(res => {
+
+      if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
+
+    })
   }
 
   setradio(user) {
@@ -193,7 +215,6 @@ export class AddproductComponent implements OnInit {
     console.log(id);
     this.sellerId = id
     this.getAllCategory(id)
-
   }
 
   celebritySelected(id) {
@@ -352,6 +373,7 @@ export class AddproductComponent implements OnInit {
       body.append('price', this.addProductForm.controls['price'].value);
       body.append('category', this.addProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.addProductForm.controls['subCategory'].value));
+      body.append('availableLocation', JSON.stringify(this.addProductForm.controls['availableLocation'].value));
       body.append('brand', this.addProductForm.controls['brand'].value);
       body.append('purchaseQuantity', this.addProductForm.controls['purchaseQuantity'].value);
       body.append('productQuantity', this.addProductForm.controls['quantity'].value);

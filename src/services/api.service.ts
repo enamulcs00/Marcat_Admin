@@ -92,7 +92,13 @@ export class ApiService {
       deleteDocument: 'admin/deleteDocument',
       subadmin: 'admin/admin',
       getEndorsementAdmin: 'admin/getEndorse',
-      //commonApi to change status of any user type
+      deleteEndorsement:'admin/deleteEndorse/',
+      postEndorsement:'admin/endorse',
+      geoFenceList:'admin/getAllGeofence',
+      addGeofence:'admin/geoFence',
+      viewGeoFence:'admin/geoFence',
+
+      //commonApi to change status of, any user type
       status: 'common/status',
 
 
@@ -858,8 +864,42 @@ export class ApiService {
   }
 
 
-  getEndorsementAdmin(): Observable<any> {
-    return this.http.get<any>(this.apiEndPoints.getEndorsementAdmin, this.getHeaders());
+  getEndorsementAdmin(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getEndorsementAdmin, body, this.getHeaders());
+  }
+
+
+  deleteEndorse(id):Observable<any>{
+    return this.http.delete(this.apiEndPoints.deleteEndorsement+id,this.getHeaders())
+  }
+
+
+  addEndorsement(body):Observable<any>{
+    return this.http.post<any>(this.apiEndPoints.postEndorsement, body,this.getHeaders())
+  }
+
+  getAllGeofence(body):Observable<any>{
+    return this.http.post<any>(this.apiEndPoints.geoFenceList,body,this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  createGeoFencing(body):Observable<any>{
+    return this.http.post<any>(this.apiEndPoints.addGeofence, body,this.getHeaders())
+  }
+
+
+  getGeofencing(id):Observable<any>
+  {
+    return this.http.get<any>(`${this.apiEndPoints.viewGeoFence}?id=`+id,this.getHeaders() )
+  }
+   
+  updateGeofencing(body):Observable<any>{
+    return this.http.put<any>(this.apiEndPoints.viewGeoFence,body,this.getHeaders())
+  }
+
+
+  deleteGeofence(id):Observable<any>{
+    return this.http.delete(this.apiEndPoints.viewGeoFence+'/'+id, this.getHeaders())
   }
 
 
