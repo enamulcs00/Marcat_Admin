@@ -179,6 +179,9 @@ export class SubAdminAddComponent implements OnInit {
         this.addAdminForm.get('setting').setValue(res.data.permissions.setting);
         this.addAdminForm.get('subadmin').setValue(res.data.permissions.subadmin);
         this.addAdminForm.get('revenue').setValue(res.data.permissions.revenue);
+        this.addAdminForm.get('stringLiterals').setValue(res.data.permissions.stringLiterals);
+        this.addAdminForm.get('adminEndorsment').setValue(res.data.permissions.adminEndorsment);
+        this.addAdminForm.get('geofenceManagement').setValue(res.data.permissions.geofenceManagement);
         if (this.flagComp == 'edit') {
           this.addAdminForm.get('email').disable()
         }
@@ -186,14 +189,8 @@ export class SubAdminAddComponent implements OnInit {
           this.addAdminForm.disable();
         }
       }
-
     })
-
   }
-
-
-
-
   save() {
 
     console.log(this.addAdminForm.value);
@@ -214,6 +211,9 @@ export class SubAdminAddComponent implements OnInit {
         'reviews': this.addAdminForm.get('reviews').value,
         'subadmin': this.addAdminForm.get('subadmin').value,
         'revenue': this.addAdminForm.get('revenue').value,
+        'stringLiterals': this.addAdminForm.get('stringLiterals').value,
+        'adminEndorsment': this.addAdminForm.get('adminEndorsment').value,
+        'geofenceManagement': this.addAdminForm.get('geofenceManagement').value,
 
       }
       console.log(permisssions);

@@ -96,7 +96,7 @@ export class EditGeofenceComponent implements OnInit  {
     this.getPolygonCoordinates(this.constructTriangle);
   }
   Back() {
-    this.router.navigate(['/geofence'])
+    this.router.navigate(['/geo-fence-List'])
   }
  
 
@@ -172,7 +172,7 @@ export class EditGeofenceComponent implements OnInit  {
           this.addgeofence = false;
           this.commonService.successToast(res.message)
 
-          this.router.navigate(['/geofence'])
+          this.router.navigate(['/geo-fence-List'])
         } else {
           this.commonService.errorToast(res.message)
         }

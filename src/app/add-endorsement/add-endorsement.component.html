@@ -61,7 +61,7 @@
                             <li>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Commission<span class="red">*</span></mat-label>
-                                    <input matInput type="text" placeholder="Arabic Name" formControlName="commission"
+                                    <input matInput type="number" placeholder="Arabic Name" formControlName="commission"
                                         placeholder="" name="name">
                                     <mat-error *ngIf="endorsementForm.get('commission').hasError('required')">
                                         Commission is <strong>required</strong>

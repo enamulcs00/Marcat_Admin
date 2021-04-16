@@ -18,7 +18,7 @@
               <form [formGroup]="geofenceForm">
                   <div class="row mb-3">
 
-                      <div class="col-4">
+                      <div class="col-8">
 
                           <mat-form-field class="full-width">
                               <mat-label>Geofence Name</mat-label>
@@ -26,6 +26,11 @@
                               <mat-error *ngIf="geofenceForm.get('geofenceName').hasError('required')">
                                   Please Add Geofence Name
                               </mat-error>
+                              
+                              <mat-error *ngIf="geofenceForm.get('geofenceName').hasError('maxlength')">
+                                 Max length for geofence name is 30
+                              </mat-error>
+
                           </mat-form-field>
 
 
@@ -33,7 +38,7 @@
                      
                     
 
-                      <div class="col-6">
+                      <div class="col-4">
                           <button mat-button (click)="save()">Save</button>
                       </div>
 

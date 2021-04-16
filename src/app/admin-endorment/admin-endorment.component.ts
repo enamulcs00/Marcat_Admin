@@ -119,6 +119,7 @@ export class AdminEndormentComponent implements OnInit {
   deleteEndorsment(id){
 
     this.apiService.deleteEndorse(id).subscribe(res=>{
+      
       console.log(res);
       if(res.success){
         this.commonService.successToast(res.message)
