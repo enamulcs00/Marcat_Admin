@@ -150,10 +150,6 @@ export class SubAdminAddComponent implements OnInit {
         write: [false],
       })
 
-
-
-
-
     })
   }
 
