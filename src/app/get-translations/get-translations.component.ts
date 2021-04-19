@@ -67,6 +67,12 @@ export class GetTranslationsComponent implements OnInit {
   save() {
 
     let body
+    debugger
+    for (let el in this.dataForm.controls) {
+      if (this.dataForm.controls[el].errors) {
+        console.log(el)
+      }
+    }
     if (this.dataForm.valid) {
       console.log(this.dataForm);
       console.log(this.dataForm.value);
@@ -83,9 +89,13 @@ export class GetTranslationsComponent implements OnInit {
           this.commonService.errorToast(res.message)
         }
       })
+      
+      
+   }
+   
     }
   }
 
 
 
-}
+
