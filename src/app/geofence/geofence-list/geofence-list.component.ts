@@ -23,7 +23,11 @@ export class GeofenceListComponent implements OnInit {
   constructTriangle: any;
   drawingManager: google.maps.drawing.DrawingManager;
   polyarray: any;
-  constructor(private router: Router, private mapsAPILoader: MapsAPILoader, private apiService: ApiService, private commonService: CommonService) { }
+  user: any;
+  constructor(private router: Router, private mapsAPILoader: MapsAPILoader, private apiService: ApiService, private commonService: CommonService) {
+    this.user = JSON.parse(this.apiService.getUser())
+
+   }
 
   ngOnInit() {
 

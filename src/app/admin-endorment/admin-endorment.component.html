@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1></h1>
-                    <div class="input_divs2 input_button input_button2 ">
+                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.adminEndorsment.write==true)" class="input_divs2 input_button input_button2 ">
                         <button mat-button [routerLink]="['/updateEndorsement']" [queryParams]="{check: 'add'}" routerLinkActive="router-link-active" ><span>+</span>Add Endorsement</button>
 
 
@@ -94,7 +94,7 @@
                                 <th>Celebrity Name </th>
                                 <th>Commission </th>
 
-                                <th>Action</th>
+                                <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.adminEndorsment.write==true)">Action</th>
                             </tr>
 
                             <tr *ngFor="let product of endorsementProductList;  let i = index">
@@ -107,7 +107,7 @@
                                 <td>{{ product.commission }}</td>
                              
                                 <td *ngIf="user.roles== 'admin'  || (user.roles=='subAdmin' &&
-                                this.user.permissions.subadmin.write==true)">
+                                this.user.permissions.adminEndorsment.write==true)">
                                                         <div class="action">
                                                             <ul>
                                                                 <!-- <li class="show" (click)="goToviewSubadmin(product._id)"><i

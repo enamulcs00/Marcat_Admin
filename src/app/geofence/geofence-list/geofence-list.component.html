@@ -49,7 +49,7 @@
 
               <!-----start pagination-->
               <div class=" shadow m-3 p-2">
-                  <div class="add_location_name ">
+                  <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.geofenceManagement.write==true)" class="add_location_name ">
                       <a matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="10" (click)="addGeofence()"
                           class="button-border add_state ml-2">
                           <i class="fa fa-plus"></i> Add Geofence</a>
@@ -79,7 +79,7 @@
 
                               <h5 class="item-card-title mt-3 mb-3 ml-0">{{i+1}} &nbsp;{{item.name}}</h5>
                               
-                              <div class="row ml-3 cursor">
+                              <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.geofenceManagement.write==true)" class="row ml-3 cursor">
                                   <span class="card-title text-right" (click)="editGeofence(item._id)"><i
                                           class="material-icons">create</i></span>
 
