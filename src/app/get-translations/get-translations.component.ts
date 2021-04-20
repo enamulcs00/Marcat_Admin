@@ -12,12 +12,14 @@ export class GetTranslationsComponent implements OnInit {
   dataForm: FormGroup;
 
   hasKey: boolean = false;
+  user: any;
   // sample={
   //   "name": "Phone Number",
   //   "name_ar": "Phone Number"
   // }
-
-  constructor(private service: ApiService, private formBuilder: FormBuilder, private commonService: CommonService) { }
+  constructor(private service: ApiService, private formBuilder: FormBuilder, private commonService: CommonService) {
+    this.user = JSON.parse(this.service.getUser())
+   }
   data1: any;
   ngOnInit() {
 
@@ -67,12 +69,13 @@ export class GetTranslationsComponent implements OnInit {
   save() {
 
     let body
-    debugger
-    for (let el in this.dataForm.controls) {
-      if (this.dataForm.controls[el].errors) {
-        console.log(el)
-      }
-    }
+    
+
+    // for (let el in this.dataForm.controls) {
+    //   if (this.dataForm.controls[el].invalid) {
+    //     console.log(el)
+    //   }
+    // }
     if (this.dataForm.valid) {
       console.log(this.dataForm);
       console.log(this.dataForm.value);

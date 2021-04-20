@@ -17,8 +17,11 @@ export class AddEndorsementComponent implements OnInit {
   productList: any;
   sellerId: any;
   celebList: any;
+  user: any;
 
-  constructor(private apiService:ApiService,private commonService:CommonService,private fb:FormBuilder, private router:Router) { }
+  constructor(private apiService:ApiService,private commonService:CommonService,private fb:FormBuilder, private router:Router) {
+    this.user = JSON.parse(this.apiService.getUser())
+   }
 
   ngOnInit() {
     this.showVendorList();

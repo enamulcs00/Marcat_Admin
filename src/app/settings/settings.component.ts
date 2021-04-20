@@ -44,7 +44,10 @@ export class SettingsComponent implements OnInit {
   showCountryList: any;
   countryName: any;
   countryShortCodeEdit: any;
-  constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) { }
+  user: any;
+  constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
+    this.user = JSON.parse(this.apiService.getUser())
+   }
 
   ngOnInit() {
     this.getTax();
