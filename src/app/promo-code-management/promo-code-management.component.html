@@ -7,7 +7,7 @@
                 <div class="sub_heading">
                     <h1>Promo Code Management</h1>
                     <div *ngIf="roles=='admin'  || (roles=='subAdmin' &&
-                this.user.permissions.discount.write==true)" class="input_divs2 input_button input_button2">
+                this.userDetails.permissions.discount.write==true)" class="input_divs2 input_button input_button2">
                         <button mat-button (click)="goToAddPromoCode()">Add Promo Code</button>
                         <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button> -->
