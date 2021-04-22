@@ -84,14 +84,13 @@
                                             <th>Order Date</th>
                                             <th>Expected Delivery Date</th>
                                             <th>Delivery Date</th>
-                                            <th>Status</th>
-                                            <ng-container
-                                                *ngIf="user.roles=='subAdmin' && this.user.permissions.orderList.read==false; else elseTemplate">
+                                            <!-- <th>Delivery Date</th> -->
+                                            <th>Payment Method</th>
 
-                                            </ng-container>
-                                            <ng-template #elseTemplate>
+                                            <th>Status</th>
+                                          
                                                 <th class="action_bx">Action</th>
-                                            </ng-template>
+                                       
 
 
                                         </tr>
@@ -113,20 +112,27 @@
                                                 {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
                                                 {{item.deliveryAddress.postalCode}}</td>
                                             <td>{{item.createdAt|date}}</td>
-                                            <td>{{item.deliveryDate==null?"Date not assigned yet":item.deliveryDate|date}}
+                                            <td>{{item.deliveryDate==null?"Date not assigned
+                                                yet":item.deliveryDate|date}}
                                             </td>
-                                            <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
+                                            <td>{{item.deliveredDate==null ?"Not delivered
+                                                yet":item.deliveredDate|date}}
                                             </td>
-                                            <td *ngIf="roles=='admin'">
-                                                {{item.status}}
+                                            <td>{{item.paymentMethod}}
+                                            </td>
 
-                                            </td>
+
+
+                                            <!-- <td *ngIf="roles=='admin'">
+                                               
+
+                                            </td> -->
                                             <td>
                                                 <ng-container
-                                                    *ngIf="roles=='admin' || roles=='subAdmin'; else elseTemplate">
-
+                                                    *ngIf="roles=='admin' || roles=='subAdmin'; else elseTemplate2">
+                                                    {{item.status}}
                                                 </ng-container>
-                                                <ng-template #elseTemplate>
+                                                <ng-template #elseTemplate2>
                                                     <mat-select style="width: 100px;" [(ngModel)]="item.status"
                                                         (selectionChange)="statusChanged($event.value, item._id)">
                                                         <mat-option *ngFor="let item of filterList"

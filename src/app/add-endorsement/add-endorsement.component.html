@@ -66,6 +66,12 @@
                                     <mat-error *ngIf="endorsementForm.get('commission').hasError('required')">
                                         Commission is <strong>required</strong>
                                     </mat-error>
+                                    <mat-error *ngIf="endorsementForm.get('commission').hasError('max')">
+                                        Commission can be max <strong>100%</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="endorsementForm.get('commission').hasError('min')">
+                                        Commission can be min <strong>0%</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
 

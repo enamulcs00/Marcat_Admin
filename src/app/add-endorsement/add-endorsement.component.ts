@@ -30,7 +30,7 @@ export class AddEndorsementComponent implements OnInit {
       id:['',Validators.required],
       product:['',Validators.required],
       celebrity:['',Validators.required],
-      commission:['',Validators.required],
+      commission:['',[Validators.required, Validators.max(100), Validators.min(0)]],
     })
 
   }
