@@ -34,7 +34,9 @@ export class RevenuereportComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger
     this.roles = this.user.roles
+    console.log(this.roles)
     this.getRevenueReport()
 
   }

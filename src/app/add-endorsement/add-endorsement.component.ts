@@ -36,7 +36,11 @@ export class AddEndorsementComponent implements OnInit {
   }
 
 
+
+
+
   showVendorList() {
+    
     console.log("inside get vendor")
     let body = {
       roles: 'merchant',

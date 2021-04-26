@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Banner Management</h1>
-                    <ng-container *ngIf="userDetails.roles=='subAdmin' || userDetails.permissions.banner.write==false; else
+                    <ng-container *ngIf="userDetails.roles=='subAdmin' && userDetails.permissions.banner.write==false; else
                         elseTemplate">
 
                     </ng-container>
@@ -77,7 +77,7 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Offer Details</th>
-                                <ng-container *ngIf="userDetails.roles=='subAdmin' || userDetails.permissions.banner.write==false; else
+                                <ng-container *ngIf="userDetails.roles=='subAdmin' && userDetails.permissions.banner.write==false; else
                         elseTemplate1">
 
                                 </ng-container>
