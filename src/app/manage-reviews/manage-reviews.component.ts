@@ -27,7 +27,12 @@ export class ManageReviewsComponent implements OnInit {
   srNo: number;
   reviewList: any;
   progress: boolean;
-  constructor(private apiService: ApiService, private commonService: CommonService) { }
+  user: any;
+  roles: any;
+  constructor(private apiService: ApiService, private commonService: CommonService) { 
+    this.user = JSON.parse(this.apiService.getUser())
+    this.roles=this.user.roles
+  }
 
   ngOnInit() {
     this.getReview()

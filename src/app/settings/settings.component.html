@@ -112,15 +112,12 @@
                     </form>
 
 
-                    <ul class="card forShadow">
-
-
+                    <!-- <ul class="card forShadow">
                         <li class="row">
                             <div class="row">
                                 <div class="col-md-10">
                                     <label>Shipping Rates<span class="red">*</span></label>
                                 </div>
-
                                 <div class="col-md-2 pb-2">
                                     <div *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
                 this.user.permissions.setting.write==true)" class="top_subheading_add">
@@ -134,7 +131,6 @@
                             <div>
                                 <table>
                                     <tr>
-
                                         <th>Country</th>
                                         <th>Price range</th>
                                         <th>Shipping charges in this range</th>
@@ -142,7 +138,6 @@
                                         <th>Shipping charges above this range</th>
                                         <th *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
                 this.user.permissions.setting.write==true)">Action</th>
-
                                     </tr>
                                     <tr *ngFor="let item of shippingChargesList; let i=index">
                                         <td>{{item.country}}</td>
@@ -152,10 +147,7 @@
                                         <td>{{item.abovePrice}}</td>
                                         <td *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
                 this.user.permissions.setting.write==true)">
-                                            <!-- <a href="javascript:;" data-toggle="modal"
-                                                (click)="editShippingCharge(item._id)" data-target=" #editlargeModal">
-                                                <i class="fa fa-edit"></i>
-                                            </a> -->
+                                          
                                             <button style="background-color: transparent !important;"
                                                 (click)="editShippingCharge(item._id)" data-toggle="modal"
                                                 data-target="#editlargeModal"> <i class="fa fa-edit"></i></button>
@@ -168,7 +160,7 @@
                         </li>
 
 
-                    </ul>
+                    </ul> -->
                 </div>
 
 
@@ -181,7 +173,7 @@
 
 
 <!--Add shipping Charges Modal Start From here -->
-
+<!-- 
 <div id="largeModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -192,12 +184,7 @@
             <div class="modal-body add_user_list">
                 <form [formGroup]="zoneFormGroup">
                     <ul>
-
                         <li>
-
-
-
-
                             <mat-form-field>
                                 <mat-label>Country<span class="red">*</span></mat-label>
                                 <input matInput type="text" list="browsers" (keyup)="onKey($event.target.value)"
@@ -213,112 +200,75 @@
                                 </mat-error>
 
                             </mat-form-field>
-
-
-                            <!-- <div class="custom-invalid"
-                                *ngIf="submitted && zoneFormGroup.controls['selectedCountry'].hasError('required')">
-                                Country is <strong>required</strong>
-                            </div> -->
-
-
                         </li>
-
                         <li class="row">
                             <mat-form-field>
                                 <mat-label>Shipping charges below this range<span class="red">*</span></mat-label>
-
                                 <input matInput matInput type="number" placeholder="" formControlName="belowMinValue"
                                     name="name">
-
-
                                 <mat-error *ngIf="zoneFormGroup.get('belowMinValue').hasError('required')">
                                     Shipping charges below this range is <strong>required</strong>
                                 </mat-error>
-
                             </mat-form-field>
                         </li>
                         <li>
-
                             <div class="row">
                                 <div class="col-5">
                                     <mat-form-field>
                                         <mat-label>Product min value<span class="red">*</span></mat-label>
                                         <input matInput type="number" class="form-controll" placeholder=""
                                             formControlName="minValue" name="name">
-
-
                                         <mat-error *ngIf="zoneFormGroup.get('minValue').hasError('required')">
                                             Product min value is <strong>required</strong>
                                         </mat-error>
-
                                     </mat-form-field>
                                 </div>
-
                                 <div class="col-5 offset-lg-1">
                                     <mat-form-field>
                                         <mat-label>Product max value<span class="red">*</span></mat-label>
                                         <input matInput type="number" placeholder="" formControlName="maxValue"
                                             name="name">
-
-
                                         <mat-error *ngIf="zoneFormGroup.get('maxValue').hasError('required')">
                                             Product max value is <strong>required</strong>
                                         </mat-error>
-
                                     </mat-form-field>
                                 </div>
-
                             </div>
                         </li>
-
                         <li class="row">
                             <mat-form-field>
                                 <mat-label>Shipping charges in this range<span class="red">*</span></mat-label>
-
                                 <input matInput type="number" placeholder="" formControlName="rangePrice" name="name">
-
-
                                 <mat-error *ngIf="zoneFormGroup.get('rangePrice').hasError('required')">
                                     Shipping charges in this range is <strong>required</strong>
                                 </mat-error>
-
                             </mat-form-field>
                         </li>
-
-
                         <li class="row">
                             <mat-form-field>
                                 <mat-label>Price above max value<span class="red">*</span></mat-label>
-
                                 <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
                                     name="name">
-
-
                                 <mat-error *ngIf="zoneFormGroup.get('aboveMaxValue').hasError('required')">
                                     Price above max value is <strong>required</strong>
                                 </mat-error>
-
                             </mat-form-field>
                         </li>
-
-
                     </ul>
                 </form>
             </div>
             <div class="modal-footer">
-
                 <button mat-button class="button" (click)="saveZone()">Save</button>
-
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- MOdal ends here -->
 
 
 <!--edit shipping Charges Modal Start From here -->
 
-<div id="editlargeModal" class="modal fade" tabindex="-1" role="dialog">
+<!-- <div id="editlargeModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -328,26 +278,11 @@
             <div class="modal-body add_user_list">
                 <form [formGroup]="zoneEditFormGroup">
                     <ul>
-                        <!-- <li>
-                            <label>Zone Name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" formControlName="zoneName">
-                            </mat-form-field>
-                        </li> -->
+                        
                         <li>
                             <label>Country<span class="red">*</span></label>
                             <input readonly matInput formControlName="selectedCountry" id="browser">
-
-                            <!-- <select (selectionChange)="countrySelected($event.value)">
-                            <input class="form-controll" placeholder="Search Product"
-                                (keyup)="onKeyInCountry($event.target.value)">
-                            <option>None</option>
-                            <option *ngFor="let body of countryList" [value]="body.code">{{body.name}}
-                            </option>
-                        </select> -->
-
                         </li>
-
                         <li class="row">
                             <mat-form-field>
                                 <mat-label>Shipping charges below this range<span class="red">*</span></mat-label>
@@ -356,13 +291,9 @@
                                 <mat-error *ngIf="zoneEditFormGroup.get('belowMinValue').hasError('required')">
                                     Shipping charges below this range is <strong>required</strong>
                                 </mat-error>
-
-
                             </mat-form-field>
                             <div>
-
                             </div>
-
                         </li>
                         <li>
                             <div class="row">
@@ -375,8 +306,6 @@
                                         <mat-error *ngIf="zoneEditFormGroup.get('minValue').hasError('required')">
                                             Product min value is <strong>required</strong>
                                         </mat-error>
-
-
                                     </mat-form-field>
                                 </div>
                                 <div class="col-5 ">
@@ -388,57 +317,40 @@
                                             Product max value is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
-
                                 </div>
-
                             </div>
                         </li>
-
                         <li class="row">
                             <mat-form-field>
                                 <label>Shipping charges in this range<span class="red">*</span></label>
                                 <div>
                                     <input matInput type="number" placeholder="" formControlName="rangePrice"
                                         name="name">
-
                                     <mat-error *ngIf="zoneEditFormGroup.get('rangePrice').hasError('required')">
                                         Shipping charges in this range is <strong>required</strong>
                                     </mat-error>
-
-
                                 </div>
                             </mat-form-field>
-
                         </li>
-
-
                         <li class="row">
                             <mat-form-field>
                                 <mat-label>Price above max value<span class="red">*</span></mat-label>
                                 <div>
                                     <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
                                         name="name">
-
-
                                     <mat-error *ngIf="zoneEditFormGroup.get('aboveMaxValue').hasError('required')">
                                         Price above max value is <strong>required</strong>
                                     </mat-error>
-
                                 </div>
                             </mat-form-field>
-
                         </li>
-
-
                     </ul>
                 </form>
             </div>
             <div class="modal-footer">
-
                 <button mat-button data-dismiss="modal" class="button" (click)="updateShippingRate()">Save</button>
-
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- MOdal ends here -->

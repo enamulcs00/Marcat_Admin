@@ -30,6 +30,7 @@ export class AdminEndormentComponent implements OnInit {
   isApproved: any;
   endorsementProductList: any;
   progress: boolean;
+  flagData:boolean=false
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log(this.user);
@@ -98,6 +99,11 @@ export class AdminEndormentComponent implements OnInit {
         this.progress = false
         this.endorsementProductList = res.data;
         this.length = res.total;
+        if(this.length>0){
+          this.flagData=false
+        }else{
+          this.flagData=true
+        }
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)

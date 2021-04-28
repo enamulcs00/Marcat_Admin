@@ -67,20 +67,22 @@
                                                 <th>Seller</th>
                                                 <th>Email</th>
                                                 <th>Number of Sale</th>
-                                                <th>Total Price</th>
+                                                <th>Total Revenue</th>
                                                 <th>Total Tax</th>
                                                 <th>Total Commission Earned</th>
+                                                <th>Payout</th>
     
                                             </tr>
                                             <tr *ngFor="let item of revenueReport; let i=index">
                                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                                 <td *ngIf="flagUserList==false">{{i+1}}</td>
-                                                <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
-                                                <td>{{item.seller.email}}</td>
-                                                <td>{{item.count}}</td>
+                                                <td>{{item.seller?.firstName}} {{item.seller?.lastName}}</td>
+                                                <td>{{item.seller?.email}}</td>
+                                                <td>{{item?.count}}</td>
                                                 <td>{{item.totalPrice|number}}</td>
                                                 <td>{{item.tax|number}}</td>
                                                 <td>{{item.commission|number}}</td>
+                                                <td>{{item.totalPrice-(item.tax+item.commission)| number}}</td>
     
                                             </tr>
     

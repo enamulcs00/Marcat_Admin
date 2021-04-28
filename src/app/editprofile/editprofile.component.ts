@@ -30,6 +30,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   showProfilePic
   deliveryType: any;
   user: any;
+  roles: any;
 
   constructor(private fb: FormBuilder, private commonService: CommonService, private apiService: ApiService, private route: ActivatedRoute, private urlService: UrlService) {
     this.sub = this.route
@@ -38,6 +39,8 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
         // Defaults to 0 if no query param provided.
         this.id = params['id'];
       });
+
+
 
 
     this.imagePath = this.urlService.imageUrl;
@@ -58,6 +61,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
     this.user = JSON.parse(this.apiService.getUser())
 
+    this.roles=this.user.roles
   }
 
 
@@ -72,7 +76,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       profilePic1: ['',],
-      deliveryType: [''],
+      deliveryType: ['ARAMEX'],
 
       profilePic: []
     });
@@ -120,14 +124,9 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
   submit() {
 
-
     this.submitted = true
-
     if (this.submitted && this.updateProfileForm.valid) {
-
       const data = new FormData();
-
-
       if (this.picUploader === true) {
         data.append('profilePic', this.imageFile, this.imageFile.name)
       }

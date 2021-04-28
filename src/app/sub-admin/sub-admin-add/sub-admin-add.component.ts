@@ -19,6 +19,7 @@ export class SubAdminAddComponent implements OnInit {
   profilePicName: any = 'Choose file';
   imagePreview: any;
   submitted: boolean;
+  progress:boolean=false
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
 
     this.sub = this.activatedRoute.queryParams.subscribe(res => {
@@ -156,10 +157,11 @@ export class SubAdminAddComponent implements OnInit {
 
 
   getSingleSubAdmin() {
+    this.progress=true
     this.apiService.getSingleSubAdmin(this.id).subscribe(res => {
       console.log(res);
       if (res.success) {
-
+this.progress=false
         this.addAdminForm.get('firstName').setValue(res.data.firstName);
         this.addAdminForm.get('lastName').setValue(res.data.lastName);
         this.addAdminForm.get('email').setValue(res.data.email);
@@ -188,6 +190,9 @@ export class SubAdminAddComponent implements OnInit {
         if (this.flagComp == 'view') {
           this.addAdminForm.disable();
         }
+      }else{
+        this.progress=false
+        this.commonService.errorToast(res.message)
       }
     })
   }
@@ -234,25 +239,29 @@ export class SubAdminAddComponent implements OnInit {
       });
 
       if (this.id) {
-
+        this.progress=true
         this.apiService.putSubAdmin(formData, this.id).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress=false
             this.commonService.successToast(res.message)
             this.router.navigate(['sub-admin-list'])
           } else {
+            this.progress=false
             this.commonService.errorToast(res.message)
           }
 
         })
       } else {
-
+        this.progress=true
         this.apiService.postSubAdmin(formData).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress=false
             this.commonService.successToast(res.message)
             this.router.navigate(['sub-admin-list'])
           } else {
+            this.progress=false
             this.commonService.errorToast(res.message)
           }
 

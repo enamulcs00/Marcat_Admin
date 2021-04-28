@@ -27,6 +27,8 @@ export class SubAdminListComponent implements OnInit {
   pageEvent: PageEvent;
   flagData: boolean;
   user: any;
+  srNo: number;
+  flagUserList: boolean;
 
   constructor(private apiService: ApiService, private router: Router, private commonService: CommonService) {
 
@@ -159,6 +161,33 @@ export class SubAdminListComponent implements OnInit {
     })
 
   }
+
+
+  subAdminListAfterPageSizeChanged(e): any {
+    console.log(e);
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.count = e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.count = e.pageSize
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.count = e.pageSize
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+    this.getSubAdminList()
+  }
+
 
 
 

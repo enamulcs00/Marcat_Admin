@@ -118,12 +118,13 @@
                             </tbody>
                         </table>
                     </div>
+                     <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="count" [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = subAdminListAfterPageSizeChanged($event)">
+            </mat-paginator>
+            <!-----end pagination-->
                 </div>
-                <!-----start pagination-->
-                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="pageEvent = discountListAfterPageSizeChanged($event)">
-                </mat-paginator>
-                <!-----end pagination-->
+               
 
             </div>
         </div>

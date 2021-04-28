@@ -34,15 +34,15 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  filterSelected(e) {
-    console.log(e);
-    let body = {
-      'deliveryType': this.deliveryType
-    }
+  // filterSelected(e) {
+  //   console.log(e);
+  //   let body = {
+  //     'deliveryType': this.deliveryType
+  //   }
 
-    this.apiService.editUser(body)
+  //   this.apiService.editUser(body)
 
-  }
+  // }
 
 
   radioChange(e) {
