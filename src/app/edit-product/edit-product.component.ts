@@ -276,7 +276,7 @@ export class EditProductComponent implements OnInit {
   }
 
   deleteLocally(i) {
-    debugger
+    
     this.urls.splice(i, 1);
     this.images.splice(i, 1)
   }
@@ -404,7 +404,7 @@ export class EditProductComponent implements OnInit {
 
     console.log("check", this.editProductForm)
     this.submitted = true;
-    debugger
+    
     if (this.submitted && this.editProductForm.valid && (this.previewImage.length > 0 || this.images.length > 0)) {
       const body = new FormData();
       body.append('id', this.id);

@@ -4,9 +4,9 @@ import { Injectable } from "@angular/core";
   providedIn: "root"
 })
 export class UrlService {
-  baseUrl = "https://appgrowthcompany.com:9079";
-  imageUrl = "https://appgrowthcompany.com:9079/";
-  SERVER_URL = "https://appgrowthcompany.com:9079"
+  baseUrl = "https://api.markat.store";
+  imageUrl = "https://api.markat.store/";
+  SERVER_URL = "https://api.markat.store"
   constructor() { }
   login = `${this.baseUrl}/login`;
 }

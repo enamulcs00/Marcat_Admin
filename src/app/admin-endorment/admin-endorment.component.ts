@@ -33,7 +33,6 @@ export class AdminEndormentComponent implements OnInit {
   flagData:boolean=false
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-    console.log(this.user);
 
 
   }
@@ -93,9 +92,8 @@ export class AdminEndormentComponent implements OnInit {
     }
     this.progress = true
     this.apiService.getEndorsementAdmin(body).subscribe(res => {
-      console.log(res);
       if (res.success) {
-        debugger
+        
         this.progress = false
         this.endorsementProductList = res.data;
         this.length = res.total;
@@ -126,7 +124,6 @@ export class AdminEndormentComponent implements OnInit {
 
     this.apiService.deleteEndorse(id).subscribe(res=>{
       
-      console.log(res);
       if(res.success){
         this.commonService.successToast(res.message)
         this.getEndorsement()
@@ -178,7 +175,6 @@ export class AdminEndormentComponent implements OnInit {
   // }
 
   endorsementList(e): any {
-    console.log(e);
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -209,7 +205,6 @@ export class AdminEndormentComponent implements OnInit {
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
-    console.log(this.search);
 
     this.getEndorsement()
 

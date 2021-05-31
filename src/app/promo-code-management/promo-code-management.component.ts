@@ -47,7 +47,6 @@ export class PromoCodeManagementComponent implements OnInit {
 
   flag = false
   filterSelected(e) {
-    debugger
     this.filterBy = e.value
 
     if (this.filterBy) {
@@ -70,7 +69,6 @@ export class PromoCodeManagementComponent implements OnInit {
   }
 
   clearSearch() {
-    debugger
     this.flagSearch = true
     this.search = ''
     this.getPromoCode();

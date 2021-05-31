@@ -30,6 +30,7 @@ export class EndorsedProductComponent implements OnInit {
   isApproved: any;
   endorsementProductList: any;
   progress: boolean;
+  endorsementRevenue: any=10;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log(this.user);
@@ -97,6 +98,7 @@ export class EndorsedProductComponent implements OnInit {
       if (res.success) {
         this.progress = false
         this.endorsementProductList = res.data;
+        // this.endorsementRevenue=res.endorsementTotalRevenue
         this.length = res.total;
       } else {
         this.progress = false

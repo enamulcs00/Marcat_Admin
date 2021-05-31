@@ -73,9 +73,6 @@
                                             <th>Order Id</th>
                                             <th>Product Name</th>
                                             <th>Product category</th>
-
-
-
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th *ngIf="roles=='admin'">Seller Name</th>
@@ -86,23 +83,14 @@
                                             <th>Delivery Date</th>
                                             <!-- <th>Delivery Date</th> -->
                                             <th>Payment Method</th>
-
                                             <th>Status</th>
-                                          
-                                                <th class="action_bx">Action</th>
-                                       
-
-
+                                            <th  *ngIf="roles=='admin' || roles=='subAdmin'">Refund</th>
+                                            <th class="action_bx">Action</th>
                                         </tr>
-
-
-
                                         <tr *ngFor="let item of salesList; let i=index">
                                             <td>{{item.orderId}}</td>
                                             <td>{{item.product.name}}</td>
                                             <td>{{item.product.category.name}}</td>
-
-
                                             <td>{{item.quantity}}</td>
                                             <td>{{item.finalAmount|number}}</td>
                                             <td *ngIf="roles=='admin'">{{item.seller.firstName}}
@@ -112,21 +100,16 @@
                                                 {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
                                                 {{item.deliveryAddress.postalCode}}</td>
                                             <td>{{item.createdAt|date}}</td>
-                                            <td>{{item.deliveryDate==null?"Date not assigned
-                                                yet":item.deliveryDate|date}}
+                                            <td>{{item.deliveryDate==null?"Date not assigned yet":item.deliveryDate|date}}
                                             </td>
-                                            <td>{{item.deliveredDate==null ?"Not delivered
-                                                yet":item.deliveredDate|date}}
+                                            <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
                                             </td>
                                             <td>{{item.paymentMethod}}
                                             </td>
 
 
 
-                                            <!-- <td *ngIf="roles=='admin'">
-                                               
-
-                                            </td> -->
+                                            <!-- <td *ngIf="roles=='admin'"> </td> -->
                                             <td>
                                                 <ng-container
                                                     *ngIf="roles=='admin' || roles=='subAdmin'; else elseTemplate2">
@@ -147,6 +130,7 @@
 
 
                                             </td>
+                                            <td  *ngIf="roles=='admin' || roles=='subAdmin'"><button *ngIf="item.paymentStatus==='PAID'" (click)="refundPayment(item.orderId)"  mat-button>Refund</button></td>
                                             <td>
                                                 <div class="action">
                                                     <ul>

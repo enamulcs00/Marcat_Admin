@@ -71,7 +71,6 @@ export class CategoryComponent implements OnInit {
   getAllCategories() {
     this.apiService.getAllCategories().subscribe(res => {
       this.categories = res.data;
-      console.log(this.categories);
       this.submitted = false;
     })
   }
@@ -155,9 +154,7 @@ export class CategoryComponent implements OnInit {
 
   onUpdateCategory() {
     this.submitted = true;
-    console.log(this.imageFile);
     if (this.submitted && this.editCategoryForm.valid) {
-      console.log(this.editCategoryForm.value)
       const data = new FormData();
       data.append('id', this.id)
       data.append('name', this.editCategoryForm.get('name').value);
@@ -167,10 +164,7 @@ export class CategoryComponent implements OnInit {
         data.append('image', this.imageFile, this.imageFile.name);
 
       }
-      console.log(" form data");
-      data.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+    
       this.progress = true
       this.apiService.editCategory(data).subscribe(res => {
         if (res.success) {
@@ -230,7 +224,6 @@ export class CategoryComponent implements OnInit {
     this.apiService.viewCategory(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
-        console.log(res)
         this.editCategoryForm.controls['name'].setValue(res.data.name);
 
         this.editCategoryForm.controls['name_ar'].setValue(res.data.name_ar);
@@ -240,12 +233,10 @@ export class CategoryComponent implements OnInit {
         this.image = data.image
         this.imageFile = data.image;
         this.imageName = data.image.name
-        console.log(this.image);
 
       }
     })
 
-    console.log(this.image)
   }
   editCategory(id) {
     this.id = id;
@@ -269,14 +260,12 @@ export class CategoryComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.result = result;
-        console.log(id)
         const data = {
           "id": id,
           "model": "Category"
         }
 
         this.apiService.delete(data).subscribe(res => {
-          console.log(res);
           if (res.success) {
             this.getAllCategories()
             this.commonService.successToast(res.message);
@@ -289,13 +278,12 @@ export class CategoryComponent implements OnInit {
 
 
       } else {
-        console.log("cancelled");
+        console.warn("cancelled");
       }
     });
   }
 
   cancelClicked() {
-    console.log("hi")
     this.addCategoryForm.reset()
   }
 
@@ -313,17 +301,14 @@ export class CategoryComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.result = result;
-        console.log(id)
         const data = {
           "id": id,
           "model": "Category"
         }
 
-        console.log(data)
 
 
         this.apiService.delete(data).subscribe(res => {
-          console.log(res);
           if (res.success) {
             this.getAllCategories()
             this.commonService.successToast(res.message);
@@ -335,7 +320,7 @@ export class CategoryComponent implements OnInit {
         });
 
       } else {
-        console.log("cancelled");
+        console.warn("cancelled");
       }
     });
   }
@@ -346,7 +331,6 @@ export class CategoryComponent implements OnInit {
 
     this.getAllCategories()
     this.commonService.successToast("Cateogry Deleted");
-    console.log(this.categories)
 
 
   }
@@ -368,7 +352,6 @@ export class CategoryComponent implements OnInit {
     this.apiService.viewCategory(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
-        console.log(res)
         this.editSubcategoryForm.controls['name'].setValue(res.data.name);
 
         this.editSubcategoryForm.controls['name_ar'].setValue(res.data.name_ar);
@@ -376,12 +359,10 @@ export class CategoryComponent implements OnInit {
         this.image = data.image
         this.imageFile = data.image;
         this.imageName = data.image.name
-        console.log(this.image);
 
       }
     })
 
-    console.log(this.image)
   }
 
 
@@ -391,9 +372,7 @@ export class CategoryComponent implements OnInit {
 
 
     this.submitted = true;
-    console.log(this.imageFile);
     if (this.submitted && this.editSubcategoryForm.valid) {
-      console.log(this.editSubcategoryForm.value)
       const data = new FormData();
       data.append('id', this.subCatId)
       data.append('name', this.editSubcategoryForm.get('name').value);
@@ -402,10 +381,10 @@ export class CategoryComponent implements OnInit {
         data.append('image', this.imageFile, this.imageFile.name);
 
       }
-      console.log(" form data");
-      data.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+      // console.log(" form data");
+      // data.forEach((value, key) => {
+      //   console.log(key + " " + value)
+      // });
       this.progress = true
       this.apiService.editCategory(data).subscribe(res => {
         if (res.success) {

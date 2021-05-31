@@ -48,7 +48,6 @@ export class AddproductComponent implements OnInit {
     private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
 
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
-    console.log(this.user);
 
     if (this.user.roles == 'admin') {
       this.sellerId = null
@@ -140,12 +139,10 @@ export class AddproductComponent implements OnInit {
     if (roles == 'celebrity') {
       timestamp = Date.now()
       this.productId = timestamp + 'CE'
-      console.log(this.productId);
 
     } else if (roles == 'merchant') {
       timestamp = Date.now()
       this.productId = timestamp + 'ME'
-      console.log(this.productId);
     }
   }
 
@@ -160,7 +157,6 @@ export class AddproductComponent implements OnInit {
 
       if (res.success) {
         this.geofenceList = res.data
-        console.log(this.geofenceList);
       }
 
     })
@@ -179,7 +175,6 @@ export class AddproductComponent implements OnInit {
 
       this.apiService.getCelebList(search, roles).subscribe((res) => {
         if (res.success) {
-          console.log(res);
           this.vendorList = res.data;
           this.showCelebrity = true;
           this.addProductForm.get('merchantSeller').disable()
@@ -200,7 +195,6 @@ export class AddproductComponent implements OnInit {
 
         this.apiService.getCelebList(search, roles).subscribe((res) => {
           if (res.success) {
-            console.log(res);
             this.vendorList = res.data;
             this.showMerchant = true;
             this.addProductForm.get('merchantSeller').enable()
@@ -212,13 +206,11 @@ export class AddproductComponent implements OnInit {
     }
   }
   merchantSelected(id) {
-    console.log(id);
     this.sellerId = id
     this.getAllCategory(id)
   }
 
   celebritySelected(id) {
-    console.log(id);
     this.sellerId = id
     this.getAllCategory(id);
 
@@ -226,7 +218,6 @@ export class AddproductComponent implements OnInit {
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
-      console.log(res)
       if (res.success) {
         this.tax = res.data[0].tax
         this.taxId = res.data[0]._id
@@ -293,9 +284,7 @@ export class AddproductComponent implements OnInit {
     this.apiService.getCategoryByUser(id).subscribe(res => {
 
       if (res.success) {
-        console.log(res);
 
-        console.log(res)
         if (res.data) {
           this.categoryList = res.data
         }
@@ -333,7 +322,6 @@ export class AddproductComponent implements OnInit {
   subCategorySelected(id) {
 
 
-    console.log(id);
     this.selectedSubcategory = id
 
   }
@@ -343,7 +331,6 @@ export class AddproductComponent implements OnInit {
     this.brandList = []
     this.apiService.getBrandListBySubcat(id).subscribe(res => {
       if (res.success) {
-        console.log(res)
         if (res.data) {
           this.brandList = res.data;
         }
@@ -353,13 +340,11 @@ export class AddproductComponent implements OnInit {
 
   brandSelected(id) {
     this.selectedBrand = id;
-    console.log(id);
 
   }
   progress: boolean
   onSubmit() {
 
-    console.log("check", this.addProductForm)
     this.submitted = true;
 
     if (this.submitted && this.addProductForm.valid && this.images.length > 0) {
@@ -397,15 +382,12 @@ export class AddproductComponent implements OnInit {
 
       body.append('discount', this.addProductForm.controls['discount'].value)
 
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+    
       this.progress = true
       this.apiService.AddProduct(body).subscribe((res) => {
         if (res.success) {
           this.commonService.successToast("Product Successfully added")
           this.router.navigate(['/product'])
-          console.log(res)
           this.progress = false
         } else {
           this.commonService.errorToast(res.message)
@@ -429,14 +411,12 @@ export class AddproductComponent implements OnInit {
       for (let i = 0; i < filesAmount; i++) {
         let name = event.target.files[i].name;
         tempfile = event.target.files[i]
-        console.log("check image", event.target.files[i].size);
         var reader = new FileReader();
         let toasterService = this.commonService
 
         reader.readAsDataURL(event.target.files[i])
         reader.onload = (event: any) => {
           img.src = event.target.result;
-          console.log(event.target.result);
 
           let temp = {
             name: name,

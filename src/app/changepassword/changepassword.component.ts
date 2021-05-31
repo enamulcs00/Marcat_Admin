@@ -53,7 +53,7 @@ export class ChangepasswordComponent implements OnInit {
         }
       });
     } else {
-      console.log(
+      console.warn(
         "invalid"
       )
     }

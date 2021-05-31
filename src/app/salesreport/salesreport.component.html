@@ -5,80 +5,105 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Report of sales</h1>
-                    <div class="top_subheading_add">
-                        <a (click)="goTosalesgraph()">View Sales Graph</a>
-                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
+                    <h1> Sales report </h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
+                        <!-- <button (click)="downloadCsv()" class="ml-2" mat-button matRipple [matRippleColor]="'#9e8221'"
+                            [matRippleRadius]="20" mat-button>Download
+                            CSV</button> -->
                     </div>
+                    <!-- <div class="top_subheading_add">
+                        <a (click)="goToaddsale()"><span>+</span>Add Sale</a>
+                        <option *ngFor="let item of filterList" value="{{item.value}}">
+                            {{item.viewValue}}
+                        </option>
+                    </div> -->
                 </div>
                 <div class="tab-content">
                     <div id="allOrders" class="tab-pane fade in active">
                         <div class="inner_content">
                             <div class="outer_table">
                                 <div class="search_fields">
-                                    <div class="filters Booking_status">
-                                        <label>Filter</label>
-                                        <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                            <option *ngIf="flag==true" value="">Remove Filter</option>
-                                            <option *ngIf="flag==false" value=""></option>
-                                            <option *ngFor="let item of filterList" value="{{item.value}}">
-                                                {{item.viewValue}}
-                                            </option>
-                                            <!-- <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option> -->
-                                            <!-- <option value="lastName"></option> -->
-                                        </select>
-                                    </div>
+                                    <!-- <div class="filters Booking_status">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Filter</mat-label>
+
+
+
+
+                                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                                (selectionChange)="filterSelected($event.value)">
+                                                <mat-option *ngIf="flag==true" value="">
+                                                    Remove Filter
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of filterList" value="{{item.value}}">
+                                                    {{item.viewValue}}
+                                                </mat-option>
+
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div> -->
                                     <div class="search_inner_fiels">
                                         <div class="filters Booking_status">
-                                            <label>Search</label>
                                             <div class="search_with_icons">
-                                                <mat-form-field [floatLabel]="'never'">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Search</mat-label>
+
                                                     <input matInput type="text" [(ngModel)]="search" placeholder="">
                                                 </mat-form-field>
-                                                <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                                    (click)="searchMethod()"></i>
-                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                                    (click)="clearSearch()"></i>
+                                                <button mat-button matSuffix mat-icon-button> <i
+                                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                        (click)="searchMethod()"></i>
+                                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                        (click)="clearSearch()"></i>
+                                                </button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="table-responsive">
+                                <div *ngIf="flagData==true">
+                                    <h2>No Data Found</h2>
+                                </div>
+
+                                <div *ngIf="flagData==false" class="table-responsive">
                                     <table>
                                         <tr>
                                             <th>Order Id</th>
                                             <th>Product Name</th>
                                             <th>Product category</th>
-                                            <th>Product sub category</th>
 
-                                            <th>ISBN Number</th>
-                                            <th>SKU Number</th>
+
+
                                             <th>Quantity</th>
                                             <th>Price</th>
+                                            <th *ngIf="roles=='admin'">Seller Name</th>
                                             <th>User name</th>
                                             <th>User Address</th>
                                             <th>Order Date</th>
                                             <th>Expected Delivery Date</th>
                                             <th>Delivery Date</th>
+                                            <!-- <th>Delivery Date</th> -->
+                                            <th>Payment Method</th>
                                             <th>Status</th>
-                                            <!-- <th class="action_bx">Action</th> -->
+                                             <th>Commission earned</th>
                                         </tr>
 
 
 
                                         <tr *ngFor="let item of salesList; let i=index">
                                             <td>{{item.orderId}}</td>
-                                            <td>{{item.productId.name}}</td>
-                                            <td>{{item.productId.category.name}}</td>
-                                            <td>{{item.productId.subCategory.name}}</td>
-                                            <td>{{item.productId.isbn}}</td>
-                                            <td>{{item.productId.sku}}</td>
+                                            <td>{{item.product.name}}</td>
+                                            <td>{{item.product.category.name}}</td>
+
+
                                             <td>{{item.quantity}}</td>
-                                            <td>{{item.totalAmount|number}}</td>
-                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
-                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}
+                                            <td>{{item.finalAmount|number}}</td>
+                                            <td *ngIf="roles=='admin'">{{item.seller.firstName}}
+                                                {{item.seller.lastName}}</td>
+                                            <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+                                            <td>{{item.deliveryAddress.name}} {{item.deliveryAddress.apartment}}
                                                 {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
                                                 {{item.deliveryAddress.postalCode}}</td>
                                             <td>{{item.createdAt|date}}</td>
@@ -86,20 +111,45 @@
                                             </td>
                                             <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
                                             </td>
+                                            <td>{{item.paymentMethod}}
+                                            </td>
+
+
+
+                                            <!-- <td *ngIf="roles=='admin'">
+                                               
+
+                                            </td> -->
                                             <td>
-                                                {{item.status}}
+                                                <ng-container
+                                                    *ngIf="roles=='admin' || roles=='subAdmin'; else elseTemplate2">
+                                                    {{item.status}}
+                                                </ng-container>
+                                                <ng-template #elseTemplate2>
+                                                    <mat-select style="width: 100px;" [(ngModel)]="item.status"
+                                                        (selectionChange)="statusChanged($event.value, item._id)">
+                                                        <mat-option *ngFor="let item of filterList"
+                                                            value="{{item.value}}">
+                                                            {{item.viewValue}}
+                                                        </mat-option>
+                                                        <!-- <option>Pending</option>
+                                                                                                    <option>Confirmed</option>
+                                                                                                    <option>cancelled</option> -->
+                                                    </mat-select>
+                                                </ng-template>
+
 
                                             </td>
                                             <td>
-                                                <!-- <div class="action">
-                                                      <ul>
-                                                          <li class="show" (click)="goToviewOrder(item._id)"><i
-                                                                  class="fa fa-eye"></i></li>
-                                                          <li class="edit" (click)="goToeditOrder()"><i
+                                                <div class="action">
+                                                    <ul>
+                                                        <li class="show" (click)="goToviewOrder(item._id)">
+                                                            {{item.commission |number}}</li>
+                                                        <!-- <li class="edit" (click)="goToeditOrder()"><i
                                                                 class="fa fa-pencil fa-fw"></i></li> -->
-                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> 
-                                                      </ul>
-                                                  </div> -->
+                                                        <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                    </ul>
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -116,5 +166,10 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>

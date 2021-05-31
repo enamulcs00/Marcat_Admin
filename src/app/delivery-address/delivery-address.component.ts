@@ -29,17 +29,13 @@ export class DeliveryAddressComponent implements OnInit {
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.id = params['id'];
-
       });
-
     this.getUserAddresses();
-
   }
 
   getUserAddresses() {
 
     this.apiService.getUserAddress(this.id).subscribe((res) => {
-      console.log(res);
       if (res.data.length > 0) {
         this.flagData = true
         this.addressList = res.data
@@ -86,7 +82,6 @@ export class DeliveryAddressComponent implements OnInit {
       'postalCode': this.postalCode,
       'phone': this.phone
     }
-
 
     this.apiService.updateAddress(body).subscribe((res) => {
       console.log(res);

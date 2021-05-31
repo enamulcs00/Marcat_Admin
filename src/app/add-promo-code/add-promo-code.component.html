@@ -45,7 +45,7 @@
                                 <mat-form-field>
                                     <mat-label>Expire Date<span class="red">*</span></mat-label>
                                     <input matInput [matDatepicker]="disabletext" formControlName="expiry"
-                                        placeholder="Please Chose Date" disabled>
+                                        placeholder="Please Chose Date" [min]="today">
                                     <mat-datepicker-toggle matSuffix [for]="disabletext">
                                     </mat-datepicker-toggle>
                                     <mat-datepicker #disabletext disabled="false">

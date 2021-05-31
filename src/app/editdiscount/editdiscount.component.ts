@@ -53,7 +53,7 @@ export class EditdiscountComponent implements OnInit {
   sellerId: string;
   imageNotAccepted: boolean = true
   tempArray: any[];
-  images: any = [];
+  images: any = '';
   sub: any;
   id: any;
   discountDetails: any;
@@ -800,11 +800,8 @@ export class EditdiscountComponent implements OnInit {
       let body = {
         'categories': [this.selectedCategory],
         'subCategories': [this.selectedSubCategory],
-
       }
-
       this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
-
         if (res.success) {
           console.log("ProductList", res);
 

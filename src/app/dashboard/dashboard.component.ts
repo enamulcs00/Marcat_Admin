@@ -131,14 +131,12 @@ export class DashboardComponent implements OnInit {
     this.revenueGraphData = []
     if (this.roles == 'admin') {
       this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, revenueFilter).subscribe(res => {
-        console.log("dashboardData", res);
 
         if (res.success) {
 
           this.dashboardData = res.data;
           this.salesListData = this.dashboardData.salesTable;
           this.length = this.salesListData.length
-          console.log("Dashboard Data:", this.dashboardData);
 
           for (let i in this.dashboardData.salesGraph) {
             let temp = Math.round(this.dashboardData.salesGraph[i])
@@ -156,14 +154,12 @@ export class DashboardComponent implements OnInit {
     } else {
 
       this.apiService.getVednorDashboardData(page, pageSize, search, filterBy, typeSale, revenueFilter).subscribe(res => {
-        console.log("dashboardData", res);
 
         if (res.success) {
 
           this.dashboardData = res.data;
           this.salesListData = this.dashboardData.salesTable;
           this.length = this.salesListData.length
-          console.log("Dashboard Data:", this.dashboardData);
 
           this.salesData(this.dashboardData.salesGraph);
           //this.vendorData(this.dashboardData.vendorGraph);
@@ -186,7 +182,6 @@ export class DashboardComponent implements OnInit {
 
   salesData(graphData) {
     let array = []
-    console.log(graphData);
     let data = graphData.length
     for (let i = 0; i < data; i++) {
       if (this.periodSale == 'monthly') {
@@ -216,9 +211,7 @@ export class DashboardComponent implements OnInit {
 
 
     // this.barChartData = this.barChartData;
-    console.log("labels: ", this.barChartLabelSale);
-    console.log("data: ", this.barChartDataSale);
-    console.log("options: ", this.barChartOptionsSale);
+   
 
     this.chartReady = true
 
@@ -228,7 +221,6 @@ export class DashboardComponent implements OnInit {
   vendorData(vendorGraphData) {
 
     let array = []
-    console.log(vendorGraphData);
     let data = vendorGraphData.length
     for (let i = 0; i < data; i++) {
       if (this.vendorFilter == 'monthly') {
@@ -258,9 +250,7 @@ export class DashboardComponent implements OnInit {
 
 
     // this.barChartData = this.barChartData;
-    console.log("labels: ", this.barChartLabelVendor);
-    console.log("data: ", this.barChartDataVendor);
-    console.log("options: ", this.barChartOptionsVendor);
+   
 
     this.chartReady = true
 
@@ -269,7 +259,6 @@ export class DashboardComponent implements OnInit {
   revenueData(revenueGraphData) {
 
     let array = []
-    console.log(revenueGraphData);
     let data = revenueGraphData.length
     for (let i = 0; i < data; i++) {
       if (this.revenueFilter == 'monthly') {
@@ -299,9 +288,7 @@ export class DashboardComponent implements OnInit {
 
 
     // this.barChartData = this.barChartData;
-    console.log("labels: ", this.barChartLabelVendor);
-    console.log("data: ", this.barChartDataVendor);
-    console.log("options: ", this.barChartOptionsVendor);
+  
 
     this.chartReady = true
 
@@ -330,14 +317,12 @@ export class DashboardComponent implements OnInit {
   }
 
   filterSelected(e) {
-    console.log(e);
     if (this.filterBy) {
       this.flag = true
     }
     else {
       this.flag = false
     }
-    console.log(e.value);
 
     this.filterBy = e.value
 
@@ -345,11 +330,11 @@ export class DashboardComponent implements OnInit {
 
   }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    console.info(event, active);
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    console.info(event, active);
   }
 
 
@@ -365,7 +350,6 @@ export class DashboardComponent implements OnInit {
 
   productListAfterPageSizeChanged(e): any {
 
-    console.log(e)
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;

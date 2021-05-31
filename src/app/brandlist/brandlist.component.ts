@@ -58,9 +58,7 @@ export class BrandlistComponent implements OnInit {
   getBrandList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.apiService.getBrandList().subscribe(res => {
-      console.log(res)
       if (res.success == true) {
-        console.log(res.data);
         this.brandList = res.data
       }
     })
@@ -68,9 +66,7 @@ export class BrandlistComponent implements OnInit {
 
   getCategoryList() {
     this.apiService.getAllCategories().subscribe(res => {
-      console.log(res)
       if (res.success == true) {
-        console.log(res.data);
         this.categoryList = res.data
       }
     })
@@ -79,12 +75,9 @@ export class BrandlistComponent implements OnInit {
 
   categorySelected(e) {
 
-    console.log(e.value);
     // let id = e
     this.apiService.getSubcategoryList(e).subscribe(res => {
-      console.log(res)
       if (res.success == true) {
-        console.log(res.data);
         this.subcategoryList = res.data
       }
     })
@@ -124,13 +117,10 @@ export class BrandlistComponent implements OnInit {
       if (res.data) {
         this.flagImage = false;
         this.apiService.getSubcategoryList(res.data.category._id).subscribe(res => {
-          console.log(res)
           if (res.success == true) {
-            console.log(res.data);
             this.subcategoryList = res.data
           }
         })
-        console.log(res)
         this.editableBrandId = res.data._id
         this.editBrandForm.controls['name'].setValue(res.data.name);
 
@@ -165,15 +155,12 @@ export class BrandlistComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.result = result;
-        console.log(id)
         const data = {
           "id": id,
           "model": "Brand"
         }
 
-        console.log(data)
         this.apiService.delete(data).subscribe(res => {
-          console.log(res);
           if (res.success) {
             // this.getAllCategories()
             this.commonService.successToast(res.message);
@@ -184,7 +171,6 @@ export class BrandlistComponent implements OnInit {
 
         });
       } else {
-        console.log("cancelled");
       }
     });
 
@@ -196,7 +182,6 @@ export class BrandlistComponent implements OnInit {
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
-      console.log(body);
 
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
@@ -206,7 +191,6 @@ export class BrandlistComponent implements OnInit {
       formData.append('image', this.imageFile, this.imageFile.name);
       this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
-        console.log(res)
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('SuccessFully Added')
@@ -247,7 +231,6 @@ export class BrandlistComponent implements OnInit {
       }
       this.progress = true
       this.apiService.editBrand(formData).subscribe(res => {
-        console.log(res)
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('SuccessFully Edited')

@@ -126,10 +126,18 @@
                                     name="profilePic1">
 
                                 <div class="user_img">
-                                    <figure>
-                                        <img style="height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;"
-                                            [src]="imagePreview != null ? imagePreview: imagePath+showProfilePic" />
-                                    </figure>
+                                    <div *ngIf="showProfilePic=='' && imagePreview=='';else elseBlock">
+                                        
+
+                                    </div>  
+                                    <ng-template #elseBlock>
+                                        <figure>
+                                            <img style="height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;"
+                                                [src]="imagePreview != null ? imagePreview: imagePath+showProfilePic" />
+                                        </figure>
+                                    </ng-template>
+                                 
+                                    <!-- <div *ngIf="expression;else templateName"></div> -->
                                     <div *ngIf="submitted && f.profilePic1.errors" class="custom-invalid">
                                         <div *ngIf="f.profilePic1.errors.required">
                                             profile Picture is required.

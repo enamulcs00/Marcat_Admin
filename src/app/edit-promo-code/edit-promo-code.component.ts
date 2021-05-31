@@ -19,7 +19,7 @@ export class EditPromoCodeComponent implements OnInit {
   constructor(private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute, private commonService: CommonService, private router: Router) { }
 
   ngOnInit() {
-    this.today = moment(new Date()).format('YYYY-MM-DD');
+    this.today = moment(new Date()).add(1,'day').format('YYYY-MM-DD');
     this.sub = this.route
       .queryParams
       .subscribe(params => {
@@ -29,8 +29,6 @@ export class EditPromoCodeComponent implements OnInit {
       });
 
     this.viewPromoCode()
-
-
     this.editPromoCodeForm = this.fb.group({
       code: ['', Validators.required],
       expiry: ['', Validators.required],
@@ -41,10 +39,8 @@ export class EditPromoCodeComponent implements OnInit {
       discountType: ['', Validators.required],
       freqPerUser: ['', Validators.required],
       exhaustLimit: ['', Validators.required]
-
     })
   }
-
 
   viewPromoCode() {
     

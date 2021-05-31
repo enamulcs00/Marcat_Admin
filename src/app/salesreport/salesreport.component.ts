@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
+import { UrlService } from 'src/services/url.service';
 
 interface readOnly {
   viewValue: string,
@@ -18,6 +19,7 @@ export class SalesreportComponent implements OnInit {
   page = 1;
   length = 100;
   pageSize = 10;
+  progress: boolean;
   filterList: readOnly[] = [{ viewValue: 'New', value: 'New' },
   { viewValue: 'Accepted', value: 'Accepted' },
   { viewValue: 'Cancelled', value: 'Canceled' },
@@ -25,47 +27,83 @@ export class SalesreportComponent implements OnInit {
   { viewValue: 'Packing', value: 'Packing' },
   { viewValue: 'Shipped', value: 'Shipped' },
   { viewValue: 'Delivered', value: 'Delivered' },
-  { viewValue: 'Unwant', value: 'UnWant' },
-  { viewValue: 'Picking', value: 'Picking' },
-  { viewValue: 'Rescheduled', value: 'Rescheduled' },
-  { viewValue: 'Picked For Shipping', value: 'pickedShipping' },
-  { viewValue: 'Picked', value: 'Picked' },
-  { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }]
+    // { viewValue: 'Unwant', value: 'UnWant' },
+    // { viewValue: 'Picking', value: 'Picking' },
+    // { viewValue: 'Rescheduled', value: 'Rescheduled' },
+    // { viewValue: 'Picked For Shipping', value: 'pickedShipping' },
+    // { viewValue: 'Picked', value: 'Picked' },
+    // { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }
+  ]
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
-  filterBy: string = '';
+  filterBy: string = 'Delivered';
   search: string = '';
   salesList = []
   status: number
   flagSearch: boolean = true;
-  flagData: any;
+  flagData: any = true;
   flag: any
   flagUserList: boolean;
   srNo: number;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
+  user: any;
+  roles: any;
+  baseUrl: string;
+  view: any
+  sellerId: any;
+  vendorId: any='';
+  sub: any;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private activatedRoute:ActivatedRoute,private urlService: UrlService) {
+
+    this.user = JSON.parse(this.apiService.getUser())
+    this.baseUrl = urlService.SERVER_URL
+    if (this.user.roles == 'admin' || this.user.roles == 'subAdmin') {
+      this.sellerId = null
+      this.sub=this.activatedRoute.queryParams.subscribe(res=>{
+        this.vendorId=res.vendor
+        console.log('vednor id from admin is:',this.vendorId);
+        
+      })
 
 
+
+
+    } else {
+      this.sellerId = this.user._id
+    }
   }
 
   ngOnInit() {
+    this.roles = this.user.roles;
+
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   getSaleslist(page, pageSize, search, filterBy) {
-    this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+    this.progress = true
+    this.apiService.getSaleList(page, pageSize, search, filterBy, this.vendorId).subscribe(res => {
       console.log(res)
-      if (res.data) {
-        this.flagData = false
-        this.salesList = res.data;
-        this.length = res.total
+
+      if (res.success) {
+        this.progress = false
+        if (res.data) {
+          if (res.data.length > 0) {
+            this.flagData = false
+          }
+          this.salesList = res.data;
+          this.length = res.total
+        } else {
+          this.flagData = true
+        }
       } else {
-        this.flagData = true
+        this.progress = false;
+        this.commonService.errorToast(res.message)
       }
     })
 
   }
 
   filterSelected(e) {
+
     console.log(e);
     if (this.filterBy) {
       this.flag = true
@@ -73,9 +111,9 @@ export class SalesreportComponent implements OnInit {
     else {
       this.flag = false
     }
-    console.log(e.target.value);
+    console.log(e);
 
-    this.filterBy = e.target.value
+    this.filterBy = e
 
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
 
@@ -92,9 +130,10 @@ export class SalesreportComponent implements OnInit {
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
   statusChanged(value, id) {
+
     console.log("value", value, "ID", id);
     let body = {
-      id: id,
+
       status: value
     }
     this.apiService.updateStatus(body, id).subscribe(res => {
@@ -135,15 +174,36 @@ export class SalesreportComponent implements OnInit {
 
 
 
-  goToanalytics() {
-    this.router.navigate(['analytics'])
-  }
-  goTosalesgraph() {
-    this.router.navigate(['salesgraph'])
-  }
+
+
+
+  goToaddordermanagement() {
+    this.router.navigate(['/addordermanagement'])
+  };
+  goToeditOrder() {
+    this.router.navigate(['/editOrder'])
+  };
+  goToviewOrder(id) {
+    this.router.navigate(['/viewOrder'], { queryParams: { "id": id } })
+  };
 
 
   back() {
     window.history.back()
   }
+
+  downloadCsv() {
+
+    let url = [this.baseUrl + '/api/admin/exportSaleCsv',]
+    if (this.user.roles != 'admin') {
+
+      window.open(this.baseUrl + '/api/admin/exportSaleCsv?src=' + this.sellerId, '_blank')
+    } else {
+      window.open(this.baseUrl + '/api/admin/exportSaleCsv', '_blank')
+    }
+
+
+
+  }
+
 }

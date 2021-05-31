@@ -167,8 +167,7 @@ export class InventryManagementComponent implements OnInit {
   }
 
   downloadCsv() {
-    debugger
-    let url = [this.baseUrl + '/api/admin/exportInventoryCsv',]
+        let url = [this.baseUrl + '/api/admin/exportInventoryCsv',]
     if (this.user.roles != 'admin') {
       console.log(this.baseUrl + '/api/admin/exportInventoryCsv?src=' + this.sellerId);
 

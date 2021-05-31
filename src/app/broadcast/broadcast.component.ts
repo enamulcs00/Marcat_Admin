@@ -24,10 +24,8 @@ export class BroadcastComponent implements OnInit {
 
 
   sendNotification() {
-    console.log(this.broadcastForm.value);
     let body = this.broadcastForm.value
     this.apiService.broadcastNotification(body).subscribe(res => {
-      console.log(res);
       if (res.success == true) {
         this.commonService.successToast("Notification sent successfully");
       }

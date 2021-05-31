@@ -18,7 +18,7 @@ export class AddPromoCodeComponent implements OnInit {
   constructor(private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService, private router: Router) { }
 
   ngOnInit() {
-    this.today = moment(new Date()).format('YYYY-MM-DD');
+    this.today = moment(new Date()).add(1,'day').format('YYYY-MM-DD');
 
 
 
@@ -42,13 +42,11 @@ export class AddPromoCodeComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.addPromoCodeForm.value);
     if (this.addPromoCodeForm.valid) {
       let body = this.addPromoCodeForm.value;
 
       this.progress = true
       this.apiService.addPromoCode(body).subscribe(res => {
-        console.log(res);
         if (res.success) {
           this.progress = false;
           this.commonService.successToast(res.message)

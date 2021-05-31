@@ -23,12 +23,10 @@ export class ConsumerprivacypolicyComponent implements OnInit {
   getAllCms() {
     let allCms = []
     this.apiService.getAllCMs().subscribe(res => {
-      console.log(res);
       if (res.success == true) {
         allCms = res.data;
         this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
         this.mycontent = this.termsAndCondition.description;
-        console.log(this.termsAndCondition);
 
 
       }
@@ -51,7 +49,6 @@ export class ConsumerprivacypolicyComponent implements OnInit {
 
 
     this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
-      console.log(res)
 
       if (res.success == true) {
         this.commonService.successToast("Updated Successfully")
@@ -63,12 +60,10 @@ export class ConsumerprivacypolicyComponent implements OnInit {
 
 
   onChange($event: any): void {
-    console.log("onChange");
     //this.log += new Date() + "<br />";
   }
 
   onPaste($event: any): void {
-    console.log("onPaste");
     //this.log += new Date() + "<br />";
   }
 

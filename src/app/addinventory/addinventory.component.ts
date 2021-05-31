@@ -48,7 +48,6 @@ export class AddinventoryComponent implements OnInit {
 
   getProduct(id) {
     this.apiService.viewProduct(id).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.updateInventoryForm.get('productId').setValue(res.data.productId)
         this.updateInventoryForm.get('productName').setValue(res.data.name)
@@ -75,16 +74,13 @@ export class AddinventoryComponent implements OnInit {
       body.append('id', this.id);
       body.append('productQuantity', this.updateInventoryForm.controls['updateQuantity'].value);
 
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+    
       this.progress = true
       this.apiService.updateProduct(body).subscribe((res) => {
         if (res.success) {
           this.commonService.successToast(res.message)
           this.progress = false
           this.router.navigate(['/inventryManagement'])
-          console.log(res)
         } else {
           this.commonService.errorToast(res.message)
           this.progress = false

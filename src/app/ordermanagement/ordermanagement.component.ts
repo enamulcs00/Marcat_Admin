@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
@@ -50,12 +50,21 @@ export class OrdermanagementComponent implements OnInit {
   baseUrl: string;
   view: any
   sellerId: any;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
+  vendorId: any='';
+  sub: any;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private activatedRoute:ActivatedRoute,private urlService: UrlService) {
 
     this.user = JSON.parse(this.apiService.getUser())
     this.baseUrl = urlService.SERVER_URL
     if (this.user.roles == 'admin' || this.user.roles == 'subAdmin') {
       this.sellerId = null
+      this.sub=this.activatedRoute.queryParams.subscribe(res=>{
+       // this.vendorId=res.vendor
+       // console.log('vednor id from admin is:',this.vendorId);
+        
+      })
+
+
 
 
     } else {
@@ -71,7 +80,7 @@ export class OrdermanagementComponent implements OnInit {
 
   getSaleslist(page, pageSize, search, filterBy) {
     this.progress = true
-    this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+    this.apiService.getSaleList(page, pageSize, search, filterBy, this.vendorId).subscribe(res => {
       console.log(res)
 
       if (res.success) {
@@ -108,6 +117,22 @@ export class OrdermanagementComponent implements OnInit {
 
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
 
+  }
+
+
+
+  refundPayment(id){
+    let body={
+'orderId':id
+    }
+    this.apiService.refundPayment(body).subscribe(res=>{
+        if(res.success){
+          this.commonService.successToast(res.message);
+          this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+        }else{
+          this.commonService.errorToast(res.message)
+        }
+    })
   }
 
   searchMethod() {

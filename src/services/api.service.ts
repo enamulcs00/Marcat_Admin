@@ -97,6 +97,7 @@ export class ApiService {
       geoFenceList:'admin/getAllGeofence',
       addGeofence:'admin/geoFence',
       viewGeoFence:'admin/geoFence',
+      refundPayment:'app/refund',
 
       //commonApi to change status of, any user type
       status: 'common/status',
@@ -722,8 +723,8 @@ export class ApiService {
   }
 
   //Sales Module
-  getSaleList(page, pageSize, search, filterBy): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.salesList}?page=${page}&count=${pageSize}&filter=${filterBy}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  getSaleList(page, pageSize, search, filterBy, vendor): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.salesList}?page=${page}&count=${pageSize}&filter=${filterBy}&search=${search}&vendor=${vendor}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   updateStatus(body, id): Observable<any> {
@@ -900,6 +901,11 @@ export class ApiService {
 
   deleteGeofence(id):Observable<any>{
     return this.http.delete(this.apiEndPoints.viewGeoFence+'/'+id, this.getHeaders())
+  }
+
+
+  refundPayment(body):Observable<any>{
+    return this.http.post(this.apiEndPoints.refundPayment,body,this.getHeaders())
   }
 
 

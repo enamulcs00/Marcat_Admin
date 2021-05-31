@@ -79,7 +79,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showSubcategory = false;
         this.showVendor = false;
         this.showProduct = false
-        console.log("category");
         break;
       case "subcategory":
         this.singleSubCategorySelection = false
@@ -87,7 +86,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showSubcategory = true;
         this.showVendor = false;
         this.showProduct = false
-        console.log("subcategory");
         break;
       case "brand":
         this.singleVendorSelection = false
@@ -97,7 +95,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showProduct = false
         this.selectedCategory = '';
         this.selectedSubCategory = '';
-        console.log("brand");
         break;
       case "product":
         this.singleProductSelection = false
@@ -107,7 +104,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showProduct = true
         this.selectedCategory = '';
         this.selectedSubCategory = '';
-        console.log("product");
         break;
     }
   }
@@ -163,7 +159,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
       if (res.success) {
         this.geofenceList = res.data
-        console.log(this.geofenceList);
       }
 
     })
@@ -175,7 +170,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     let currentDate = new Date().getDate();
     let currentMonth = new Date().getMonth();
     let year = new Date().getFullYear();
-    //console.log(new Date(year, currentMonth, currentDate + 1))
 
 
     this.addDiscountForm = this.fb.group({
@@ -291,7 +285,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
           image: event.target.result
         }
         img.onload = () => {
-          debugger
+          
           var height = img.height;
           var width = img.width;
           if (this.addDiscountForm.get('type').value == 'Home Banner') {
@@ -355,7 +349,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   onCategorySelect(item: any) {
-    console.log(item.id);
 
     const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedCategoryItem.push(item);
@@ -381,7 +374,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
   onSelectAll(items: any) {
 
-    console.log(items)
     for (let i = 0; i < items.length; i++) {
       this.selectedItem.push(items[i].id)
     }
@@ -402,7 +394,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
       if (res.success) {
 
-        console.log(res)
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -433,7 +424,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
       if (res.success) {
 
-        console.log("categoryList", res)
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -458,7 +448,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   selectedCategory = ''
   categorySelected(id) {
 
-    console.log("category :", id);
     this.selectedCategory = id;
     this.getAllSubcategory(id);
   }
@@ -471,7 +460,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       this.apiService.getAllSubCategoriesForDiscount(id).subscribe(res => {
         if (res.success) {
 
-          console.log("subCategoryList", res)
           if (res.data) {
 
             for (let i = 0; i < res.data.length; i++) {
@@ -497,7 +485,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   selectedSubCategory = ''
   subCategorySelected(id) {
-    console.log("subcategory:", id)
     this.selectedSubCategory = id
 
     this.getAllVendor();
@@ -516,7 +503,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         if (res.success) {
 
 
-          console.log("brnadlist", res)
           if (res.data) {
             for (let i = 0; i < res.data.length; i++) {
               let body = {
@@ -539,7 +525,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   selectedBrand = ''
   vendorSelected(e) {
 
-    console.log("vendor:", e)
     this.selectedBrand = e
     this.getAllProduct()
   }
@@ -558,7 +543,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
 
         if (res.success) {
-          console.log("ProductList", res);
 
           if (res.data) {
             for (let i = 0; i < res.data.length; i++) {
@@ -580,13 +564,11 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   productSelected(id) {
-    console.log("product:", id);
     this.selectedProduct = id;
 
   }
 
   typeSelected(e) {
-    console.log(e);
     this.addDiscountForm.get('bannerImage').enable()
 
   }
@@ -594,7 +576,6 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   checkBanner() {
 
     this.submitted = true
-    console.log(this.addDiscountForm);
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
     if (checkOffer == "category") {
 
@@ -789,13 +770,9 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     this.tempArray = []
     
     this.tempArray.push(body);
-    //  console.log(body)
-    body.forEach((value, key) => {
-      console.log(key + " " + value)
-    });
+  
     this.progress = true
     this.apiService.addBanner(body).subscribe(res => {
-      console.log(res)
       if (res.success) {
         this.progress = false
         this.router.navigateByUrl('offerdeals');

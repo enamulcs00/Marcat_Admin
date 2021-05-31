@@ -12,8 +12,25 @@
                     </div>
 
                 </div>
+                <div class="inner_data">
+                    <div class="dashboard_boxs col-3">
+                        <div class="card border-left-success shadow">
+                            <div class="card-body">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Total Endorsement Revenue </h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{endorsementRevenue}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="outer_table">
                     <div class="search_fields">
+                       
                         <!-- <div class="filters Booking_status">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Filter<span class="red">*</span></mat-label>
@@ -64,7 +81,7 @@
                                 <th>Price</th>
                                 <th>Discount</th>
                                 <th>Commission</th>
-                                
+
                             </tr>
                             <tr *ngFor="let item of endorsementProductList; index as i ">
                                 <td *ngIf="flagUserList==false">{{i+1}}</td>

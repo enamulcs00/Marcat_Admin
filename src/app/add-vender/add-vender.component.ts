@@ -46,7 +46,6 @@ export class AddVenderComponent implements OnInit {
 
     this.readCountryCode();
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
-    console.log("USer", this.userDetails);
     this.getCategoryList()
     this.getAllGeofence()
 
@@ -70,7 +69,6 @@ export class AddVenderComponent implements OnInit {
 
       if (res.success) {
 
-        console.log(res)
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -88,7 +86,6 @@ export class AddVenderComponent implements OnInit {
 
   readCountryCode() {
     this.apiService.getCountryCode().subscribe(res => {
-      console.log(res);
       this.countryList = res;
     })
   }
@@ -128,7 +125,6 @@ export class AddVenderComponent implements OnInit {
 
   onCategorySelect(e) {
 
-    console.log(e.id);
     let temp
     const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
     if (index < 0) {
@@ -143,7 +139,6 @@ export class AddVenderComponent implements OnInit {
   onSelectAll(e) {
 
     let temp
-    console.log(e)
     for (let i = 0; i < e.length; i++) {
       this.selectedCategoryId.push(e[i].id)
     }
@@ -154,7 +149,6 @@ export class AddVenderComponent implements OnInit {
   public AddressChange(address: any) {
 
     //setting address from API to local variable 
-    console.log(address);
     this.lat = address.geometry.location.lat()
     this.lng = address.geometry.location.lng()
     this.formattedaddress = address.formatted_address
@@ -175,7 +169,6 @@ export class AddVenderComponent implements OnInit {
 
       if (res.success) {
         this.geofenceList = res.data
-        console.log(this.geofenceList);
       }
 
     })
@@ -184,7 +177,6 @@ export class AddVenderComponent implements OnInit {
 
 
   onFileChange(e) {
-    console.log(e);
     let temp = []
 
     if (e.target.files && e.target.files[0] && this.document.length < 6) {
@@ -228,17 +220,12 @@ export class AddVenderComponent implements OnInit {
   }
 
   deletePhoto(id) {
-    console.log(id);
 
     let temp = [];
     let tempDoc = []
-    console.log("beforeDelete", this.urls);
-    console.log("beforeDelete", this.document);
     temp = this.urls.splice(id, 1);
     tempDoc = this.document.splice(id, 1);
 
-    console.log("Deleted", temp);
-    console.log("Deleted", tempDoc);
 
 
 
@@ -247,9 +234,6 @@ export class AddVenderComponent implements OnInit {
   onProfileSetUp() {
     this.submitted = true
 
-    console.log("Form", this.setUpProfile.value);
-    console.log("image", this.profileImage);
-    console.log("document", this.document);
     if (this.setUpProfile.valid) {
       let temp
 
@@ -283,12 +267,11 @@ export class AddVenderComponent implements OnInit {
       formData.append('lng', this.lng)
       formData.append('roles', this.roles)
 
-      formData.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+      // formData.forEach((value, key) => {
+      //   console.log(key + " " + value)
+      // });
       this.progress = true
       this.apiService.addVendorCelebrity(formData).subscribe(res => {
-        console.log(res);
         if (res.success) {
           this.commonService.successToast(res.message);
           this.progress = false

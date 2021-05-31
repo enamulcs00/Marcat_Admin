@@ -41,7 +41,6 @@ export class AddEndorsementComponent implements OnInit {
 
   showVendorList() {
     
-    console.log("inside get vendor")
     let body = {
       roles: 'merchant',
       filter: '',
@@ -53,7 +52,6 @@ export class AddEndorsementComponent implements OnInit {
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
         this.progress = false
-        console.log(res);
         this.vendorList = res.data;
       
       } else {
@@ -66,7 +64,6 @@ export class AddEndorsementComponent implements OnInit {
 
 
   showCelebrityList() {
-    console.log("inside get vendor")
     let body = {
       roles: 'celebrity',
       filter: '',
@@ -79,7 +76,6 @@ export class AddEndorsementComponent implements OnInit {
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
         this.progress = false
-        console.log(res);
         this.celebList = res.data;
       } else {
         this.progress = false
@@ -90,7 +86,6 @@ export class AddEndorsementComponent implements OnInit {
 
 
   vendorSelected(id) {
-    console.log(id);
     this.sellerId = id
     this.getAllProducts()
   }
@@ -99,7 +94,6 @@ export class AddEndorsementComponent implements OnInit {
   onSubmit(){
     let body= this.endorsementForm.value;
     this.apiService.addEndorsement(body).subscribe(res=>{
-      console.log(res);
       if(res.success){
         this.commonService.successToast(res.message);
         this.router.navigate(['/admin-endorment'])
@@ -122,13 +116,11 @@ export class AddEndorsementComponent implements OnInit {
     this.apiService.getProductsForEndorsement(1, 99999999999, '', true, '',
       this.sellerId, true)
       .subscribe(res => {
-        console.log(res)
         if (res.success) {
           this.progress = false
           if (res.data.length > 0) {
             this.flagData = false;
             this.productList = res.data;
-            console.log(res.data);
             // this.productList = res.data
           } else {
             this.flagData = true;
