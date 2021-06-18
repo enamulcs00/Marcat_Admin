@@ -1,0 +1,316 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Edit Banner</h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <button class="btn_back" mat-button (click)="goToofferdeals()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <form [formGroup]="editDiscountForm">
+                    <!-----start input fields------>
+                    <div class="add_user_list">
+                        <div *ngIf="userDetails.roles=='admin'">
+                            <fieldset>
+                                Category
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('category')" value="category">
+                                &nbsp;&nbsp;
+                                Sub-category
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('subcategory')" value="subCategory">&nbsp;&nbsp;
+                                Brand
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('brand')" value="brand">&nbsp;&nbsp;
+                                Product
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('Product')" value="product">&nbsp;&nbsp;
+                            </fieldset>
+                            <mat-error *ngIf="submitted && editDiscountForm.controls['dicountOn'].hasError('required')">
+                                Offer type is <strong>required</strong>
+                            </mat-error>
+                        </div>
+                        <ul>
+                            <li *ngIf="showCategory">
+                                <label>Select Category<span class="red">*</span></label>
+                                <mat-form-field *ngIf="singleCategorySelection">
+                                    <mat-select [(ngModel)]="selectedCategory" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="categorySelected($event.value)">
+                                        <input matInput placeholder="Search Category"
+                                            (keyup)="onKeyInCategory($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleCategorySelection" [placeholder]=""
+                                    [data]="categoryList" [(ngModel)]="selectedCategoryItem"
+                                    [ngModelOptions]="{standalone: true}" [settings]="categoryDropDownSettings"
+                                    (onSelect)="onCategorySelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </li>
+                            <li *ngIf="showSubcategory">
+                                <label>Select Sub Category<span class="red">*</span></label>
+                                <mat-form-field *ngIf="singleSubCategorySelection">
+                                    <mat-select [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="subCategorySelected($event.value)">
+                                        <input matInput placeholder="Search Sub-Category"
+                                            (keyup)="onKeyInSubCategory($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of subCategoryList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleSubCategorySelection" [placeholder]=""
+                                    [(ngModel)]="selectedSubcategoryItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="subcategoryDropDownSettings" [data]="subCategoryList"
+                                    (onSelect)="onSubcategorySelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </li>
+                            <li *ngIf="showVendor">
+                                <label>Select Brand<span class="red">*</span></label>
+                                <mat-form-field *ngIf="singleVendorSelection">
+                                    <mat-select [(ngModel)]="selectedBrand" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="vendorSelected($event.value)">
+                                        <input matInput placeholder="Search Vendor"
+                                            (keyup)="onKeyInVendor($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of vendorList" [value]="body.id">
+                                            {{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleVendorSelection" [placeholder]=""
+                                    [(ngModel)]="selectedVendorItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="vendorDropDownSettings" [data]="vendorList"
+                                    (onSelect)="onVendorSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </li>
+                            <li *ngIf="showProduct">
+                                <label>Select Product<span class="red">*</span></label>
+                                <mat-form-field *ngIf="singleProductSelection">
+                                    <mat-select (selectionChange)="productSelected($event.value)">
+                                        <input matInput placeholder="Search Product"
+                                            (keyup)="onKeyInProduct($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of productList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="singleProductSelection==false" [placeholder]=""
+                                    [(ngModel)]="selectedProductItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="productDropDownSettings" [data]="productList"
+                                    (onSelect)="onProductSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </li>
+
+
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Select region<span class="red">*</span></mat-label>
+                                    <mat-select placeholder="Placeholder" formControlName="availableLocation" multiple>
+                                        <mat-option *ngFor="let item of geofenceList" [value]="item._id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editDiscountForm.get('availableLocation').hasError('required')">
+                                      Please select a region 
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label> Name <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name" type="text" placeholder="Name" name="name">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['name'].hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </div>
+                                    <mat-error *ngIf="editDiscountForm.get('name').hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label> Arbic Name </label> -->
+                                <mat-form-field>
+                                    <mat-label>Arbic Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name_ar" type="text" placeholder="Arbic Name"
+                                        name="name_ar">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['name_ar'].hasError('required')">
+                                        Arbic Name is <strong>required</strong>
+                                    </div>
+
+                                    <mat-error *ngIf="editDiscountForm.get('name_ar').hasError('required')">
+                                        Arabic Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Best suited for <span class="red">*</span></mat-label>
+                                    <mat-select formControlName="gender" multiple>
+
+                                        <mat-option value="M">
+                                            Male
+                                        </mat-option>
+                                        <mat-option value="F">
+                                            Female
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editDiscountForm.get('gender').hasError('required')">
+                                        Please Select the gender this suits for
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label> Discount <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Discount<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="disount" min="0" max="100" type="number"
+                                        placeholder="" name="name">
+
+                                    <mat-error *ngIf="editDiscountForm.get('disount').hasError('required')">
+                                        Discount percentage is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="editDiscountForm.controls['disount'].hasError('min')">
+                                        Discount percentage should not be <strong>less than zero</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
+                            <label>Timeline for Discount<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="date" placeholder="" name="name">
+                            </mat-form-field>
+                        </li> -->
+                            <li>
+                                <!-- <label>Start Date <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Start Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="startDate" type="date" [min]="today"
+                                        placeholder="Start Date" name="name">
+
+                                    <mat-error *ngIf="editDiscountForm.get('startDate').hasError('required')">
+                                        Start Date is <strong>required</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label>End Date <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>End Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
+                                        placeholder="End Date" name="name">
+                                    <mat-error *ngIf="editDiscountForm.get('endDate').hasError('required')">
+                                        End Date is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field>
+                                    <mat-label>Select Type<span class="red">*</span></mat-label>
+                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName="type">
+
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editDiscountForm.get('type').hasError('required')">
+                                        Deal Type is <strong>required</strong>
+                                    </mat-error>
+                                    <!-- <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['type'].hasError('required')">
+                                        Deal Type is <strong>required</strong>
+                                    </div> -->
+
+                                </mat-form-field>
+                                <ng-container
+                                    *ngIf="editDiscountForm.get('type').value=='Home Banner' && !previewImage; else elseTemplate">
+                                    <p>Please Upload image of size 1920px*1080px or 1280px*720px </p>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <div *ngIf="(editDiscountForm.get('type').value=='Home' ||
+                                        editDiscountForm.get('type').value=='Offer')&& !previewImage">
+                                        <p>Please Upload image which have equal height and width</p>
+                                    </div>
+                                </ng-template>
+                            </li>
+                            <li class="banner_image">
+                                <label>Add Banner image</label>
+
+                                <div class="product_image_upload">
+                                    <ng-container
+                                        *ngIf="editDiscountForm.get('type').value=='Home Banner'; else elseTemplate">
+                                        <p>Please Upload image of size 1920px*1080px </p>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <ng-container
+                                            *ngIf="editDiscountForm.get('type').value=='Home'; else elseTemplate2">
+                                            <p>Please Upload image of size 1280*360px </p>
+                                        </ng-container>
+                                        <ng-template #elseTemplate2>
+                                            <div
+                                                *ngIf="editDiscountForm.get('type').value=='Offer'||editDiscountForm.get('type').value=='Popup'">
+                                                <p>Please Upload image of size 360*360</p>
+                                            </div>
+                                        </ng-template>
+                                    </ng-template>
+
+                                    <input type='file' [disabled]='imageNotAccepted' (change)="bannerImageEvent($event)"
+                                        accept="image/*" formControlName="bannerImage" placeholder="choosefile"
+                                        class="images_uploader">
+
+                                    <span>Choose File</span>
+
+
+                                </div>
+                            </li>
+                            <li class="user_img">
+                                <ng-container *ngIf="urlImage==true; else elseTemplate1">
+                                    <figure class="figure">
+                                        <img style="max-width: 200px; max-height: 200px;"
+                                            [src]="imageUrl+previewImage" />
+                                    </figure>
+                                </ng-container>
+                                <ng-template #elseTemplate1>
+                                    <figure class="figure">
+                                        <img style="max-width: 150px;" [src]="previewImage" />
+                                    </figure>
+                                </ng-template>
+
+                            </li>
+
+
+
+                        </ul>
+                        <div class="update_button">
+                            <button mat-button (click)="checkBanner()">
+                                <span><i class="fa fa-window-restore"></i>
+                                </span>
+                                Update
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+                <!-----End input fields------>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

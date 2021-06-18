@@ -1,0 +1,49 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>All Category</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goToVendorList()">Go To Vendor List</a>
+                    </div>
+                </div>
+                <div>
+                    <div *ngIf="flagData==true">
+                        <h1>No Data Found</h1>
+                    </div>
+                    <div *ngIf="flagData==false" class="card">
+
+
+                        <table>
+                            <tr>
+                                <th>Sr.no</th>
+                                <th> Name</th>
+                                <th> Arbic Name</th>
+                                <th> Image</th>
+                                <th>View Subcategory</th>
+                            </tr>
+                            <tr *ngFor="let item of categoryList;index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.name_ar}}</td>
+                                <td>
+                                    <figure><img width="200" src={{imagePath+item.image}}></figure><br>
+                                </td>
+                                <td style="text-align: center;"><a class="edit" style="float:none;"
+                                        (click)="goToSubcategory(item._id, item.name)"><i
+                                            class="fa fa-eye fa-fw"></i></a></td>
+                            </tr>
+                        </table>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

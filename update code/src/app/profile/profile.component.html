@@ -1,0 +1,122 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1> Profile</h1>
+                </div>
+
+                <div class="add_business_detail">
+                    <div id="exTab1">
+                        <div class="businiess_outer">
+                            <div class="profile_image_detail">
+                                <ng-container *ngIf="profileData?.profilePic; else elseTemplate">
+                                    <figure><img style="border-radius: 50%; height: 120px; width: 120px;"
+                                            [src]="imageUrl+profileData.profilePic">
+                                    </figure>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <figure><img style="border-radius: 50%; height: 120px; width: 120px;"
+                                            src="assets/images/profileImage.png">
+                                    </figure>
+                                </ng-template>
+
+
+                                <h2>{{profileData?.firstName}} {{profileData?.lastName}}</h2>
+                                <div class="follow_all">
+                                    <ul>
+                                        <li class="input_divs input_button "><button mat-button
+                                                (click)="goToeditprofile(profileData._id)">Edit Profile</button></li>
+                                    </ul>
+                                </div>
+                                <div class="social_icon">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" href={{profileData?.facebookLink}}><img
+                                                    src="assets/images/facebook.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.twitterLink}}><img
+                                                    src="assets/images/twitter.png"></a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.instagramLink}}><img
+                                                    src="assets/images/instagram.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.linkedinLink}}><img
+                                                    src="assets/images/linkedin.png"></a></li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="apple_store_link">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" href={{profileData?.appleStoreLink}}><img
+                                                    src="assets/images/apple-store.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.playStoreLink}}><img
+                                                    src="assets/images/google-play.png"></a></li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="1a">
+                                <div class="personal_deatil">
+                                    <ul>
+                                        <li><strong>Full Name :</strong>{{profileData?.firstName}}
+                                            {{profileData?.lastName}} </li>
+                                        <li><strong>Phone Number
+                                                :</strong>{{profileData?.countryCode}}-{{profileData?.phone}}</li>
+                                        <li><strong>Email :</strong> {{profileData?.email}}</li>
+                                        <li><strong>Location :</strong>
+                                            {{profileData?.address}}
+                                        </li>
+                                        <div *ngIf="roles =='admin' || roles=='subAdmin';else templateName"></div>
+                                        <ng-template #templateName><li ><Strong>Delivery Type :</Strong>{{profileData.deliveryType}} </li></ng-template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+<div *ngIf="roles=='admin' || roles=='subAdmin';else templateName1">
+
+
+</div>
+
+<ng-template #templateName1>
+
+
+    <div  class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    Layout
+                </div>
+                <div class="card-body">
+
+                    <mat-radio-group aria-labelledby="example-radio-group-label"
+                        class="example-radio-group">
+                        <mat-radio-button class="example-radio-button mr-3" [(ngModel)]="layout"
+                            (change)="radioChange($event)" *ngFor="let season of layoutstyle"
+                            [value]="season.value">
+                            {{season.viewValue}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+               
+               
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

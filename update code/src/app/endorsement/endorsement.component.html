@@ -1,0 +1,187 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Endorsement </h1>
+                    <div class="input_divs2 input_button input_button2" *ngIf="user.roles=='celebrity'">
+                        <button mat-button (click)="goToEndorsedProduct()">Endorsed Product</button>
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
+                    </div>
+
+                </div>
+                <div class="outer_table">
+                    <div class="search_fields">
+                        <div class="filters Booking_status" *ngIf="user.roles=='merchant'">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Filter<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                    (selectionChange)="filterSelected($event)">
+                                    <mat-option *ngIf="flag==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="active">
+                                        Active
+                                    </mat-option>
+                                    <mat-option value="inactive">
+                                        Inactive
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="filters Booking_status pl-3" *ngIf="user.roles=='merchant'">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Is Approved<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Filter" [(ngModel)]="isApproved"
+                                    (selectionChange)="isApprovedSelected($event)">
+                                    <mat-option *ngIf="flagApproved==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="1">
+                                        Approved
+                                    </mat-option>
+                                    <mat-option value="3">
+                                        Rejected
+                                    </mat-option>
+                                    <mat-option value="2">
+                                        Pending
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <div class="search_with_icons">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Search</mat-label>
+
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                            class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="noData==true">
+                        <h1>
+                            No Data found
+                        </h1>
+                    </div>
+
+                    <!-- <div *ngIf="user.roles=='celebrity'" class="table-responsive">
+                        <table *ngIf="noData==false">
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>Phone Number </th>
+                                <th>Email ID</th>
+                                <th>Product List</th>
+                            </tr>
+                            <tr *ngFor="let item of vendorList; index as i ">
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <td>{{item.gender==='M'?"Male":"Female"}}</td>
+                                <td>{{item.address}}</td>
+                                <td>{{item.countryCode}}-{{item.phone}}</td>
+                                <td>{{item.email}}</td>
+                                <td class="Booking_status" (click)="goToproduct(item._id)">
+                                    <button mat-button class="accept_button">View</button></td>
+                        </table>
+                    </div> -->
+                    <div *ngIf="user.roles=='merchant'" class="table-responsive">
+                        <table *ngIf="noData==false">
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Product Name</th>
+                                <th>Product Category</th>
+                                <th>Product Brand</th>
+                                <th>Product Price</th>
+                                <th>Celebrity Name </th>
+                                <th>Email ID</th>
+                                <th>Phone</th>
+                                <th>Gender</th>
+                                <th>Commission</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr *ngFor="let item of endorsementProductList; index as i ">
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>{{item?.product?.name}} </td>
+                                <td>{{item?.product?.category?.name}}</td>
+                                <td>{{item?.product?.brand?.name}}</td>
+                                <td>{{item?.product?.price}}</td>
+                                <td>{{item?.celebrity?.firstName}} {{item?.celebrity?.lastName}}</td>
+                                <td>{{item?.celebrity?.email}}</td>
+                                <td>{{item?.celebrity?.phone}}</td>
+                                <td>{{item?.celebrity?.gender}}</td>
+                                <td>{{item?.commission}}</td>
+                                <td>
+                                    <ul *ngIf="item.isApproved==false">
+                                        <li class="show" (click)="acceptRequest(item._id,1)"><i class="fa fa-check"></i>
+                                        </li>
+                                        <li class="show" (click)="acceptRequest(item._id,0)"><i class="fa fa-times"></i>
+                                        </li>
+                                    </ul>
+                                    <ul *ngIf="item.isApproved==true">
+                                        <div class="enable_disable">
+                                            <mat-slide-toggle [checked]="item.status==0?'true':'false'"
+                                                (change)="onChangeStatus(item._id,item.status)">
+                                            </mat-slide-toggle>
+                                        </div>
+                                    </ul>
+                                </td>
+                        </table>
+                    </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = vendorListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Sub-category -->
+<div id="EditSubcategory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>Category List</h3>
+                <ul>
+                    <li *ngFor="let item of selectedCategory; let i=index">
+                        {{i+1}} {{item.name}}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

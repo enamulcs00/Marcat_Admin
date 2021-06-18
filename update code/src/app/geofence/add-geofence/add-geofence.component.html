@@ -1,0 +1,62 @@
+<div id="wrapper">
+  <app-navbar></app-navbar>
+  <div id="content-wrapper" class="">
+      <div id="content">
+          <app-sidebar></app-sidebar>
+          <div class="container-fluid">
+              <div class="sub_heading">
+                  <h1>Add Geofence</h1>
+                  <div class="input_divs2 input_button input_button2">
+                      <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                              aria-hidden="true"></i></button>
+                  </div>
+                
+              </div>
+
+
+              <!-----start pagination-->
+              <form [formGroup]="geofenceForm">
+                  <div class="row mb-3">
+
+                      <div class="col-8">
+
+                          <mat-form-field class="full-width">
+                              <mat-label>Geofence Name</mat-label>
+                              <input matInput placeholder="Geofence name" formControlName="geofenceName" type="text">
+                              <mat-error *ngIf="geofenceForm.get('geofenceName').hasError('required')">
+                                  Please Add Geofence Name
+                              </mat-error>
+                              
+                              <mat-error *ngIf="geofenceForm.get('geofenceName').hasError('maxlength')">
+                                 Max length for geofence name is 30
+                              </mat-error>
+
+                          </mat-form-field>
+
+
+                      </div>
+                     
+                    
+
+                      <div class="col-4">
+                          <button mat-button (click)="save()">Save</button>
+                      </div>
+
+                  </div>
+              </form>
+              <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="onMapReady($event)">
+
+                  <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
+              </agm-map>
+
+              <!-----end pagination-->
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="loader_bg" *ngIf="progress">
+  <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
+      <span class="sr-only">Loading...</span>
+  </div>
+</div>

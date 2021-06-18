@@ -1,0 +1,169 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Inventory Management</h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <button (click)="downloadCsv()" class="ml-2" mat-button matRipple [matRippleColor]="'#9e8221'"
+                            [matRippleRadius]="20" mat-button>Download CSV</button>
+                    </div>
+                </div>
+                <div class="search_fields">
+                    <div class="filters Booking_status mr-3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label> Product Status Filter<span class="red">*</span></mat-label>
+
+                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                (selectionChange)="filterSelected($event)">
+                                <mat-option *ngIf="flag==true" value="">
+                                    Remove Filter
+                                </mat-option>
+
+                                <mat-option value="active">
+                                    Active
+                                </mat-option>
+                                <mat-option value="inactive">
+                                    Inactive
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filters Booking_status">
+                        <mat-form-field class="example-full-width">
+                            <mat-label> View Filter<span class="red">*</span></mat-label>
+
+                            <mat-select placeholder="Filter" [(ngModel)]="view"
+                                (selectionChange)="viewFilterSelected($event)">
+                                <mat-option *ngIf="flagView==true" value="0">
+                                    Remove Filter
+                                </mat-option>
+
+                                <mat-option value="1">
+                                    <!--For Top view Product use 1-->
+                                    Top View
+                                </mat-option>
+                                <mat-option value="2">
+                                    <!--For Least view Product use 2-->
+                                    Least View
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <div class="search_with_icons">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Search</mat-label>
+
+                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                </mat-form-field>
+                                <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                        class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="flagData==true">
+                    <h1>No Data Found</h1>
+                </div>
+                <div *ngIf="flagData==false" class="table-responsive divAboveTable">
+                    <table>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Product Id</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th *ngIf="user.roles=='admin'">Seller</th>
+                            <th>Product Status</th>
+                            <th>View</th>
+                            <th>Normal Stock</th>
+                            <th>Over Stock</th>
+                            <th>Current Quantity</th>
+                            <th> Maximum puchase quantity</th>
+                            <th>Price </th>
+                            <ng-container *ngIf=" user.roles=='admin' || user.roles=='subAdmin' ; else elseTemplate">
+
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <th>Action</th>
+
+                            </ng-template>
+
+
+                        </tr>
+
+                        <tr *ngFor="let product of productList;  let i = index">
+                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                            <td>
+                                {{product.productId}}
+                            </td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category.name }}</td>
+                            <td *ngIf="user.roles=='admin'">{{product.seller.firstName}}
+                                {{product.seller.lastName}}
+                            </td>
+                            <td>{{product.status==1?"Active":"Inactive"}}</td>
+                            <td>{{product.views}}
+                            </td>
+                            <td>{{product.normalStock}}</td>
+                            <td>{{product.overStock}}</td>
+                            <td class="bgColor">
+                                <!-- <ng-container *ngIf="product.normalStock===product.productQuantity; else elseTemplate">
+                                    <strong style="color:'yellow'"> {{ product.productQuantity }}</strong>
+                                </ng-container>
+                                <ng-template
+                                    [ngStyle]="{'color':product.normalStock<product.productQuantity?'red':'green' }"
+                                    #elseTemplate>
+                                    {{ product.productQuantity }}
+                                </ng-template> -->
+                                <span [ngClass]="{
+    'text-success':product.productQuantity > product.normalStock,
+    'text-warning':product.productQuantity === product.normalStock,
+    'text-danger':product.productQuantity < product.normalStock
+  }"> {{product.productQuantity}}</span>
+
+                            </td>
+                            <td>{{ product.purchaseQuantity }}</td>
+                            <td>{{ product.price }}</td>
+                            <ng-container *ngIf="user.roles=='admin' || user.roles=='subAdmin'; else elseTemplate">
+
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <td>
+                                    <ul>
+                                        <li class="edit" (click)="gotoUpdateInventory(product.id)"><i
+                                                class="fa fa-pencil fa-fw"></i></li>
+                                    </ul>
+                                </td>
+                            </ng-template>
+
+
+                        </tr>
+                    </table>
+
+                </div>
+                <!-----start pagination-->
+                <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = ListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

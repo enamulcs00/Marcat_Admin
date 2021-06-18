@@ -1,0 +1,50 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>{{userType}} Management</h1>
+
+                    <div class="input_divs2 input_button input_button2">
+
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="outer_table">
+
+                    <div>
+
+                        <ng-container *ngIf="documentList.length>0; else elseTemplate">
+                            <!-- <figure *ngFor="let item of documentList">
+                                <img [src]="baseUrl+item.image" alt="">
+
+                            </figure> -->
+                            <figure *ngFor="let item of documentList; let i=index">
+                                <div (click)="clickedImage()">
+                                    <img [src]="baseUrl+item.image" alt="" #file[i]>
+                                </div>
+
+                            </figure>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <!-- <label for="inputTypeFile">Certificate</label>
+                            <input id="inputTypeFile" type="file"> -->
+                            <h2>No document Found</h2>
+                        </ng-template>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

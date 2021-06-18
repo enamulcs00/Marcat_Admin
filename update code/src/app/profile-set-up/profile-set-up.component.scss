@@ -1,0 +1,51 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.item_img {
+    position: relative;
+    margin-top: 20px;
+
+    .del_btn {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background: #99999973;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 2rem 1.5rem;
+    font: 1rem/1.5 "PT Sans", Arial, sans-serif;
+    color: #5a5a5a;
+}
+
+.logininner {
+    .form_2 {
+        li {
+            padding: 10px 0px;
+        }
+    }
+}

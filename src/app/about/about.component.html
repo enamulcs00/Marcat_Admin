@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>About</h1>
+                    <h1>About App</h1>
                     <div class="top_subheading_add">
                         <!-- <a (click)="goToaddcategory()"><span>+</span>Add Category</a> -->
                         <!-- <a class="add_excelsheet">Import excel sheet</a> -->
@@ -20,7 +20,7 @@
                         </ckeditor>
                         <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div>
                     </div>
-                    <button [disabled]="myForm.invalid" class="btn btn-primary"
+                    <button [disabled]="myForm.invalid" class="button mat-button mat-button-base"
                         (click)="updateTermAndCondition()">Save</button>
                 </form>
             </div>

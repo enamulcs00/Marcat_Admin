@@ -161,9 +161,9 @@ export class SidebarComponent implements OnInit {
   goTocontactus() {
     this.router.navigate(['contactus'])
   }
-  /*goToprivacypolicy(){
+  goToprivacypolicy(){
     this.router.navigate(['privacypolicy'])
-  }  */
+   } 
   goToreturnpolicy() {
     this.router.navigate(['returnpolicy'])
   }
@@ -193,6 +193,11 @@ export class SidebarComponent implements OnInit {
   goToSettings() {
     this.router.navigate(['Settings'])
   }
-
+  goToAboutapp() {
+    this.router.navigate(['about'])
+  }
+  // goToprivacypolicy() {
+  //   this.router.navigate(['privacypolicy'])
+  // }
 }
 

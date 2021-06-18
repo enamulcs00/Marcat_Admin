@@ -1,0 +1,202 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Celebrity Management</h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <button *ngIf="user.roles=='admin' || (user.roles=='subAdmin' &&
+                            user.permissions.celebrity.write==true)" mat-button (click)="goToaddVender()">Add
+                            Celebrity</button>
+
+                        <button (click)="downloadCsv()" class="ml-2" mat-button matRipple [matRippleColor]="'#9e8221'"
+                            [matRippleRadius]="20" mat-button>Download CSV</button>
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
+                    </div>
+
+                </div>
+                <div class="outer_table">
+                    <div class="search_fields">
+                        <div class="filters Booking_status">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Status Filter<span class="red">*</span></mat-label>
+                                <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                    (selectionChange)="filterSelected($event)">
+                                    <mat-option *ngIf="flag==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="active">
+                                        Active
+                                    </mat-option>
+                                    <mat-option value="inactive">
+                                        Inactive
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="filters Booking_status ml-3">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Is Featured Filter<span class="red">*</span></mat-label>
+                                <mat-select placeholder="Filter" [(ngModel)]="isFeaturedFilterBy"
+                                    (selectionChange)="isFeatuedFilterSelected($event)">
+                                    <mat-option *ngIf="flagFeatured==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="true">
+                                        Featured
+                                    </mat-option>
+                                    <mat-option value="false">
+                                        Not Featured
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <div class="search_with_icons">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Search</mat-label>
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                            class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive divAboveTable">
+                        <table>
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>Phone Number </th>
+                                <th>Email ID</th>
+                                <th>Category</th>
+                                <th>Status </th>
+                                <th>Featured</th>
+                                <th>Date of Joining</th>
+                                <th>Product List</th>
+                                <th>Total number of order</th>
+                                <th>Total revenue generated</th>
+                                <th>Document</th>
+                                <th>Purpose</th>
+                                <th class="action_bx" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' &&
+                            user.permissions.celebrity.write==true)">Action</th>
+                            </tr>
+                            <tr *ngFor="let item of vendorList; index as i ">
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <td>{{item.gender==='M'?"Male":"Female"}}</td>
+                                <td>{{item.address}}</td>
+                                <td>{{item.countryCode}}-{{item.phone}}</td>
+                                <td>{{item.email}}</td>
+                                <td class="Booking_status" data-toggle="modal" style="margin-left:25px ;"
+                                    (click)="goToViewCategory(item.categories)" data-target="#EditSubcategory"><button
+                                        mat-button class="accept_button ">View
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
+                                            [checked]="item.status=='1'? true:false"></mat-slide-toggle>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeUserfeatured(item._id,item.isFeatured)"
+                                            [checked]="item.isFeatured"></mat-slide-toggle>
+                                    </div>
+                                </td>
+                                <td>{{item.createdAt | date}}</td>
+                                <td class="Booking_status" (click)="goToproduct(item._id)">
+                                    <button mat-button class="accept_button">View</button></td>
+                                <td>{{item.totalOrders}}</td>
+
+                                <td>{{item.totalRevenue}}</td>
+                                <td>
+                                    <ul>
+                                        <li class="delete" (click)="viewDocument(item._id)"><i
+                                                class="fa fa-eye fa-fw"></i>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <p *ngIf="item.celebrityType==1">Endorse</p>
+                                    <p *ngIf="item.celebrityType==2">Sell</p>
+                                    <p *ngIf="item.celebrityType==3">For both</p>
+                                </td>
+                                <td>
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' &&
+                            user.permissions.celebrity.write==true)" class="action">
+                                        <ul *ngIf="item.sellerProfileStatus==1">
+                                            <li class="show" (click)="goToviewVendor(item._id)"><i
+                                                    class="fa fa-eye"></i></li>
+                                            <li class="edit" (click)="goToeditVendor(item._id)"><i
+                                                    class="fa fa-pencil fa-fw"></i></li>
+                                            <li class="delete" (click)="deleteCelebrity(item._id)"><i
+                                                    class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                        <ul *ngIf="item.sellerProfileStatus ==0 || item.sellerProfileStatus ==2">
+                                            <li class="show" (click)="acceptVendor(item._id )"><i
+                                                    class="fa fa-check"></i></li>
+                                            <li class="edit" (click)="declinedVendor(item._id)"><i
+                                                    class="fa fa-times fa-fw"></i></li>
+
+                                        </ul>
+
+                                    </div>
+                                </td>
+                        </table>
+                    </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = vendorListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Sub-category -->
+<div id="EditSubcategory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>Category List</h3>
+                <ul>
+                    <li *ngFor="let item of selectedCategory; let i=index">
+                        {{i+1}} {{item.name}}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>

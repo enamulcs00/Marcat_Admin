@@ -1,0 +1,43 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>View Inventory</h1>
+                    <a (click)="goToinventry()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Product Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="Product Name" name="name">
+                            </mat-form-field>
+                        </li>                        
+                        <li>
+                            <label>Product Cost<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="Product Cost" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Required Quantity<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="Required Quantity" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Current Quantity<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="Current Quantity" name="name">
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Revenue Graph</h1>
+                </div>
+
+                <div class="charts">
+                    <ul>
+                        <li>
+                            <div class="chart_title">
+                                <p>Revenue</p>
+                                <div class="filters Booking_status">
+                                    <label>Filter</label>
+                                    <select [(ngModel)]="revenueFilter" (change)="revenuePeriodChanged($event)">
+                                        <!-- <option>Daily</option> -->
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="user_charts" *ngIf="chartReady">
+
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartDataRevenue" [labels]="barChartLabelrevenue"
+                                    [options]="barChartOptionsRevenue" [plugins]="barChartPluginsRevenue"
+                                    [legend]="barChartLegendRevenue" [chartType]="barChartTypeRevenue">
+                                </canvas>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

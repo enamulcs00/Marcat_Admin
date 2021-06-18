@@ -1,0 +1,41 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Broadcast Notification</h1>
+                    <div class="right_side_buttons">
+                        <a (click)="back()">Go Back</a>
+
+                    </div>
+                </div>
+                <div class="card">
+                    <form [formGroup]="broadcastForm">
+                        <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Select </label>
+                            <select mat-select class="input" formControlName="type">
+                                <option value="user">User</option>
+                                <option value="seller">Vendor</option>
+                            </select>
+                        </div>
+                        <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Title</label>
+                            <input class="input" type="text" formControlName="title">
+                        </div>
+                        <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Description</label>
+                            <textarea name="description" class="input" formControlName="message" id="" cols="30"
+                                rows="10"></textarea>
+                        </div>
+
+                        <button mat-button class="button m-3" (click)="sendNotification()">Send Notification</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

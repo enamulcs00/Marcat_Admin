@@ -1,0 +1,223 @@
+<!-- Sidebar -->
+<ul class="side_barlist">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand" href="index.html">
+        <div class="sidebar-brand-icon">
+            <figure><img src="../../assets/images/whitesmall_logo.png"></figure>
+        </div>
+        <div class="sidebar-brand-text">
+            <figure><img src="../../assets/images/whitelogo.png"></figure>
+        </div>
+    </a>
+    <!-- Nav Item - Dashboard -->
+    <li rel="core1" class="nav_item active">
+        <a class="nav-link">
+            Co
+        </a>
+    </li>
+    <li rel="core3" class="nav_item">
+        <a class="nav-link">
+            In
+        </a>
+    </li>
+    <li rel="core7" class="nav_item">
+        <a class="nav-link">
+            Re
+        </a>
+    </li>
+    <li rel="core4" class="nav_item">
+        <a class="nav-link">
+            Cs
+        </a>
+    </li>
+    <!-- <li rel="core4" class="nav_item">
+        <a class="nav-link">
+            Nt
+        </a>
+    </li>
+    <li rel="core5" class="nav_item">
+        <a class="nav-link">
+            Hc
+        </a>
+    </li>
+    <li rel="core6" class="nav_item">
+        <a class="nav-link">
+            Cr
+        </a>
+    </li> -->
+
+
+</ul>
+<div class="side_pages">
+    <div id="core1" class="core active">
+        <h3>Core</h3>
+        <ul>
+            <li (click)="goTodashboard()">Dashboard</li>
+
+
+            <li (click)="goTomanageUser()"
+                *ngIf="roles =='admin' || (roles=='subAdmin' && this.user.permissions.users.read==true)">User
+                Management
+            </li>
+
+            <ng-container
+                *ngIf="user.roles=='subAdmin' &&  this.user.permissions.product.read==false; else elseTemplate1">
+
+            </ng-container>
+            <ng-template #elseTemplate1>
+                <li (click)="goToProduct()">Product Management
+                </li>
+            </ng-template>
+
+
+
+
+            <li (click)="goTovendermanagement()"
+                *ngIf="roles =='admin' || (roles=='subAdmin' && this.user.permissions.vendor.read==true)">Vendor
+                Management</li>
+
+            <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin' || (roles=='subAdmin' &&
+                this.user.permissions.celebrity.read==true)">Celebrity
+                Management</li>
+
+            <li (click)="goToBrand()" *ngIf="roles=='admin' || (roles=='subAdmin' &&
+                this.user.permissions.brand.read==true)">Brand Management</li>
+
+            <li (click)="goTocategory()" *ngIf="roles=='admin' || (roles=='subAdmin' &&
+                this.user.permissions.category.read==true)">Category</li>
+
+            <ng-container
+                *ngIf="roles=='admin' || (roles=='subAdmin' && this.user.permissions.adminEndorsment.read==true); else elseTemplate">
+                <li> <a [routerLink]="['/admin-endorment']" routerLinkActive="router-link-active">Admin Endorsement</a>
+                </li>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <li (click)="goToEndorsement()" *ngIf="celebrityType!=2">
+
+                    Endorsement</li>
+            </ng-template>
+
+            <!-- <div *ngIf>
+              
+            </div> -->
+            <!-- <li (click)="goTosubcategory()">Sub-Category</li>-->
+            <ng-container
+                *ngIf="user.roles=='subAdmin' &&  this.user.permissions.inventory.read==false; else elseTemplate2">
+
+            </ng-container>
+            <ng-template #elseTemplate2>
+                <li (click)="goToinventry()">Inventory Management</li>
+
+            </ng-template>
+
+            <ng-container
+                *ngIf="user.roles=='subAdmin' && this.user.permissions.banner.read==false; else elseTemplate3">
+
+            </ng-container>
+            <ng-template #elseTemplate3>
+                <li (click)="goToofferdeals()">Banner Manegement</li>
+            </ng-template>
+
+
+        </ul>
+    </div>
+    <div id="core3" class="core">
+        <h3>Intel</h3>
+        <ul>
+            <li *ngIf="roles=='admin'  || (roles=='subAdmin' &&
+                this.user.permissions.discount.read==true)" (click)="goToPromoCode()">Promo Code
+                Management</li>
+            <ng-container
+                *ngIf="user.roles=='subAdmin' && this.user.permissions.orderList.read==false; else elseTemplate4">
+
+            </ng-container>
+            <ng-template #elseTemplate4>
+                <li (click)="goToordermanagement()">Order Managment </li>
+            </ng-template>
+
+
+            <!--<li>Analytics</li>-->
+            <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.setting.read==true)" (click)="goToSettings()">Settings</li>
+            <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.reviews.read==true)" (click)="goTomanageReviews()">Review
+                Management</li>
+            <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.subadmin.read==true)" [routerLink]="['/sub-admin-list']">Manage
+                Sub-admin</li>
+            <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.stringLiterals.read==true)" [routerLink]="['/transaltions']">Manage
+                Translations</li> 
+                <li *ngIf="roles== 'admin'  || (roles=='subAdmin' &&
+                this.user.permissions.geofenceManagement.read==true)" [routerLink]="['/geo-fence-List']">Geo-fence Management</li>
+            </ul>
+
+           
+            
+    </div>
+    <div id="core4" class="core">
+            <h3>CMS Pages</h3>
+            <ul>
+        <!-- <li (click)="goTowarehouse()">Warehouse</li> -->
+                <li (click)="goToAboutapp()">About Us</li>
+                <li (click)="goTotermcondition()">Terms and Conditions</li>
+        <!-- <li (click)="goToBroadCast()">Broadcast Message</li> -->
+        <!-- <li (click)="goTonotification()">Notifications</li> -->
+        </ul>
+    </div>
+    <!-- <div id="core4" class="core">
+        <h3>Notifications</h3>
+        <ul> -->
+    <!-- <li (click)="goTowarehouse()">Warehouse</li>
+            <li (click)="goToaccounts()">Accounts</li>
+            <li (click)="goTooffersync()">offer Sync</li>-->
+    <!-- <li (click)="goToBroadCast()">Broadcast Message</li> -->
+    <!-- <li (click)="goTonotification()">Notifications</li> -->
+    <!-- </ul>
+    </div> -->
+    <div id="core7" class="core">
+        <h3>Report</h3>
+        <ul>
+            <!-- <li (click)="goTosalesreport()">Report of sales</li> -->
+            <ng-container
+                *ngIf="user.roles=='subAdmin' && this.user.permissions.revenue.read==false; else elseTemplate5">
+
+            </ng-container>
+            <ng-template #elseTemplate5>
+                <li (click)="goTorevenuereport()">Report of Revenue</li>
+            </ng-template>
+
+
+            <!-- <li (click)="goTovendorSalesReport()">Vendor Sales Report</li> -->
+
+
+
+        </ul>
+    </div>
+    <!-- <div id="core5" class="core">
+        <h3>Help Center</h3>
+        <ul>
+
+
+
+            < <li (click)="goTotermcondition()">Terms and Conditions</li> -->
+    <!-- <li (click)="goTocontactus()">Contact Us</li> -->
+    <!--<li (click)="goToprivacypolicy()">Privacy Policy </li>-->
+    <!-- <li (click)="goToreturnpolicy()">Return Policy </li> -->
+    <!-- <li (click)="goToventorT()">Vendor Terms and Condition </li> -
+
+
+
+        </ul>
+    </div>
+    <div id="core6" class="core">
+        <h3>Consumers Rights</h3>
+        <ul>
+            <!- <li (click)="goTotermofuse()">Terms Of Use</li> -->
+    <!-- <li (click)="goTotermofsales()">Terms Of Sales</li> -->
+    <!-- <li (click)="goToconsumerprivacypolicy()">Privacy Policy </li> -->
+    <!-- <li (click)="goTowarrantypolicy()">Warranty Policy </li> --
+        </ul>
+    </div> -->
+</div>

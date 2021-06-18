@@ -1,0 +1,30 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Terms of Sales</h1>
+                    <div class="right_side_buttons">
+                        <a (click)="back()">Go Back</a>
+
+                    </div>
+                </div>
+
+                <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
+                    <div class="form-group has-feedback"
+                        [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }">
+                        <ckeditor [(ngModel)]="mycontent" #myckeditor="ngModel" name="myckeditor" required
+                            [config]="ckeConfig" debounce="500" (paste)="onPaste($event)" (change)="onChange($event)">
+                        </ckeditor>
+                        <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div>
+                    </div>
+                    <button [disabled]="myForm.invalid" class="btn btn-primary"
+                        (click)="updateTermAndCondition()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

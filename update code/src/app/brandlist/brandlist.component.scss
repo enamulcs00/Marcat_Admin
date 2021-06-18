@@ -1,0 +1,163 @@
+.location_name h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.location_name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.button-border {
+    display: block;
+    border: 1px solid #e0e0e0;
+    padding: 10px 20px;
+}
+
+.state-list {
+    padding-left: 25px;
+}
+
+.country_name a {
+    padding-left: 18px;
+}
+
+.actions {
+    padding-top: 8px;
+}
+
+.actions a {
+    text-decoration: none;
+}
+
+.outer_loaction {
+    background: #fff;
+    padding: 20px;
+}
+
+.modal-body h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    padding: 0 0 20px;
+}
+
+.modal-header::before,
+.modal-header::after {
+    content: unset;
+}
+
+.modal-body {
+    position: relative;
+}
+
+.modal-content {
+    background-color: #f9f9f9;
+}
+
+.modal-dialog {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.modal-body .uk-form-row {
+    display: block;
+}
+
+
+.action-wrap {
+    padding: 10px;
+}
+
+.uk-form-row.action-wrap {
+    margin: 0;
+}
+
+.model_buttons button {
+    padding: 6px 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.add_edit button.export_button {
+    width: 15%;
+    margin-left: 20px;
+}
+
+a {
+    color: #404553;
+}
+
+.model_buttons {
+    margin-top: 15px;
+}
+
+.mobille_list {
+    padding-left: 60px;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.mobille_list ul {
+    list-style-type: disc;
+}
+
+input.form-control.file {
+
+    padding: 3px 12px;
+
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.14rem;
+    margin-left: 0.6rem;
+    font-size: 95%;
+    color: #f55353;
+}
+
+.country_name figure {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.country_name figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.country_name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.mobille_list ul li span.sub_category_image figure {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.mobille_list ul li span.sub_category_image figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobille_list ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}

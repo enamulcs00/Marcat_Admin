@@ -1,0 +1,266 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Banner Management</h1>
+                    <ng-container *ngIf="userDetails.roles=='subAdmin' && userDetails.permissions.banner.write==false; else
+                        elseTemplate">
+
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <div class="input_divs2 input_button input_button2">
+                            <button mat-button (click)="goToaddoffers()">Add Banner</button>
+                            <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
+                        </div>
+                    </ng-template>
+
+
+                </div>
+                <div class="outer_table">
+                    <div class="search_fields">
+                        <div class="filters Booking_status">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Filter<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                    (selectionChange)="filterSelected($event)">
+                                    <mat-option *ngIf="flag==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="active">
+                                        Active
+                                    </mat-option>
+                                    <mat-option value="inactive">
+                                        Inactive
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <div class="search_with_icons">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Search</mat-label>
+
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                            class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="flagData==true">
+                        <h1>No Data Found</h1>
+                    </div>
+                    <div *ngIf="flagData==false" class="table-responsive divAboveTable">
+                        <table>
+                            <tr>
+                                <th>Sr No</th>
+                                <!-- <th>Category</th>
+                                <th>Sub Category
+                                </th> -->
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Discount</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Offer Details</th>
+                                <ng-container *ngIf="userDetails.roles=='subAdmin' && userDetails.permissions.banner.write==false; else
+                        elseTemplate1">
+
+                                </ng-container>
+                                <ng-template #elseTemplate1>
+                                    <th class="action_bx">Action</th>
+                                </ng-template>
+
+
+                            </tr>
+                            <tr *ngFor="let item of bannerList; index as i">
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>
+                                    <figure>
+                                        <img [src]="imagePath+item.image" width="50px" height="50px" alt="">
+                                    </figure>
+                                </td>
+                                <td>{{item?.name}}</td>
+                                <td>{{item?.discount}}%</td>
+                                <td>
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeDiscountStatus(item._id,item?.status)"
+                                            [checked]="item.status=='1'? true:false">
+                                        </mat-slide-toggle>
+                                    </div>
+                                </td>
+                                <td>{{item?.startDate | date}}</td>
+                                <td>{{item?.endDate | date}}</td>
+                                <td><a href="javascript:void(0)" class="button-pad add_city show" data-toggle="modal"
+                                        data-target="#Add_city" (click)="getDAta(item._id)"><i style="color: #696969;"
+                                            class="fa fa-eye"></i></a>
+                                    <div>
+
+                                        <!-- Modal define loaction edit state  -->
+                                        <div id="Add_city" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-body">
+                                                        <div *ngIf="modalData">
+                                                            <table>
+                                                                <tr>
+
+                                                                    <th>Name</th>
+                                                                    <th *ngIf="modalData.type!=='seller'">Arbic Name
+                                                                    </th>
+                                                                    <th *ngIf="modalData.type==='seller'"> Email</th>
+                                                                    <th>type</th>
+
+                                                                </tr>
+
+                                                                <tr *ngFor="let item of modalData.list">
+                                                                    <td *ngIf="item.name">
+                                                                        {{item?.name}}
+                                                                    </td>
+                                                                    <td *ngIf="item.firstName">
+                                                                        {{item?.firstName}} {{item?.lastName}}
+                                                                    </td>
+                                                                    <td *ngIf="item.name_ar">{{item?.name_ar}}</td>
+                                                                    <td *ngIf="item.email">{{item?.email}}</td>
+                                                                    <td>{{modalData?.type}}</td>
+
+
+                                                                </tr>
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    <ng-container
+                                        *ngIf="userDetails.roles=='admin' || userDetails.roles=='subAdmin' ; else elseTemplate1">
+                                        <ng-container *ngIf="userDetails.roles=='subAdmin' &&
+                                            userDetails.permissions.banner.write==false; else elseTemplate4">
+
+                                        </ng-container>
+                                        <ng-template #elseTemplate4>
+                                            <div class="action">
+                                                <ul *ngIf="item.isAdminAdded==true">
+                                                    <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                            class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditdiscount(item._id)"><i
+                                                            class="fa fa-pencil fa-fw"></i></li>
+                                                    <li class="delete" (click)="deleteDiscount(item._id)"><i
+                                                            class="fa fa-trash-o fa-fw"></i></li>
+                                                </ul>
+                                                <ul *ngIf="item.isAdminAdded==false">
+                                                    <ng-container *ngIf="item.isApproved; else elseTemplate2">
+                                                        <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                                class="fa fa-eye"></i></li>
+                                                        <li class="delete" (click)="deleteDiscount(item._id)"><i
+                                                                class="fa fa-trash-o fa-fw"></i></li>
+                                                    </ng-container>
+                                                    <ng-template #elseTemplate2>
+                                                        <li class="show"
+                                                            (click)="accept(item._id, item.name, item.name_ar)"><i
+                                                                class="fa fa-check"></i>
+                                                        </li>
+
+
+                                                    </ng-template>
+
+
+                                                </ul>
+                                            </div>
+                                        </ng-template>
+
+                                        <!-- <div class="action">
+                                            <ul *ngIf="item.isAdminAdded==true">
+                                                <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                        class="fa fa-eye"></i></li>
+                                                <li class="edit" (click)="goToeditdiscount(item._id)"><i
+                                                        class="fa fa-pencil fa-fw"></i></li>
+                                                <li class="delete" (click)="deleteDiscount(item._id)"><i
+                                                        class="fa fa-trash-o fa-fw"></i></li>
+                                            </ul>
+                                            <ul *ngIf="item.isAdminAdded==false">
+                                                <ng-container *ngIf="item.isApproved; else elseTemplate2">
+                                                    <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                            class="fa fa-eye"></i></li>
+                                                    <li class="delete" (click)="deleteDiscount(item._id)"><i
+                                                            class="fa fa-trash-o fa-fw"></i></li>
+                                                </ng-container>
+                                                <ng-template #elseTemplate2>
+                                                    <li class="show"
+                                                        (click)="accept(item._id, item.name, item.name_ar)"><i
+                                                            class="fa fa-check"></i>
+                                                    </li>
+
+
+                                                </ng-template>
+
+
+                                            </ul>
+                                        </div> -->
+                                    </ng-container>
+                                    <ng-template #elseTemplate1>
+                                        <div class="action">
+                                            <ul *ngIf="item.isAdminAdded==false">
+                                                <ng-container *ngIf="item.isApproved; else elseTemplate3">
+                                                    <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                            class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditdiscount(item._id)"><i
+                                                            class="fa fa-pencil fa-fw"></i></li>
+                                                    <li class="delete" (click)="deleteDiscount(item._id)"><i
+                                                            class="fa fa-trash-o fa-fw"></i></li>
+                                                </ng-container>
+                                                <ng-template #elseTemplate3>
+                                                    <p>Waiting For Approval</p>
+
+                                                </ng-template>
+
+                                                <li></li>
+                                            </ul>
+                                        </div>
+                                    </ng-template>
+
+
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = discountListAfterPageSizeChanged($event)">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
