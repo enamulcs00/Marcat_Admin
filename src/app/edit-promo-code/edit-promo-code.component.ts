@@ -56,8 +56,6 @@ export class EditPromoCodeComponent implements OnInit {
           this.editPromoCodeForm.get('discountType').setValue(res.data.discountType),
           this.editPromoCodeForm.get('freqPerUser').setValue(res.data.freqPerUser),
           this.editPromoCodeForm.get('exhaustLimit').setValue(res.data.exhaustLimit);
-
-
       }
       else {
         this.commonService.errorToast(res.message)

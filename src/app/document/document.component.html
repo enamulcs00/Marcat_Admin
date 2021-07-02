@@ -14,19 +14,15 @@
                     </div>
                 </div>
                 <div class="outer_table">
-
                     <div>
-
                         <ng-container *ngIf="documentList.length>0; else elseTemplate">
                             <!-- <figure *ngFor="let item of documentList">
                                 <img [src]="baseUrl+item.image" alt="">
-
                             </figure> -->
-                            <figure *ngFor="let item of documentList; let i=index">
+                            <figure  *ngFor="let item of documentList; let i=index">
                                 <div (click)="clickedImage()">
-                                    <img [src]="baseUrl+item.image" alt="" #file[i]>
+                                    <img [src]="baseUrl+item.image" class="img-fluid" width="300"  alt="" #file[i]>
                                 </div>
-
                             </figure>
                         </ng-container>
                         <ng-template #elseTemplate>

@@ -14,25 +14,25 @@ export class TermconditionComponent implements OnInit {
   mycontent: string;
   log: string = '';
   title: string = "Term and Condition"
-  slugName = "terms-and-conditions";
+  slugName = "tnc";
   termsAndCondition: any;
+  id: any;
   constructor(private apiService: ApiService, private commonService: CommonService) {
 
   }
 
   getAllCms() {
-    let allCms = []
+    let allCms
     this.apiService.getAllCMs().subscribe(res => {
       console.log(res);
-      if (res.success == true) {
-        allCms = res.data;
-        this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
-        this.mycontent = this.termsAndCondition.description;
+      if (res.success) {
+        debugger
+        allCms = res.data[0];
+        this.id = allCms._id
+        this.termsAndCondition = allCms.tnc;
+        this.mycontent = this.termsAndCondition;
         console.log(this.termsAndCondition);
-
-
       }
-
     })
   }
 
@@ -46,15 +46,20 @@ export class TermconditionComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
+    let body = {
+      'tnc': this.mycontent,
+      'id': this.id
 
-    this.termsAndCondition.description = this.mycontent
+    }
 
 
-    this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+
+    this.apiService.updateTax(body).subscribe(res => {
       console.log(res)
 
       if (res.success == true) {
-        this.commonService.successToast("Updated Successfully")
+        this.commonService.successToast("Updated Successfully");
+        this.getAllCms();
       }
 
     })

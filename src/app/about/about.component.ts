@@ -16,18 +16,20 @@ export class AboutComponent implements OnInit {
   title: string = "About Us"
   slugName = "terms-of-sales";
   termsAndCondition: any;
+  id: any;
   constructor(private apiService: ApiService, private commonService: CommonService) {
 
   }
 
   getAllCms() {
-    let allCms = []
+    let allCms
     this.apiService.getAllCMs().subscribe(res => {
       
       if (res.success == true) {
-        allCms = res.data;
-        this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
-        this.mycontent = this.termsAndCondition.description;
+        allCms = res.data[0];
+        this.id=allCms._id
+        this.termsAndCondition = allCms.aboutUs;
+        this.mycontent = this.termsAndCondition;
         
 
       }
@@ -45,14 +47,16 @@ export class AboutComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
+let body={
+   'aboutUs': this.mycontent,
+   'id':this.id
+  }
 
-    this.termsAndCondition.description = this.mycontent
-
-
-    this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+    this.apiService.updateTax(body).subscribe(res => {
      
       if (res.success == true) {
         this.commonService.successToast("Updated Successfully")
+        this.getAllCms()
       }
 
     })

@@ -760,7 +760,7 @@ export class ApiService {
 
 
   getAllCMs(): Observable<any> { // Method  to get All CMS Pages
-    return this.http.get<any>(this.apiEndPoints.getAllCms, this.getHeaders()).pipe(catchError(this.handleError));
+    return this.http.get<any>(this.apiEndPoints.getTax, this.getHeaders()).pipe(catchError(this.handleError));
   }
 
 

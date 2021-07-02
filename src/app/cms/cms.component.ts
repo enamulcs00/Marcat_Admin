@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 
 export class CmsComponent implements OnInit {
+  
 name = 'ng4-ckeditor';
   ckeConfig: any;
   mycontent: string;
