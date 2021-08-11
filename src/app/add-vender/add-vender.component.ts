@@ -184,7 +184,6 @@ export class AddVenderComponent implements OnInit {
         var reader = new FileReader();
         let name = e.target.files[i].name;
         this.document.push(e.target.files[i]);
-
         reader.readAsDataURL(e.target.files[i]);
         reader.onload = (event: any) => {
           let body = {

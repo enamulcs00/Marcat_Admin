@@ -408,23 +408,19 @@ export class AddproductComponent implements OnInit {
     let tempfile: any
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
+      for (let i = 0; i < event.target.files.length; i++) {
         let name = event.target.files[i].name;
         tempfile = event.target.files[i]
         var reader = new FileReader();
         let toasterService = this.commonService
-
         reader.readAsDataURL(event.target.files[i])
         reader.onload = (event: any) => {
           img.src = event.target.result;
-
           let temp = {
             name: name,
             image: event.target.result
           }
-
-          img.onload = () => {
-
+           img.onload = () => {
             var height = img.height;
             var width = img.width;
             if (height != width) {
