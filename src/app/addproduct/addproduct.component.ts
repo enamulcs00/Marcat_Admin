@@ -17,7 +17,7 @@ export class AddproductComponent implements OnInit {
   name = 'Angular 4';
   urls = [];
   addProductForm: FormGroup
-  images = [];
+  images= [];
   parentId = ''
   categoryList: any[];
   selectedCategory: any;
@@ -344,6 +344,7 @@ export class AddproductComponent implements OnInit {
   }
   progress: boolean
   onSubmit() {
+console.log('Form status',this.addProductForm.valid, this.images,"Img len",this.images.length);
 
     this.submitted = true;
 
@@ -374,8 +375,10 @@ export class AddproductComponent implements OnInit {
       body.append('searchKeyword', JSON.stringify(this.addProductForm.controls['aliases'].value));
 
       body.append('specifications_ar', JSON.stringify(this.addProductForm.controls['specification_ar'].value));
-      for (let i = 0; i < this.images.length; i++) {
+      for (let i in this.images) {
         body.append('images', this.images[i], this.images[i].name);
+console.log("images",this.images[i],'index',i);
+
       }
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
@@ -401,51 +404,75 @@ export class AddproductComponent implements OnInit {
     this.router.navigate(['/product'])
   }
 
-  readUrl(event: any) {
-    let imageOk: boolean = true
-    var img = new Image;
-    let sefl = this
-    let tempfile: any
-    if (event.target.files && event.target.files[0]) {
-      var filesAmount = event.target.files.length;
-      for (let i = 0; i < event.target.files.length; i++) {
-        let name = event.target.files[i].name;
-        tempfile = event.target.files[i]
-        var reader = new FileReader();
-        let toasterService = this.commonService
-        reader.readAsDataURL(event.target.files[i])
-        reader.onload = (event: any) => {
-          img.src = event.target.result;
-          let temp = {
-            name: name,
-            image: event.target.result
-          }
-           img.onload = () => {
-            var height = img.height;
-            var width = img.width;
-            if (height != width) {
-              toasterService.errorToast("Image should be a Square size");
-              imageOk = false
-              // this.pushImage();
-              return imageOk
-            } else {
-              toasterService.successToast("Image Size is Ok");
-              imageOk = true
-              this.urls.push(temp);
-              this.images.push(tempfile);
-              this.addProductForm.controls['image'].patchValue(this.images)
-              return imageOk
-            }
+  // readUrl(event: any) {
+  //   let imageOk: boolean = true
+  //   var img = new Image;
+  //   let sefl = this
+  //   let tempfile: any
+  //   if (event.target.files && event.target.files[0]) {
+  //     var filesAmount = event.target.files.length;
+  //     for (let i = 0; i < event.target.files.length; i++) {
+  //       let name = event.target.files[i].name;
+  //       tempfile = event.target.files[i]
+  //       var reader = new FileReader();
+  //       let toasterService = this.commonService
+  //       reader.readAsDataURL(event.target.files[i])
+  //       reader.onload = (event: any) => {
+  //         img.src = event.target.result;
+  //         let temp = {
+  //           name: name,
+  //           image: event.target.result
+  //         }
+  //          img.onload = () => {
+  //           var height = img.height;
+  //           var width = img.width;
+  //           if (height != width) {
+  //             toasterService.errorToast("Image should be a Square size");
+  //             imageOk = false
+  //             // this.pushImage();
+  //             return imageOk
+  //           } else {
+  //             toasterService.successToast("Image Size is Ok");
+  //             imageOk = true
+  //             this.urls.push(temp);
+  //             this.images.push(tempfile);
+  //             console.log('Images',this.urls,this.images,temp,tempfile);
+              
+  //             // this.addProductForm.controls['image'].patchValue(this.images)
+  //             return imageOk
+  //           }
 
-          };
-        }
-      }
-    }
-  }
+  //         };
+  //       }
+  //     }
+  //   }
+  // }
 
 
   back() {
     history.back();
   }
+  readUrl(e) {
+    let temp = []
 
+    if (e.target.files && e.target.files[0]) {
+      for (let i = 0; i < e.target.files.length; i++) {
+        var reader = new FileReader();
+        let name = e.target.files[i].name;
+        this.images.push(e.target.files[i]);
+        reader.readAsDataURL(e.target.files[i]);
+        reader.onload = (event: any) => {
+          let body = {
+            name: name,
+            image: event.target.result
+          }
+          this.urls.push(body);
+          console.log('URLs',this.urls);
+        };
+      }
+    } else {
+      this.commonService.errorToast('Only Document can be uploaded')
+    }
+
+  }
 }

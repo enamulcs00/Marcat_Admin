@@ -623,7 +623,13 @@ export class ApiService {
     );
 
   }
-
+  getApi(url) {
+    return this.http
+      .get<any>(this.BASE_URL+url, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('All Product'))
+      );
+  }
   //Categories
   getAllCategories() {
     return this.http

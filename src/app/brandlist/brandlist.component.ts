@@ -11,15 +11,16 @@ import { UrlService } from 'src/services/url.service';
   styleUrls: ['./brandlist.component.scss']
 })
 export class BrandlistComponent implements OnInit {
-
+  length = 100;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 10;
+  page: number = 1
   addBrandForm: FormGroup;
   editBrandForm: FormGroup
   submitted: boolean
   brandList = []
   result: import("sweetalert2").SweetAlertResult<unknown>;
   editableBrandId: any;
-  page: any;
-  count: any;
   imageUrl: string;
   categoryList: any;
   subcategoryList: any;
@@ -57,9 +58,10 @@ export class BrandlistComponent implements OnInit {
 
   getBrandList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
-    this.apiService.getBrandList().subscribe(res => {
+    this.apiService.getApi(`admin/getAllBrand?page=${this.page}&count=${this.pageSize}`).subscribe(res => {
       if (res.success == true) {
         this.brandList = res.data
+        this.length = res.total
       }
     })
   }
@@ -246,7 +248,21 @@ export class BrandlistComponent implements OnInit {
 
   }
 
-
+  UserListAfterPageSizeChanged(e): any {
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      this.pageSize = e.pageSize
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.pageSize = e.pageSize
+      } else {
+        this.page = e.pageIndex;
+        this.pageSize = e.pageSize
+      }
+   }
+    this.getBrandList();
+  }
 
   back() {
     window.history.back()

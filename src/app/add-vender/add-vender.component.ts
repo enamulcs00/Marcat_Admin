@@ -191,6 +191,7 @@ export class AddVenderComponent implements OnInit {
             document: event.target.result
           }
           this.urls.push(body);
+          console.log('URLs',this.urls);
           this.setUpProfile.controls['profilePhoto'].patchValue(this.imageFile);
           // need to run CD since file load runs outside of zone
           this.cd.markForCheck();
@@ -243,6 +244,8 @@ export class AddVenderComponent implements OnInit {
       if (this.document.length) {
         for (let item in this.document) {
           formData.append('documentOne', this.document[item], this.document[item].name);
+          console.log('imag',this.document[item]);
+          
         }
       }
       formData.append('firstName', this.setUpProfile.get('firstName').value);

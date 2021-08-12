@@ -100,7 +100,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login'])
   }
   goTonotification() {
-    this.router.navigate(['notification'])
+   // this.router.navigate(['notification'])
   }
   goToprofile() {
     this.router.navigate(['profile'])

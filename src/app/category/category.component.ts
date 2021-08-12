@@ -13,6 +13,10 @@ import { UrlService } from 'src/services/url.service';
 })
 export class CategoryComponent implements OnInit {
   categories: any;
+  length = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 10;
+  page: number = 1
   imageFile: any;
   addCategoryForm: FormGroup;
   editCategoryForm: FormGroup;
@@ -26,16 +30,10 @@ export class CategoryComponent implements OnInit {
   imageUrl: any
   flagImage: boolean;
   previewImage: any;
-  page: number = 1
-  count: number = 100
   subCatId: any;
   progress: boolean;
   user: any;
-
-
-
-
-  constructor(private router: Router,
+ constructor(private router: Router,
     private apiService: ApiService,
     private commonService: CommonService,
     private formBuilder: FormBuilder, private serverUrl: UrlService) {
@@ -43,8 +41,7 @@ export class CategoryComponent implements OnInit {
     this.user = JSON.parse(this.apiService.getUser())
     this.getAllCategories();
   }
-
-  ngOnInit() {
+ ngOnInit() {
     this.addCategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20),]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
@@ -69,9 +66,12 @@ export class CategoryComponent implements OnInit {
     });
   }
   getAllCategories() {
-    this.apiService.getAllCategories().subscribe(res => {
+    this.apiService.getApi(`admin/categories?page=${this.page}&count=${this.pageSize}`).subscribe(res => {
       this.categories = res.data;
       this.submitted = false;
+      this.length = res.total
+      console.log('total',res.total);
+      
     })
   }
 
@@ -137,11 +137,7 @@ export class CategoryComponent implements OnInit {
           this.submitted = false;
           this.addCategoryForm.reset();
           this.imageFile = null;
-
           this.categoryImage = null
-
-
-
         } else {
           this.progress = false
           this.commonService.errorToast(res.message)
@@ -368,10 +364,7 @@ export class CategoryComponent implements OnInit {
 
 
   updateSubcategory() {
-
-
-
-    this.submitted = true;
+ this.submitted = true;
     if (this.submitted && this.editSubcategoryForm.valid) {
       const data = new FormData();
       data.append('id', this.subCatId)
@@ -410,5 +403,25 @@ export class CategoryComponent implements OnInit {
   back() {
     window.history.back()
   }
+  UserListAfterPageSizeChanged(e): any {
+    //console.log(e);
 
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      this.pageSize = e.pageSize
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.pageSize = e.pageSize
+      } else {
+        this.page = e.pageIndex;
+        this.pageSize = e.pageSize
+      }
+
+    }
+    this.getAllCategories();
+  }
 }
