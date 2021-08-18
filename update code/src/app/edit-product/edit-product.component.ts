@@ -47,10 +47,6 @@ export class EditProductComponent implements OnInit {
   progress: boolean;
   productData: any;
   geofenceList: any;
-
-
-
-
   constructor(private router: Router, private apiService: ApiService, private route: ActivatedRoute,
     private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
 
@@ -502,6 +498,8 @@ export class EditProductComponent implements OnInit {
               this.flagImageEditted = true
               this.urls.push(temp);
               this.images.push(tempfile);
+              var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+         this.urls = uniqArray
               this.editProductForm.controls['image'].patchValue(this.images)
               return imageOk
             }

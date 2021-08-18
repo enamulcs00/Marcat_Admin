@@ -250,7 +250,7 @@
                                         accept="image/*" formControlName="bannerImage" placeholder="choosefile"
                                         class="images_uploader">
 
-                                    <span>Choose File</span>
+                                    <span *ngIf="images.length==0">Choose File</span>
                                     <div class="custom-invalid" *ngIf="submitted && images.length==0">
                                         Banner Image is <strong>required</strong>
                                     </div>

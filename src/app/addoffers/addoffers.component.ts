@@ -291,6 +291,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
           if (this.addDiscountForm.get('type').value == 'Home Banner') {
             if (width !== 1920 || height !== 1080) {
               this.commonService.errorToast("Image size should be 1920*1080");
+              console.log('Height',height, width);
               imageOk = false
               // this.pushImage();
               return imageOk
@@ -306,6 +307,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
             // width / height != 16 / 4
             if (height !== 360 || width != 1280) {
               this.commonService.errorToast("Image size should be 1280*360");
+              console.log('Height',height, width);
+              
               imageOk = false
               // this.pushImage();
               return imageOk
@@ -320,6 +323,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
           if (this.addDiscountForm.get('type').value == 'Offer' || this.addDiscountForm.get('type').value == 'Popup') {
             if (height !== 360 || width !== 360) {
               this.commonService.errorToast("Image size should be a 360*360");
+              console.log('Height',height, width);
               imageOk = false
               // this.pushImage();
               return imageOk
@@ -387,10 +391,11 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   ];
 
   getAllCategoryForAdmin() {
+    let url = `?page=1&count=700`
     let temp = []
     this.categoryList = []
 
-    this.apiService.getAllCategories().subscribe(res => {
+    this.apiService.getAllCategoriesPage(url).subscribe(res => {
 
       if (res.success) {
 
@@ -416,11 +421,11 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   getAllCategory() {
-
+let url = `?page=1&count=700`
     let temp = []
     this.categoryList = []
 
-    this.apiService.getAllCategoriesForPanel().subscribe(res => {
+    this.apiService.getAllCategoriesForPanelStatic(url).subscribe(res => {
 
       if (res.success) {
 
@@ -579,7 +584,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
     if (checkOffer == "category") {
 
-      if (this.submitted && this.addDiscountForm.valid) {
+      if (this.submitted && this.addDiscountForm.valid && this.images.length!==0) {
         if (this.selectedItem.length > 0) {
           this.typeCategory(checkOffer, this.selectedItem);
         } else {
@@ -594,6 +599,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
           }
 
         }
+      }else{
+        this.addDiscountForm.markAllAsTouched()
       }
     }
 

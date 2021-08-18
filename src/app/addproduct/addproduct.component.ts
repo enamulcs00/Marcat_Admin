@@ -466,9 +466,10 @@ console.log("images",this.images[i],'index',i);
             name: name,
             image: event.target.result
           }
-          this.urls.push(body);
-          console.log('URLs',this.urls);
-        };
+          this.urls.length<6?this.urls.push(body):(this.commonService.closeTost(),this.commonService.errorToast('Maximum 6 images can be uploaded'));
+         var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+         this.urls = uniqArray
+         };
       }
     } else {
       this.commonService.errorToast('Only Document can be uploaded')

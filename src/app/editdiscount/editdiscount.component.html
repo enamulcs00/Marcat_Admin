@@ -28,7 +28,7 @@
                                     (click)="setradio('brand')" value="brand">&nbsp;&nbsp;
                                 Product
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                    (click)="setradio('Product')" value="product">&nbsp;&nbsp;
+                                    (click)="setradio('product')" value="product">&nbsp;&nbsp;
                             </fieldset>
                             <mat-error *ngIf="submitted && editDiscountForm.controls['dicountOn'].hasError('required')">
                                 Offer type is <strong>required</strong>
@@ -270,8 +270,10 @@
                                         accept="image/*" formControlName="bannerImage" placeholder="choosefile"
                                         class="images_uploader">
 
-                                    <span>Choose File</span>
-
+                                    <span *ngIf="!previewImage">Choose File</span>
+                                    <div class="custom-invalid" *ngIf="submitted && !previewImage">
+                                        Banner Image is <strong>required</strong>
+                                    </div>
 
                                 </div>
                             </li>

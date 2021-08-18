@@ -111,6 +111,7 @@ import { AgmCoreModule } from '@agm/core';
 import { GeofenceListComponent } from './geofence/geofence-list/geofence-list.component';
 import { AddGeofenceComponent } from './geofence/add-geofence/add-geofence.component';
 import { EditGeofenceComponent } from './geofence/edit-geofence/edit-geofence.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -234,6 +235,7 @@ import { EditGeofenceComponent } from './geofence/edit-geofence/edit-geofence.co
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
     NgOtpInputModule,
+    InfiniteScrollModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBCNuSINklJM6YkiIYG9ixuWviIkJtCD5U'
     }),

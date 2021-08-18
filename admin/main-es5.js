@@ -489,7 +489,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Banner</h1>\r\n                    <div class=\"input_divs2 input_button input_button2\">\r\n                        <button class=\"btn_back\" mat-button (click)=\"goToofferdeals()\"><i class=\"fa fa-long-arrow-left\"\r\n                                aria-hidden=\"true\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <form [formGroup]=\"addDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div *ngIf=\"userDetails.roles=='admin'\">\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Brand\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('brand')\" value=\"brand\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && addDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Brand<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"singleProductSelection==false\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Select region<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select placeholder=\"Placeholder\" formControlName=\"availableLocation\" multiple>\r\n                                        <mat-option *ngFor=\"let item of geofenceList\" [value]=\"item._id\">\r\n                                            {{item.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('availableLocation').hasError('required')\">\r\n                                      Please select a region \r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Name <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"Name\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('name').hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Arbic Name </label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Arabic Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"Arabic Name\"\r\n                                        name=\"name_ar\">\r\n\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('name_ar').hasError('required')\">\r\n                                        Arabic Name is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Best suited for <span class=\"red\">*</span></mat-label>\r\n                                    <mat-select formControlName=\"gender\" multiple>\r\n\r\n                                        <mat-option value=\"M\">\r\n                                            Male\r\n                                        </mat-option>\r\n                                        <mat-option value=\"F\">\r\n                                            Female\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('gender').hasError('required')\">\r\n                                        Please Select the gender this suits for\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Discount <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Discount<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('disount').hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"addDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than 0</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"addDiscountForm.controls['disount'].hasError('max')\">\r\n                                        Discount percentage should not be <strong>More than 100</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Start Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\"\r\n                                        placeholder=\"Start Date\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('startDate').hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label>End Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>End Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"End Date\" name=\"name\">\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('endDate').hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field>\r\n                                    <mat-label>Select Type<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName=\"type\">\r\n\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option value='Home Banner'>Home Banner</mat-option>\r\n                                        <mat-option value='Home'>Banner</mat-option>\r\n                                        <mat-option value='Offer'>Offer</mat-option>\r\n                                        <mat-option *ngIf=\"!sellerId\" value='Popup'>Pop-Up</mat-option>\r\n                                        <!-- <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option> -->\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('type').hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['type'].hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </div> -->\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n                                <div class=\"product_image_upload\">\r\n                                    <ng-container\r\n                                        *ngIf=\"addDiscountForm.get('type').value=='Home Banner'; else elseTemplate\">\r\n                                        <p>Please Upload image of size 1920px*1080px</p>\r\n                                    </ng-container>\r\n                                    <ng-template #elseTemplate>\r\n                                        <ng-container\r\n                                            *ngIf=\"addDiscountForm.get('type').value=='Home'; else elseTemplate2\">\r\n                                            <p>Please Upload image of size 1280*360px </p>\r\n                                        </ng-container>\r\n                                        <ng-template #elseTemplate2>\r\n                                            <div\r\n                                                *ngIf=\"addDiscountForm.get('type').value=='Offer'||addDiscountForm.get('type').value=='Popup'\">\r\n                                                <p>Please Upload image of size 360*360</p>\r\n                                            </div>\r\n                                        </ng-template>\r\n                                    </ng-template>\r\n\r\n                                    <input type='file' [disabled]='imageNotAccepted' (change)=\"bannerImageEvent($event)\"\r\n                                        accept=\"image/*\" formControlName=\"bannerImage\" placeholder=\"choosefile\"\r\n                                        class=\"images_uploader\">\r\n\r\n                                    <span>Choose File</span>\r\n                                    <div class=\"custom-invalid\" *ngIf=\"submitted && images.length==0\">\r\n                                        Banner Image is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"user_img\">\r\n                                <figure class=\"figure2\" *ngIf=\"previewImage\">\r\n                                    <img [src]=\"previewImage\" />\r\n                                </figure>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"loader_bg\" *ngIf=\"progress\">\r\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\r\n        <span class=\"sr-only\">Loading...</span>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Banner</h1>\r\n                    <div class=\"input_divs2 input_button input_button2\">\r\n                        <button class=\"btn_back\" mat-button (click)=\"goToofferdeals()\"><i class=\"fa fa-long-arrow-left\"\r\n                                aria-hidden=\"true\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <form [formGroup]=\"addDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div *ngIf=\"userDetails.roles=='admin'\">\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Brand\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('brand')\" value=\"brand\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && addDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Brand<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"singleProductSelection==false\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Select region<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select placeholder=\"Placeholder\" formControlName=\"availableLocation\" multiple>\r\n                                        <mat-option *ngFor=\"let item of geofenceList\" [value]=\"item._id\">\r\n                                            {{item.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('availableLocation').hasError('required')\">\r\n                                      Please select a region \r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Name <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"Name\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('name').hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Arbic Name </label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Arabic Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"Arabic Name\"\r\n                                        name=\"name_ar\">\r\n\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('name_ar').hasError('required')\">\r\n                                        Arabic Name is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Best suited for <span class=\"red\">*</span></mat-label>\r\n                                    <mat-select formControlName=\"gender\" multiple>\r\n\r\n                                        <mat-option value=\"M\">\r\n                                            Male\r\n                                        </mat-option>\r\n                                        <mat-option value=\"F\">\r\n                                            Female\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('gender').hasError('required')\">\r\n                                        Please Select the gender this suits for\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Discount <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Discount<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('disount').hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"addDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than 0</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"addDiscountForm.controls['disount'].hasError('max')\">\r\n                                        Discount percentage should not be <strong>More than 100</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Start Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\"\r\n                                        placeholder=\"Start Date\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('startDate').hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label>End Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>End Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"End Date\" name=\"name\">\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('endDate').hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field>\r\n                                    <mat-label>Select Type<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName=\"type\">\r\n\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option value='Home Banner'>Home Banner</mat-option>\r\n                                        <mat-option value='Home'>Banner</mat-option>\r\n                                        <mat-option value='Offer'>Offer</mat-option>\r\n                                        <mat-option *ngIf=\"!sellerId\" value='Popup'>Pop-Up</mat-option>\r\n                                        <!-- <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option> -->\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"addDiscountForm.get('type').hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['type'].hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </div> -->\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n                                <div class=\"product_image_upload\">\r\n                                    <ng-container\r\n                                        *ngIf=\"addDiscountForm.get('type').value=='Home Banner'; else elseTemplate\">\r\n                                        <p>Please Upload image of size 1920px*1080px</p>\r\n                                    </ng-container>\r\n                                    <ng-template #elseTemplate>\r\n                                        <ng-container\r\n                                            *ngIf=\"addDiscountForm.get('type').value=='Home'; else elseTemplate2\">\r\n                                            <p>Please Upload image of size 1280*360px </p>\r\n                                        </ng-container>\r\n                                        <ng-template #elseTemplate2>\r\n                                            <div\r\n                                                *ngIf=\"addDiscountForm.get('type').value=='Offer'||addDiscountForm.get('type').value=='Popup'\">\r\n                                                <p>Please Upload image of size 360*360</p>\r\n                                            </div>\r\n                                        </ng-template>\r\n                                    </ng-template>\r\n\r\n                                    <input type='file' [disabled]='imageNotAccepted' (change)=\"bannerImageEvent($event)\"\r\n                                        accept=\"image/*\" formControlName=\"bannerImage\" placeholder=\"choosefile\"\r\n                                        class=\"images_uploader\">\r\n\r\n                                    <span *ngIf=\"images.length==0\">Choose File</span>\r\n                                    <div class=\"custom-invalid\" *ngIf=\"submitted && images.length==0\">\r\n                                        Banner Image is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"user_img\">\r\n                                <figure class=\"figure2\" *ngIf=\"previewImage\">\r\n                                    <img [src]=\"previewImage\" />\r\n                                </figure>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"loader_bg\" *ngIf=\"progress\">\r\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\r\n        <span class=\"sr-only\">Loading...</span>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1029,7 +1029,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Banner</h1>\r\n                    <div class=\"input_divs2 input_button input_button2\">\r\n                        <button class=\"btn_back\" mat-button (click)=\"goToofferdeals()\"><i class=\"fa fa-long-arrow-left\"\r\n                                aria-hidden=\"true\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <form [formGroup]=\"editDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div *ngIf=\"userDetails.roles=='admin'\">\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Brand\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('brand')\" value=\"brand\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('Product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && editDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedCategory\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedSubCategory\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Brand<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedBrand\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"singleProductSelection==false\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n\r\n\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Select region<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select placeholder=\"Placeholder\" formControlName=\"availableLocation\" multiple>\r\n                                        <mat-option *ngFor=\"let item of geofenceList\" [value]=\"item._id\">\r\n                                            {{item.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('availableLocation').hasError('required')\">\r\n                                      Please select a region \r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Name <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"Name\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['name'].hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </div>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('name').hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Arbic Name </label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Arbic Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"Arbic Name\"\r\n                                        name=\"name_ar\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['name_ar'].hasError('required')\">\r\n                                        Arbic Name is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('name_ar').hasError('required')\">\r\n                                        Arabic Name is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Best suited for <span class=\"red\">*</span></mat-label>\r\n                                    <mat-select formControlName=\"gender\" multiple>\r\n\r\n                                        <mat-option value=\"M\">\r\n                                            Male\r\n                                        </mat-option>\r\n                                        <mat-option value=\"F\">\r\n                                            Female\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('gender').hasError('required')\">\r\n                                        Please Select the gender this suits for\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Discount <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Discount<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('disount').hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"editDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than zero</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Start Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\"\r\n                                        placeholder=\"Start Date\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('startDate').hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label>End Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>End Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"End Date\" name=\"name\">\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('endDate').hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field>\r\n                                    <mat-label>Select Type<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName=\"type\">\r\n\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('type').hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['type'].hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </div> -->\r\n\r\n                                </mat-form-field>\r\n                                <ng-container\r\n                                    *ngIf=\"editDiscountForm.get('type').value=='Home Banner' && !previewImage; else elseTemplate\">\r\n                                    <p>Please Upload image of size 1920px*1080px or 1280px*720px </p>\r\n                                </ng-container>\r\n                                <ng-template #elseTemplate>\r\n                                    <div *ngIf=\"(editDiscountForm.get('type').value=='Home' ||\r\n                                        editDiscountForm.get('type').value=='Offer')&& !previewImage\">\r\n                                        <p>Please Upload image which have equal height and width</p>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n\r\n                                <div class=\"product_image_upload\">\r\n                                    <ng-container\r\n                                        *ngIf=\"editDiscountForm.get('type').value=='Home Banner'; else elseTemplate\">\r\n                                        <p>Please Upload image of size 1920px*1080px </p>\r\n                                    </ng-container>\r\n                                    <ng-template #elseTemplate>\r\n                                        <ng-container\r\n                                            *ngIf=\"editDiscountForm.get('type').value=='Home'; else elseTemplate2\">\r\n                                            <p>Please Upload image of size 1280*360px </p>\r\n                                        </ng-container>\r\n                                        <ng-template #elseTemplate2>\r\n                                            <div\r\n                                                *ngIf=\"editDiscountForm.get('type').value=='Offer'||editDiscountForm.get('type').value=='Popup'\">\r\n                                                <p>Please Upload image of size 360*360</p>\r\n                                            </div>\r\n                                        </ng-template>\r\n                                    </ng-template>\r\n\r\n                                    <input type='file' [disabled]='imageNotAccepted' (change)=\"bannerImageEvent($event)\"\r\n                                        accept=\"image/*\" formControlName=\"bannerImage\" placeholder=\"choosefile\"\r\n                                        class=\"images_uploader\">\r\n\r\n                                    <span>Choose File</span>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"user_img\">\r\n                                <ng-container *ngIf=\"urlImage==true; else elseTemplate1\">\r\n                                    <figure class=\"figure\">\r\n                                        <img style=\"max-width: 200px; max-height: 200px;\"\r\n                                            [src]=\"imageUrl+previewImage\" />\r\n                                    </figure>\r\n                                </ng-container>\r\n                                <ng-template #elseTemplate1>\r\n                                    <figure class=\"figure\">\r\n                                        <img style=\"max-width: 150px;\" [src]=\"previewImage\" />\r\n                                    </figure>\r\n                                </ng-template>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Update\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"loader_bg\" *ngIf=\"progress\">\r\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\r\n        <span class=\"sr-only\">Loading...</span>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Banner</h1>\r\n                    <div class=\"input_divs2 input_button input_button2\">\r\n                        <button class=\"btn_back\" mat-button (click)=\"goToofferdeals()\"><i class=\"fa fa-long-arrow-left\"\r\n                                aria-hidden=\"true\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <form [formGroup]=\"editDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div *ngIf=\"userDetails.roles=='admin'\">\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Brand\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('brand')\" value=\"brand\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && editDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedCategory\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedSubCategory\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Brand<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select [(ngModel)]=\"selectedBrand\" [ngModelOptions]=\"{standalone: true}\"\r\n                                        (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"singleProductSelection==false\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n\r\n\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Select region<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select placeholder=\"Placeholder\" formControlName=\"availableLocation\" multiple>\r\n                                        <mat-option *ngFor=\"let item of geofenceList\" [value]=\"item._id\">\r\n                                            {{item.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('availableLocation').hasError('required')\">\r\n                                      Please select a region \r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Name <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"Name\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['name'].hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </div>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('name').hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Arbic Name </label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Arbic Name<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"Arbic Name\"\r\n                                        name=\"name_ar\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['name_ar'].hasError('required')\">\r\n                                        Arbic Name is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('name_ar').hasError('required')\">\r\n                                        Arabic Name is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field class=\"example-full-width\">\r\n                                    <mat-label>Best suited for <span class=\"red\">*</span></mat-label>\r\n                                    <mat-select formControlName=\"gender\" multiple>\r\n\r\n                                        <mat-option value=\"M\">\r\n                                            Male\r\n                                        </mat-option>\r\n                                        <mat-option value=\"F\">\r\n                                            Female\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('gender').hasError('required')\">\r\n                                        Please Select the gender this suits for\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label> Discount <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Discount<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('disount').hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <mat-error *ngIf=\"editDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than zero</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>Start Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\"\r\n                                        placeholder=\"Start Date\" name=\"name\">\r\n\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('startDate').hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </mat-error>\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <!-- <label>End Date <span class=\"red\">*</span></label> -->\r\n                                <mat-form-field>\r\n                                    <mat-label>End Date<span class=\"red\">*</span></mat-label>\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"End Date\" name=\"name\">\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('endDate').hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </mat-error>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <mat-form-field>\r\n                                    <mat-label>Select Type<span class=\"red\">*</span></mat-label>\r\n                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName=\"type\">\r\n\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <mat-error *ngIf=\"editDiscountForm.get('type').hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </mat-error>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && editDiscountForm.controls['type'].hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </div> -->\r\n\r\n                                </mat-form-field>\r\n                                <ng-container\r\n                                    *ngIf=\"editDiscountForm.get('type').value=='Home Banner' && !previewImage; else elseTemplate\">\r\n                                    <p>Please Upload image of size 1920px*1080px or 1280px*720px </p>\r\n                                </ng-container>\r\n                                <ng-template #elseTemplate>\r\n                                    <div *ngIf=\"(editDiscountForm.get('type').value=='Home' ||\r\n                                        editDiscountForm.get('type').value=='Offer')&& !previewImage\">\r\n                                        <p>Please Upload image which have equal height and width</p>\r\n                                    </div>\r\n                                </ng-template>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n\r\n                                <div class=\"product_image_upload\">\r\n                                    <ng-container\r\n                                        *ngIf=\"editDiscountForm.get('type').value=='Home Banner'; else elseTemplate\">\r\n                                        <p>Please Upload image of size 1920px*1080px </p>\r\n                                    </ng-container>\r\n                                    <ng-template #elseTemplate>\r\n                                        <ng-container\r\n                                            *ngIf=\"editDiscountForm.get('type').value=='Home'; else elseTemplate2\">\r\n                                            <p>Please Upload image of size 1280*360px </p>\r\n                                        </ng-container>\r\n                                        <ng-template #elseTemplate2>\r\n                                            <div\r\n                                                *ngIf=\"editDiscountForm.get('type').value=='Offer'||editDiscountForm.get('type').value=='Popup'\">\r\n                                                <p>Please Upload image of size 360*360</p>\r\n                                            </div>\r\n                                        </ng-template>\r\n                                    </ng-template>\r\n\r\n                                    <input type='file' [disabled]='imageNotAccepted' (change)=\"bannerImageEvent($event)\"\r\n                                        accept=\"image/*\" formControlName=\"bannerImage\" placeholder=\"choosefile\"\r\n                                        class=\"images_uploader\">\r\n\r\n                                    <span *ngIf=\"!previewImage\">Choose File</span>\r\n                                    <div class=\"custom-invalid\" *ngIf=\"submitted && !previewImage\">\r\n                                        Banner Image is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"user_img\">\r\n                                <ng-container *ngIf=\"urlImage==true; else elseTemplate1\">\r\n                                    <figure class=\"figure\">\r\n                                        <img style=\"max-width: 200px; max-height: 200px;\"\r\n                                            [src]=\"imageUrl+previewImage\" />\r\n                                    </figure>\r\n                                </ng-container>\r\n                                <ng-template #elseTemplate1>\r\n                                    <figure class=\"figure\">\r\n                                        <img style=\"max-width: 150px;\" [src]=\"previewImage\" />\r\n                                    </figure>\r\n                                </ng-template>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Update\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"loader_bg\" *ngIf=\"progress\">\r\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\r\n        <span class=\"sr-only\">Loading...</span>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -3990,7 +3990,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".inspection_popup ul li {\n  margin-bottom: 12px;\n}\n\nli.product_specification textarea {\n  height: 168px;\n}\n\n.show_product_imges {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n          align-items: center;\n  margin-top: 12px;\n}\n\n.show_product_imges span {\n  margin-left: 10px;\n  width: 100px;\n  height: 100px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.product_image_upload {\n  position: relative;\n  top: 10px;\n}\n\n.banner_image label {\n  margin: 0;\n  position: relative;\n  top: 4px;\n}\n\n.show_product_imges span img {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n\n.product_data {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n          align-items: flex-start;\n  padding: 4rem 0;\n}\n\n.product_data_title ul {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  border: 1px solid #000;\n}\n\n.product_data_title ul li {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n          align-items: center;\n  border-bottom: 1px solid #000;\n  padding: 9px;\n}\n\n.product_data_title {\n  width: 11%;\n}\n\n.product_data_input {\n  width: 86%;\n  border: 1px solid #ffcb04;\n  padding: 2rem;\n}\n\n.product_data_title ul li:last-child {\n  border-bottom: none;\n}\n\n.genral_product textarea {\n  height: 228px;\n  width: 100%;\n}\n\n.add_product_highloghts ul {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n          align-items: center;\n  position: relative;\n  margin-top: 5rem;\n}\n\n.add_product_highloghts ul li {\n  width: 49%;\n}\n\n.add_product_highloghts ul li mat-form-field {\n  width: 100%;\n}\n\n.product_hight_addbtn {\n  position: absolute;\n  top: -50px;\n  right: 0;\n  padding: 8px 22px;\n  background: #3866df;\n  color: #fff;\n}\n\n.product_image_upload {\n  border: solid 1px #b3b3b3;\n  padding: 12px 20px;\n}\n\n.product_image_upload span {\n  color: #afafaf;\n}\n\n.user_img figure {\n  width: 150px;\n  margin: 4rem 0 0 0 !important;\n}\n\n.user_img figure img {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FwcHR1bml4L0Rlc2t0b3AvRW5hbXVsL01hcmthdF9BZG1pbi9tYXJrYXRfYWRtaW5fYW5ndWxhci9zcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxtQkFBQTtBQ0NKOztBREVBO0VBQ0ksYUFBQTtBQ0NKOztBREVBO0VBQ0ksb0JBQUE7RUFBQSxhQUFBO0VBQ0EsdUJBQUE7VUFBQSwyQkFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxnQkFBQTtBQ0NKOztBREVBO0VBQ0ksaUJBQUE7RUFDQSxZQUFBO0VBQ0EsYUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0VBQ0EsU0FBQTtBQ0NKOztBREVBO0VBQ0ksU0FBQTtFQUNBLGtCQUFBO0VBQ0EsUUFBQTtBQ0NKOztBREVBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSxzQkFBQTtLQUFBLG1CQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx5QkFBQTtVQUFBLDhCQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLGVBQUE7QUNDSjs7QURFQTtFQUNJLG9CQUFBO0VBQUEsYUFBQTtFQUNBLDRCQUFBO0VBQUEsNkJBQUE7VUFBQSxzQkFBQTtFQUNBLHNCQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx1QkFBQTtVQUFBLDJCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLDZCQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtFQUNBLHlCQUFBO0VBQ0EsYUFBQTtBQ0NKOztBREVBO0VBQ0ksbUJBQUE7QUNDSjs7QURFQTtFQUNJLGFBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx5QkFBQTtVQUFBLDhCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURFQTtFQUNJLFVBQUE7QUNDSjs7QURFQTtFQUNJLFdBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0VBQ0EsVUFBQTtFQUNBLFFBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsV0FBQTtBQ0NKOztBREVBO0VBQ0kseUJBQUE7RUFDQSxrQkFBQTtBQ0NKOztBREVBO0VBQ0ksY0FBQTtBQ0NKOztBRFFBO0VBQ0ksWUFBQTtFQUNBLDZCQUFBO0FDTEo7O0FEUUE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtFQUNBLHNCQUFBO0tBQUEsbUJBQUE7QUNMSiIsImZpbGUiOiJzcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaW5zcGVjdGlvbl9wb3B1cCB1bCBsaSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMnB4O1xyXG59XHJcblxyXG5saS5wcm9kdWN0X3NwZWNpZmljYXRpb24gdGV4dGFyZWEge1xyXG4gICAgaGVpZ2h0OiAxNjhweDtcclxufVxyXG5cclxuLnNob3dfcHJvZHVjdF9pbWdlcyB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIG1hcmdpbi10b3A6IDEycHg7XHJcbn1cclxuXHJcbi5zaG93X3Byb2R1Y3RfaW1nZXMgc3BhbiB7XHJcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuLnByb2R1Y3RfaW1hZ2VfdXBsb2FkIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIHRvcDogMTBweDtcclxufVxyXG5cclxuLmJhbm5lcl9pbWFnZSBsYWJlbCB7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICB0b3A6IDRweDtcclxufVxyXG5cclxuLnNob3dfcHJvZHVjdF9pbWdlcyBzcGFuIGltZyB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIG9iamVjdC1maXQ6IGNvbnRhaW47XHJcbn1cclxuXHJcbi5wcm9kdWN0X2RhdGEge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBmbGV4LXN0YXJ0O1xyXG4gICAgcGFkZGluZzogNHJlbSAwO1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHVsIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgIzAwMDtcclxufVxyXG5cclxuLnByb2R1Y3RfZGF0YV90aXRsZSB1bCBsaSB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMDAwO1xyXG4gICAgcGFkZGluZzogOXB4O1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHtcclxuICAgIHdpZHRoOiAxMSU7XHJcbn1cclxuXHJcbi5wcm9kdWN0X2RhdGFfaW5wdXQge1xyXG4gICAgd2lkdGg6IDg2JTtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNmZmNiMDQ7XHJcbiAgICBwYWRkaW5nOiAycmVtO1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHVsIGxpOmxhc3QtY2hpbGQge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogbm9uZTtcclxufVxyXG5cclxuLmdlbnJhbF9wcm9kdWN0IHRleHRhcmVhIHtcclxuICAgIGhlaWdodDogMjI4cHg7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLmFkZF9wcm9kdWN0X2hpZ2hsb2dodHMgdWwge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICBtYXJnaW4tdG9wOiA1cmVtO1xyXG59XHJcblxyXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCBsaSB7XHJcbiAgICB3aWR0aDogNDklO1xyXG59XHJcblxyXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCBsaSBtYXQtZm9ybS1maWVsZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLnByb2R1Y3RfaGlnaHRfYWRkYnRuIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogLTUwcHg7XHJcbiAgICByaWdodDogMDtcclxuICAgIHBhZGRpbmc6IDhweCAyMnB4O1xyXG4gICAgYmFja2dyb3VuZDogIzM4NjZkZjtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG59XHJcblxyXG4ucHJvZHVjdF9pbWFnZV91cGxvYWQge1xyXG4gICAgYm9yZGVyOiBzb2xpZCAxcHggI2IzYjNiMztcclxuICAgIHBhZGRpbmc6IDEycHggMjBweDtcclxufVxyXG5cclxuLnByb2R1Y3RfaW1hZ2VfdXBsb2FkIHNwYW4ge1xyXG4gICAgY29sb3I6ICNhZmFmYWY7XHJcbn1cclxuXHJcbi8vIC5maWd1cmUgXHJcbi8vIHtcclxuLy8gICAgICAgICBtYXJnaW46IDNyZW0haW1wb3J0YW50O1xyXG5cclxuLy8gICAgIH1cclxuXHJcbi51c2VyX2ltZyBmaWd1cmUge1xyXG4gICAgd2lkdGg6IDE1MHB4O1xyXG4gICAgbWFyZ2luOiA0cmVtIDAgMCAwICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi51c2VyX2ltZyBmaWd1cmUgaW1nIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb2JqZWN0LWZpdDogY29udGFpbjtcclxufSIsIi5pbnNwZWN0aW9uX3BvcHVwIHVsIGxpIHtcbiAgbWFyZ2luLWJvdHRvbTogMTJweDtcbn1cblxubGkucHJvZHVjdF9zcGVjaWZpY2F0aW9uIHRleHRhcmVhIHtcbiAgaGVpZ2h0OiAxNjhweDtcbn1cblxuLnNob3dfcHJvZHVjdF9pbWdlcyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgbWFyZ2luLXRvcDogMTJweDtcbn1cblxuLnNob3dfcHJvZHVjdF9pbWdlcyBzcGFuIHtcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gIHdpZHRoOiAxMDBweDtcbiAgaGVpZ2h0OiAxMDBweDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5wcm9kdWN0X2ltYWdlX3VwbG9hZCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgdG9wOiAxMHB4O1xufVxuXG4uYmFubmVyX2ltYWdlIGxhYmVsIHtcbiAgbWFyZ2luOiAwO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRvcDogNHB4O1xufVxuXG4uc2hvd19wcm9kdWN0X2ltZ2VzIHNwYW4gaW1nIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgb2JqZWN0LWZpdDogY29udGFpbjtcbn1cblxuLnByb2R1Y3RfZGF0YSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIHBhZGRpbmc6IDRyZW0gMDtcbn1cblxuLnByb2R1Y3RfZGF0YV90aXRsZSB1bCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJvcmRlcjogMXB4IHNvbGlkICMwMDA7XG59XG5cbi5wcm9kdWN0X2RhdGFfdGl0bGUgdWwgbGkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMDAwO1xuICBwYWRkaW5nOiA5cHg7XG59XG5cbi5wcm9kdWN0X2RhdGFfdGl0bGUge1xuICB3aWR0aDogMTElO1xufVxuXG4ucHJvZHVjdF9kYXRhX2lucHV0IHtcbiAgd2lkdGg6IDg2JTtcbiAgYm9yZGVyOiAxcHggc29saWQgI2ZmY2IwNDtcbiAgcGFkZGluZzogMnJlbTtcbn1cblxuLnByb2R1Y3RfZGF0YV90aXRsZSB1bCBsaTpsYXN0LWNoaWxkIHtcbiAgYm9yZGVyLWJvdHRvbTogbm9uZTtcbn1cblxuLmdlbnJhbF9wcm9kdWN0IHRleHRhcmVhIHtcbiAgaGVpZ2h0OiAyMjhweDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5hZGRfcHJvZHVjdF9oaWdobG9naHRzIHVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG1hcmdpbi10b3A6IDVyZW07XG59XG5cbi5hZGRfcHJvZHVjdF9oaWdobG9naHRzIHVsIGxpIHtcbiAgd2lkdGg6IDQ5JTtcbn1cblxuLmFkZF9wcm9kdWN0X2hpZ2hsb2dodHMgdWwgbGkgbWF0LWZvcm0tZmllbGQge1xuICB3aWR0aDogMTAwJTtcbn1cblxuLnByb2R1Y3RfaGlnaHRfYWRkYnRuIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IC01MHB4O1xuICByaWdodDogMDtcbiAgcGFkZGluZzogOHB4IDIycHg7XG4gIGJhY2tncm91bmQ6ICMzODY2ZGY7XG4gIGNvbG9yOiAjZmZmO1xufVxuXG4ucHJvZHVjdF9pbWFnZV91cGxvYWQge1xuICBib3JkZXI6IHNvbGlkIDFweCAjYjNiM2IzO1xuICBwYWRkaW5nOiAxMnB4IDIwcHg7XG59XG5cbi5wcm9kdWN0X2ltYWdlX3VwbG9hZCBzcGFuIHtcbiAgY29sb3I6ICNhZmFmYWY7XG59XG5cbi51c2VyX2ltZyBmaWd1cmUge1xuICB3aWR0aDogMTUwcHg7XG4gIG1hcmdpbjogNHJlbSAwIDAgMCAhaW1wb3J0YW50O1xufVxuXG4udXNlcl9pbWcgZmlndXJlIGltZyB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG9iamVjdC1maXQ6IGNvbnRhaW47XG59Il19 */";
+    __webpack_exports__["default"] = ".inspection_popup ul li {\n  margin-bottom: 12px;\n}\n\nli.product_specification textarea {\n  height: 168px;\n}\n\n.show_product_imges {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n          align-items: center;\n  margin-top: 12px;\n}\n\n.show_product_imges span {\n  margin-left: 10px;\n  width: 100px;\n  height: 100px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.product_image_upload {\n  position: relative;\n  top: 10px;\n}\n\n.banner_image label {\n  margin: 0;\n  position: relative;\n  top: 4px;\n}\n\n.show_product_imges span img {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n\n.product_data {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n          align-items: flex-start;\n  padding: 4rem 0;\n}\n\n.product_data_title ul {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  border: 1px solid #000;\n}\n\n.product_data_title ul li {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n          align-items: center;\n  border-bottom: 1px solid #000;\n  padding: 9px;\n}\n\n.product_data_title {\n  width: 11%;\n}\n\n.product_data_input {\n  width: 86%;\n  border: 1px solid #ffcb04;\n  padding: 2rem;\n}\n\n.product_data_title ul li:last-child {\n  border-bottom: none;\n}\n\n.genral_product textarea {\n  height: 228px;\n  width: 100%;\n}\n\n.add_product_highloghts ul {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n          align-items: center;\n  position: relative;\n  margin-top: 5rem;\n}\n\n.add_product_highloghts ul li {\n  width: 49%;\n}\n\n.add_product_highloghts ul li mat-form-field {\n  width: 100%;\n}\n\n.product_hight_addbtn {\n  position: absolute;\n  top: -50px;\n  right: 0;\n  padding: 8px 22px;\n  background: #3866df;\n  color: #fff;\n}\n\n.product_image_upload {\n  border: solid 1px #b3b3b3;\n  padding: 12px 20px;\n}\n\n.product_image_upload span {\n  color: #afafaf;\n}\n\n.user_img figure {\n  width: 150px;\n  margin: 4rem 0 0 0 !important;\n}\n\n.user_img figure img {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FwcHR1bml4L0Rlc2t0b3AvRW5hbXVsL01hcmthdF9BZG1pbi9tYXJrYXRfYWRtaW5fYW5ndWxhci9zcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxtQkFBQTtBQ0NKOztBREVBO0VBQ0ksYUFBQTtBQ0NKOztBREVBO0VBQ0ksb0JBQUE7RUFBQSxhQUFBO0VBQ0EsdUJBQUE7VUFBQSwyQkFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSxnQkFBQTtBQ0NKOztBREVBO0VBQ0ksaUJBQUE7RUFDQSxZQUFBO0VBQ0EsYUFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0VBQ0EsU0FBQTtBQ0NKOztBREVBO0VBQ0ksU0FBQTtFQUNBLGtCQUFBO0VBQ0EsUUFBQTtBQ0NKOztBREVBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSxzQkFBQTtLQUFBLG1CQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx5QkFBQTtVQUFBLDhCQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLGVBQUE7QUNDSjs7QURFQTtFQUNJLG9CQUFBO0VBQUEsYUFBQTtFQUNBLDRCQUFBO0VBQUEsNkJBQUE7VUFBQSxzQkFBQTtFQUNBLHNCQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx1QkFBQTtVQUFBLDJCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLDZCQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtFQUNBLHlCQUFBO0VBQ0EsYUFBQTtBQ0NKOztBREVBO0VBQ0ksbUJBQUE7QUNDSjs7QURFQTtFQUNJLGFBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx5QkFBQTtVQUFBLDhCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURFQTtFQUNJLFVBQUE7QUNDSjs7QURFQTtFQUNJLFdBQUE7QUNDSjs7QURFQTtFQUNJLGtCQUFBO0VBQ0EsVUFBQTtFQUNBLFFBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsV0FBQTtBQ0NKOztBREVBO0VBQ0kseUJBQUE7RUFDQSxrQkFBQTtBQ0NKOztBREVBO0VBQ0ksY0FBQTtBQ0NKOztBRFFBO0VBQ0ksWUFBQTtFQUNBLDZCQUFBO0FDTEo7O0FEUUE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtFQUNBLHNCQUFBO0tBQUEsbUJBQUE7QUNMSiIsImZpbGUiOiJzcmMvYXBwL2FkZG9mZmVycy9hZGRvZmZlcnMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaW5zcGVjdGlvbl9wb3B1cCB1bCBsaSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMnB4O1xyXG59XHJcblxyXG5saS5wcm9kdWN0X3NwZWNpZmljYXRpb24gdGV4dGFyZWEge1xyXG4gICAgaGVpZ2h0OiAxNjhweDtcclxufVxyXG5cclxuLnNob3dfcHJvZHVjdF9pbWdlcyB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIG1hcmdpbi10b3A6IDEycHg7XHJcbn1cclxuXHJcbi5zaG93X3Byb2R1Y3RfaW1nZXMgc3BhbiB7XHJcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxufVxyXG5cclxuLnByb2R1Y3RfaW1hZ2VfdXBsb2FkIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIHRvcDogMTBweDtcclxufVxyXG5cclxuLmJhbm5lcl9pbWFnZSBsYWJlbCB7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICB0b3A6IDRweDtcclxufVxyXG5cclxuLnNob3dfcHJvZHVjdF9pbWdlcyBzcGFuIGltZyB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIG9iamVjdC1maXQ6IGNvbnRhaW47XHJcbn1cclxuXHJcbi5wcm9kdWN0X2RhdGEge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBmbGV4LXN0YXJ0O1xyXG4gICAgcGFkZGluZzogNHJlbSAwO1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHVsIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgIzAwMDtcclxufVxyXG5cclxuLnByb2R1Y3RfZGF0YV90aXRsZSB1bCBsaSB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMDAwO1xyXG4gICAgcGFkZGluZzogOXB4O1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHtcclxuICAgIHdpZHRoOiAxMSU7XHJcbn1cclxuXHJcbi5wcm9kdWN0X2RhdGFfaW5wdXQge1xyXG4gICAgd2lkdGg6IDg2JTtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNmZmNiMDQ7XHJcbiAgICBwYWRkaW5nOiAycmVtO1xyXG59XHJcblxyXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHVsIGxpOmxhc3QtY2hpbGQge1xyXG4gICAgYm9yZGVyLWJvdHRvbTogbm9uZTtcclxufVxyXG5cclxuLmdlbnJhbF9wcm9kdWN0IHRleHRhcmVhIHtcclxuICAgIGhlaWdodDogMjI4cHg7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLmFkZF9wcm9kdWN0X2hpZ2hsb2dodHMgdWwge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICBtYXJnaW4tdG9wOiA1cmVtO1xyXG59XHJcblxyXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCBsaSB7XHJcbiAgICB3aWR0aDogNDklO1xyXG59XHJcblxyXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCBsaSBtYXQtZm9ybS1maWVsZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLnByb2R1Y3RfaGlnaHRfYWRkYnRuIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogLTUwcHg7XHJcbiAgICByaWdodDogMDtcclxuICAgIHBhZGRpbmc6IDhweCAyMnB4O1xyXG4gICAgYmFja2dyb3VuZDogIzM4NjZkZjtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG59XHJcblxyXG4ucHJvZHVjdF9pbWFnZV91cGxvYWQge1xyXG4gICAgYm9yZGVyOiBzb2xpZCAxcHggI2IzYjNiMztcclxuICAgIHBhZGRpbmc6IDEycHggMjBweDtcclxufVxyXG5cclxuLnByb2R1Y3RfaW1hZ2VfdXBsb2FkIHNwYW4ge1xyXG4gICAgY29sb3I6ICNhZmFmYWY7XHJcbn1cclxuXHJcbi8vIC5maWd1cmUgXHJcbi8vIHtcclxuLy8gICAgICAgICBtYXJnaW46IDNyZW0haW1wb3J0YW50O1xyXG5cclxuLy8gICAgIH1cclxuXHJcbi51c2VyX2ltZyBmaWd1cmUge1xyXG4gICAgd2lkdGg6IDE1MHB4O1xyXG4gICAgbWFyZ2luOiA0cmVtIDAgMCAwICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi51c2VyX2ltZyBmaWd1cmUgaW1nIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb2JqZWN0LWZpdDogY29udGFpbjtcclxufVxyXG4iLCIuaW5zcGVjdGlvbl9wb3B1cCB1bCBsaSB7XG4gIG1hcmdpbi1ib3R0b206IDEycHg7XG59XG5cbmxpLnByb2R1Y3Rfc3BlY2lmaWNhdGlvbiB0ZXh0YXJlYSB7XG4gIGhlaWdodDogMTY4cHg7XG59XG5cbi5zaG93X3Byb2R1Y3RfaW1nZXMge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIG1hcmdpbi10b3A6IDEycHg7XG59XG5cbi5zaG93X3Byb2R1Y3RfaW1nZXMgc3BhbiB7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xuICB3aWR0aDogMTAwcHg7XG4gIGhlaWdodDogMTAwcHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4ucHJvZHVjdF9pbWFnZV91cGxvYWQge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHRvcDogMTBweDtcbn1cblxuLmJhbm5lcl9pbWFnZSBsYWJlbCB7XG4gIG1hcmdpbjogMDtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB0b3A6IDRweDtcbn1cblxuLnNob3dfcHJvZHVjdF9pbWdlcyBzcGFuIGltZyB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG9iamVjdC1maXQ6IGNvbnRhaW47XG59XG5cbi5wcm9kdWN0X2RhdGEge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIGFsaWduLWl0ZW1zOiBmbGV4LXN0YXJ0O1xuICBwYWRkaW5nOiA0cmVtIDA7XG59XG5cbi5wcm9kdWN0X2RhdGFfdGl0bGUgdWwge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBib3JkZXI6IDFweCBzb2xpZCAjMDAwO1xufVxuXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHVsIGxpIHtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzAwMDtcbiAgcGFkZGluZzogOXB4O1xufVxuXG4ucHJvZHVjdF9kYXRhX3RpdGxlIHtcbiAgd2lkdGg6IDExJTtcbn1cblxuLnByb2R1Y3RfZGF0YV9pbnB1dCB7XG4gIHdpZHRoOiA4NiU7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNmZmNiMDQ7XG4gIHBhZGRpbmc6IDJyZW07XG59XG5cbi5wcm9kdWN0X2RhdGFfdGl0bGUgdWwgbGk6bGFzdC1jaGlsZCB7XG4gIGJvcmRlci1ib3R0b206IG5vbmU7XG59XG5cbi5nZW5yYWxfcHJvZHVjdCB0ZXh0YXJlYSB7XG4gIGhlaWdodDogMjI4cHg7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBtYXJnaW4tdG9wOiA1cmVtO1xufVxuXG4uYWRkX3Byb2R1Y3RfaGlnaGxvZ2h0cyB1bCBsaSB7XG4gIHdpZHRoOiA0OSU7XG59XG5cbi5hZGRfcHJvZHVjdF9oaWdobG9naHRzIHVsIGxpIG1hdC1mb3JtLWZpZWxkIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5wcm9kdWN0X2hpZ2h0X2FkZGJ0biB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAtNTBweDtcbiAgcmlnaHQ6IDA7XG4gIHBhZGRpbmc6IDhweCAyMnB4O1xuICBiYWNrZ3JvdW5kOiAjMzg2NmRmO1xuICBjb2xvcjogI2ZmZjtcbn1cblxuLnByb2R1Y3RfaW1hZ2VfdXBsb2FkIHtcbiAgYm9yZGVyOiBzb2xpZCAxcHggI2IzYjNiMztcbiAgcGFkZGluZzogMTJweCAyMHB4O1xufVxuXG4ucHJvZHVjdF9pbWFnZV91cGxvYWQgc3BhbiB7XG4gIGNvbG9yOiAjYWZhZmFmO1xufVxuXG4udXNlcl9pbWcgZmlndXJlIHtcbiAgd2lkdGg6IDE1MHB4O1xuICBtYXJnaW46IDRyZW0gMCAwIDAgIWltcG9ydGFudDtcbn1cblxuLnVzZXJfaW1nIGZpZ3VyZSBpbWcge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBvYmplY3QtZml0OiBjb250YWluO1xufSJdfQ== */";
     /***/
   },
 
@@ -4320,6 +4320,7 @@
                       if (this.addDiscountForm.get('type').value == 'Home Banner') {
                         if (width !== 1920 || height !== 1080) {
                           this.commonService.errorToast("Image size should be 1920*1080");
+                          console.log('Height', height, width);
                           imageOk = false; // this.pushImage();
 
                           return imageOk;
@@ -4336,6 +4337,7 @@
                         // width / height != 16 / 4
                         if (height !== 360 || width != 1280) {
                           this.commonService.errorToast("Image size should be 1280*360");
+                          console.log('Height', height, width);
                           imageOk = false; // this.pushImage();
 
                           return imageOk;
@@ -4351,6 +4353,7 @@
                       if (this.addDiscountForm.get('type').value == 'Offer' || this.addDiscountForm.get('type').value == 'Popup') {
                         if (height !== 360 || width !== 360) {
                           this.commonService.errorToast("Image size should be a 360*360");
+                          console.log('Height', height, width);
                           imageOk = false; // this.pushImage();
 
                           return imageOk;
@@ -4405,9 +4408,10 @@
       }
 
       getAllCategoryForAdmin() {
+        let url = "?page=1&count=700";
         let temp = [];
         this.categoryList = [];
-        this.apiService.getAllCategories().subscribe(res => {
+        this.apiService.getAllCategoriesPage(url).subscribe(res => {
           if (res.success) {
             if (res.data) {
               for (let i = 0; i < res.data.length; i++) {
@@ -4427,9 +4431,10 @@
       }
 
       getAllCategory() {
+        let url = "?page=1&count=700";
         let temp = [];
         this.categoryList = [];
-        this.apiService.getAllCategoriesForPanel().subscribe(res => {
+        this.apiService.getAllCategoriesForPanelStatic(url).subscribe(res => {
           if (res.success) {
             if (res.data) {
               for (let i = 0; i < res.data.length; i++) {
@@ -4554,7 +4559,7 @@
         let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
 
         if (checkOffer == "category") {
-          if (this.submitted && this.addDiscountForm.valid) {
+          if (this.submitted && this.addDiscountForm.valid && this.images.length !== 0) {
             if (this.selectedItem.length > 0) {
               this.typeCategory(checkOffer, this.selectedItem);
             } else {
@@ -4570,6 +4575,8 @@
                 this.commonService.errorToast("Please Select a Category ");
               }
             }
+          } else {
+            this.addDiscountForm.markAllAsTouched();
           }
         }
 
@@ -5369,8 +5376,9 @@
                 name: name,
                 image: event.target.result
               };
-              this.urls.push(body);
-              console.log('URLs', this.urls);
+              this.urls.length < 6 ? this.urls.push(body) : (this.commonService.closeTost(), this.commonService.errorToast('Maximum 6 images can be uploaded'));
+              var uniqArray = Array.from(new Map(this.urls.map(e => [e.name, e])).values());
+              this.urls = uniqArray;
             };
           }
         } else {
@@ -7616,7 +7624,13 @@
 
     var _geofence_edit_geofence_edit_geofence_component__WEBPACK_IMPORTED_MODULE_112__ = __webpack_require__(
     /*! ./geofence/edit-geofence/edit-geofence.component */
-    "./src/app/geofence/edit-geofence/edit-geofence.component.ts"); // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+    "./src/app/geofence/edit-geofence/edit-geofence.component.ts");
+    /* harmony import */
+
+
+    var ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_113__ = __webpack_require__(
+    /*! ngx-infinite-scroll */
+    "./node_modules/ngx-infinite-scroll/modules/ngx-infinite-scroll.js"); // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
     // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     // export function HttpLoaderFactory(http: HttpClient) {
     //   return new TranslateHttpLoader(http);
@@ -7626,7 +7640,7 @@
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"], _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_7__["ForgotPasswordComponent"], _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_8__["ResetPasswordComponent"], _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_10__["DashboardComponent"], _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_11__["SidebarComponent"], _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"], _manage_user_manage_user_component__WEBPACK_IMPORTED_MODULE_14__["ManageUserComponent"], _adduser_adduser_component__WEBPACK_IMPORTED_MODULE_15__["AdduserComponent"], _product_product_component__WEBPACK_IMPORTED_MODULE_16__["ProductComponent"], _addproduct_addproduct_component__WEBPACK_IMPORTED_MODULE_17__["AddproductComponent"], _notification_notification_component__WEBPACK_IMPORTED_MODULE_54__["NotificationComponent"], _addinventory_addinventory_component__WEBPACK_IMPORTED_MODULE_18__["AddinventoryComponent"], _ordermanagement_ordermanagement_component__WEBPACK_IMPORTED_MODULE_19__["OrdermanagementComponent"], _addordermanagement_addordermanagement_component__WEBPACK_IMPORTED_MODULE_20__["AddordermanagementComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_21__["PaymentComponent"], _my_line_chart_my_line_chart_component__WEBPACK_IMPORTED_MODULE_22__["MyLineChartComponent"], _reportpage_reportpage_component__WEBPACK_IMPORTED_MODULE_23__["ReportpageComponent"], _inventry_management_inventry_management_component__WEBPACK_IMPORTED_MODULE_24__["InventryManagementComponent"], _viewinventory_viewinventory_component__WEBPACK_IMPORTED_MODULE_25__["ViewinventoryComponent"], _manage_earning_manage_earning_component__WEBPACK_IMPORTED_MODULE_26__["ManageEarningComponent"], _refund_refund_component__WEBPACK_IMPORTED_MODULE_27__["RefundComponent"], _manage_reviews_manage_reviews_component__WEBPACK_IMPORTED_MODULE_28__["ManageReviewsComponent"], _vender_management_vender_management_component__WEBPACK_IMPORTED_MODULE_29__["VenderManagementComponent"], _add_vender_add_vender_component__WEBPACK_IMPORTED_MODULE_30__["AddVenderComponent"], _booking_request_history_booking_request_history_component__WEBPACK_IMPORTED_MODULE_31__["BookingRequestHistoryComponent"], _view_user_view_user_component__WEBPACK_IMPORTED_MODULE_32__["ViewUserComponent"], _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_33__["EditUserComponent"], _edit_product_edit_product_component__WEBPACK_IMPORTED_MODULE_34__["EditProductComponent"], _view_product_view_product_component__WEBPACK_IMPORTED_MODULE_35__["ViewProductComponent"], _edit_order_edit_order_component__WEBPACK_IMPORTED_MODULE_36__["EditOrderComponent"], _view_order_view_order_component__WEBPACK_IMPORTED_MODULE_37__["ViewOrderComponent"], _edit_vendor_edit_vendor_component__WEBPACK_IMPORTED_MODULE_38__["EditVendorComponent"], _view_vendor_view_vendor_component__WEBPACK_IMPORTED_MODULE_39__["ViewVendorComponent"], _deals_deals_component__WEBPACK_IMPORTED_MODULE_40__["DealsComponent"], _category_category_component__WEBPACK_IMPORTED_MODULE_41__["CategoryComponent"], _banner_banner_component__WEBPACK_IMPORTED_MODULE_42__["BannerComponent"], _addcategory_addcategory_component__WEBPACK_IMPORTED_MODULE_43__["AddcategoryComponent"], _viewcategory_viewcategory_component__WEBPACK_IMPORTED_MODULE_44__["ViewcategoryComponent"], _editcategory_editcategory_component__WEBPACK_IMPORTED_MODULE_45__["EditcategoryComponent"], _cms_cms_component__WEBPACK_IMPORTED_MODULE_46__["CmsComponent"], _viewdiscount_viewdiscount_component__WEBPACK_IMPORTED_MODULE_50__["ViewdiscountComponent"], _editdiscount_editdiscount_component__WEBPACK_IMPORTED_MODULE_51__["EditdiscountComponent"], _addoffers_addoffers_component__WEBPACK_IMPORTED_MODULE_53__["AddoffersComponent"], _offerdeals_offerdeals_component__WEBPACK_IMPORTED_MODULE_52__["OfferdealsComponent"], _salesreport_salesreport_component__WEBPACK_IMPORTED_MODULE_65__["SalesreportComponent"], _revenuereport_revenuereport_component__WEBPACK_IMPORTED_MODULE_66__["RevenuereportComponent"], _reveuegraph_reveuegraph_component__WEBPACK_IMPORTED_MODULE_67__["ReveuegraphComponent"], _salesgraph_salesgraph_component__WEBPACK_IMPORTED_MODULE_68__["SalesgraphComponent"], _profile_profile_component__WEBPACK_IMPORTED_MODULE_69__["ProfileComponent"], _changepassword_changepassword_component__WEBPACK_IMPORTED_MODULE_70__["ChangepasswordComponent"], _about_about_component__WEBPACK_IMPORTED_MODULE_48__["AboutComponent"], _faq_faq_component__WEBPACK_IMPORTED_MODULE_49__["FaqComponent"], _subcategory_subcategory_component__WEBPACK_IMPORTED_MODULE_56__["SubcategoryComponent"], _editsubcategory_editsubcategory_component__WEBPACK_IMPORTED_MODULE_57__["EditsubcategoryComponent"], _viewsubcategory_viewsubcategory_component__WEBPACK_IMPORTED_MODULE_58__["ViewsubcategoryComponent"], _addsubcategory_addsubcategory_component__WEBPACK_IMPORTED_MODULE_59__["AddsubcategoryComponent"], _termcondition_termcondition_component__WEBPACK_IMPORTED_MODULE_60__["TermconditionComponent"], _contactus_contactus_component__WEBPACK_IMPORTED_MODULE_61__["ContactusComponent"], _privacypolicy_privacypolicy_component__WEBPACK_IMPORTED_MODULE_62__["PrivacypolicyComponent"], _returnpolicy_returnpolicy_component__WEBPACK_IMPORTED_MODULE_63__["ReturnpolicyComponent"], _ventor_t_ventor_t_component__WEBPACK_IMPORTED_MODULE_64__["VentorTComponent"], _editprofile_editprofile_component__WEBPACK_IMPORTED_MODULE_71__["EditprofileComponent"], _vendor_sales_report_vendor_sales_report_component__WEBPACK_IMPORTED_MODULE_72__["VendorSalesReportComponent"], _report_graph_report_graph_component__WEBPACK_IMPORTED_MODULE_73__["ReportGraphComponent"], _termofuse_termofuse_component__WEBPACK_IMPORTED_MODULE_74__["TermofuseComponent"], _termofsales_termofsales_component__WEBPACK_IMPORTED_MODULE_75__["TermofsalesComponent"], _consumerprivacypolicy_consumerprivacypolicy_component__WEBPACK_IMPORTED_MODULE_76__["ConsumerprivacypolicyComponent"], _warrantypolicy_warrantypolicy_component__WEBPACK_IMPORTED_MODULE_77__["WarrantypolicyComponent"], _delivery_address_delivery_address_component__WEBPACK_IMPORTED_MODULE_81__["DeliveryAddressComponent"], _graph_graph_component__WEBPACK_IMPORTED_MODULE_83__["GraphComponent"], _addbrand_addbrand_component__WEBPACK_IMPORTED_MODULE_84__["AddbrandComponent"], _editbrand_editbrand_component__WEBPACK_IMPORTED_MODULE_85__["EditbrandComponent"], _viewbrand_viewbrand_component__WEBPACK_IMPORTED_MODULE_86__["ViewbrandComponent"], _brandlist_brandlist_component__WEBPACK_IMPORTED_MODULE_87__["BrandlistComponent"], _broadcast_broadcast_component__WEBPACK_IMPORTED_MODULE_89__["BroadcastComponent"], _settings_settings_component__WEBPACK_IMPORTED_MODULE_90__["SettingsComponent"], _sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_91__["SignUpComponent"], _sign_up_with_mobile_sign_up_with_mobile_component__WEBPACK_IMPORTED_MODULE_92__["SignUpWithMobileComponent"], _profile_set_up_profile_set_up_component__WEBPACK_IMPORTED_MODULE_94__["ProfileSetUpComponent"], _manage_celebrity_manage_celebrity_component__WEBPACK_IMPORTED_MODULE_96__["ManageCelebrityComponent"], _document_document_component__WEBPACK_IMPORTED_MODULE_97__["DocumentComponent"], _endorsement_endorsement_component__WEBPACK_IMPORTED_MODULE_98__["EndorsementComponent"], _endorsement_product_endorsement_product_component__WEBPACK_IMPORTED_MODULE_99__["EndorsementProductComponent"], _endorsed_product_endorsed_product_component__WEBPACK_IMPORTED_MODULE_100__["EndorsedProductComponent"], _add_promo_code_add_promo_code_component__WEBPACK_IMPORTED_MODULE_101__["AddPromoCodeComponent"], _promo_code_management_promo_code_management_component__WEBPACK_IMPORTED_MODULE_102__["PromoCodeManagementComponent"], _edit_promo_code_edit_promo_code_component__WEBPACK_IMPORTED_MODULE_103__["EditPromoCodeComponent"], _sub_admin_sub_admin_list_sub_admin_list_component__WEBPACK_IMPORTED_MODULE_104__["SubAdminListComponent"], _sub_admin_sub_admin_add_sub_admin_add_component__WEBPACK_IMPORTED_MODULE_105__["SubAdminAddComponent"], _get_translations_get_translations_component__WEBPACK_IMPORTED_MODULE_106__["GetTranslationsComponent"], _admin_endorment_admin_endorment_component__WEBPACK_IMPORTED_MODULE_107__["AdminEndormentComponent"], _add_endorsement_add_endorsement_component__WEBPACK_IMPORTED_MODULE_108__["AddEndorsementComponent"], _geofence_geofence_list_geofence_list_component__WEBPACK_IMPORTED_MODULE_110__["GeofenceListComponent"], _geofence_add_geofence_add_geofence_component__WEBPACK_IMPORTED_MODULE_111__["AddGeofenceComponent"], _geofence_edit_geofence_edit_geofence_component__WEBPACK_IMPORTED_MODULE_112__["EditGeofenceComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"], _material_material_module__WEBPACK_IMPORTED_MODULE_3__["MaterialModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_79__["HttpClientModule"], ngx_google_places_autocomplete__WEBPACK_IMPORTED_MODULE_95__["GooglePlaceModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"], ckeditor4_angular__WEBPACK_IMPORTED_MODULE_47__["CKEditorModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["ReactiveFormsModule"], ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_78__["ToastrModule"].forRoot(), ng_otp_input__WEBPACK_IMPORTED_MODULE_93__["NgOtpInputModule"], _agm_core__WEBPACK_IMPORTED_MODULE_109__["AgmCoreModule"].forRoot({
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"], _material_material_module__WEBPACK_IMPORTED_MODULE_3__["MaterialModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_79__["HttpClientModule"], ngx_google_places_autocomplete__WEBPACK_IMPORTED_MODULE_95__["GooglePlaceModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"], ckeditor4_angular__WEBPACK_IMPORTED_MODULE_47__["CKEditorModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["ReactiveFormsModule"], ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_78__["ToastrModule"].forRoot(), ng_otp_input__WEBPACK_IMPORTED_MODULE_93__["NgOtpInputModule"], ngx_infinite_scroll__WEBPACK_IMPORTED_MODULE_113__["InfiniteScrollModule"], _agm_core__WEBPACK_IMPORTED_MODULE_109__["AgmCoreModule"].forRoot({
         apiKey: 'AIzaSyBCNuSINklJM6YkiIYG9ixuWviIkJtCD5U'
       }), ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_82__["NgMultiSelectDropDownModule"].forRoot()],
       providers: [_angular_common__WEBPACK_IMPORTED_MODULE_80__["DatePipe"], src_services_notification_service__WEBPACK_IMPORTED_MODULE_88__["NotificationService"]],
@@ -12110,31 +12124,31 @@
         this.productList = [];
         this.selectedItem = [];
         this.selectedCategoryItem = [];
-        this.parentId = '';
+        this.parentId = "";
         this.categoryDropDownSettings = {};
         this.subcategoryDropDownSettings = {};
         this.vendorDropDownSettings = {};
         this.productDropDownSettings = {};
         this.imageNotAccepted = true;
-        this.images = '';
+        this.images = "";
         this.showMultiCategory = false;
         this.type = [{
-          value: 'Home Banner',
-          viewValue: 'Home Banner'
+          value: "Home Banner",
+          viewValue: "Home Banner"
         }, {
-          value: 'Home',
-          viewValue: 'Banner'
+          value: "Home",
+          viewValue: "Banner"
         }, {
-          value: 'Offer',
-          viewValue: 'Offer'
+          value: "Offer",
+          viewValue: "Offer"
         }, {
-          value: 'Popup',
-          viewValue: 'Pop-Up'
+          value: "Popup",
+          viewValue: "Pop-Up"
         }];
-        this.selectedCategory = '';
-        this.selectedSubCategory = '';
-        this.selectedBrand = '';
-        this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
+        this.selectedCategory = "";
+        this.selectedSubCategory = "";
+        this.selectedBrand = "";
+        this.userDetails = JSON.parse(sessionStorage.getItem("Markat_User"));
         this.imageUrl = this.urlService.imageUrl;
       }
 
@@ -12229,72 +12243,72 @@
       ngOnInit() {
         this.sub = this.route.queryParams.subscribe(params => {
           // Defaults to 0 if no query param provided.
-          this.id = params['id'];
+          this.id = params["id"];
         });
-        this.today = moment__WEBPACK_IMPORTED_MODULE_4__(new Date()).format('YYYY-MM-DD'); // let currentDate = new Date().getDate();
+        this.today = moment__WEBPACK_IMPORTED_MODULE_4__(new Date()).format("YYYY-MM-DD"); // let currentDate = new Date().getDate();
         // let currentMonth = new Date().getMonth();
         // let year = new Date().getFullYear();
         // //console.log(new Date(year, currentMonth, currentDate + 1))
         // this.endTommorow = moment(new Date(year, currentMonth, currentDate + 1)).format('YYYY-MM-DD');
 
         this.editDiscountForm = this.fb.group({
-          disount: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].min(0)]],
-          startDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-          endDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-          type: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-          dicountOn: [''],
-          name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(25)]],
-          availableLocation: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-          name_ar: [''],
-          gender: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-          bannerImage: ['']
+          disount: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].min(0)]],
+          startDate: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          endDate: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          type: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          dicountOn: [""],
+          name: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(25)]],
+          availableLocation: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          name_ar: [""],
+          gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          bannerImage: [""]
         });
 
-        if (this.userDetails.roles == 'admin') {
+        if (this.userDetails.roles == "admin") {
           this.getAllCategoryForAdmin();
-          this.sellerId = '';
+          this.sellerId = "";
         } else {
           this.getAllCategory();
           this.sellerId = this.userDetails._id; //  this.setradio('product');
 
-          this.editDiscountForm.get('dicountOn').setValue('product');
+          this.editDiscountForm.get("dicountOn").setValue("product");
         }
 
         this.getAllGeofence();
-        this.editDiscountForm.get('bannerImage').disable();
+        this.editDiscountForm.get("bannerImage").disable();
         this.categoryDropDownSettings = {
           singleSelection: this.singleCategorySelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.subcategoryDropDownSettings = {
           singleSelection: this.singleSubCategorySelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.vendorDropDownSettings = {
           singleSelection: this.singleVendorSelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.productDropDownSettings = {
           singleSelection: this.singleProductSelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
@@ -12360,17 +12374,17 @@
               this.lookUpForProduct(lookForProduct, this.discountDetails.subCategory.id, this.discountDetails.category.id, this.discountDetails.brand._id);
             }
 
-            this.editDiscountForm.controls['endDate'].setValue(moment__WEBPACK_IMPORTED_MODULE_4__(this.discountDetails.endDate).format("YYYY-MM-DD"));
-            this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
+            this.editDiscountForm.controls["endDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_4__(this.discountDetails.endDate).format("YYYY-MM-DD"));
+            this.editDiscountForm.controls["type"].setValue(this.discountDetails.type);
             this.imageNotAccepted = false;
-            this.editDiscountForm.get('bannerImage').enable();
-            this.editDiscountForm.controls['startDate'].setValue(moment__WEBPACK_IMPORTED_MODULE_4__(this.discountDetails.startDate).format("YYYY-MM-DD"));
-            this.editDiscountForm.controls['disount'].setValue(this.discountDetails.discount);
-            this.editDiscountForm.controls['availableLocation'].setValue(this.discountDetails.availableLocation);
-            this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
-            this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
-            this.editDiscountForm.controls['gender'].setValue(this.discountDetails.gender);
-            this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel.toLowerCase()); // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
+            this.editDiscountForm.get("bannerImage").enable();
+            this.editDiscountForm.controls["startDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_4__(this.discountDetails.startDate).format("YYYY-MM-DD"));
+            this.editDiscountForm.controls["disount"].setValue(this.discountDetails.discount);
+            this.editDiscountForm.controls["availableLocation"].setValue(this.discountDetails.availableLocation);
+            this.editDiscountForm.controls["name_ar"].setValue(this.discountDetails.name_ar);
+            this.editDiscountForm.controls["name"].setValue(this.discountDetails.name);
+            this.editDiscountForm.controls["gender"].setValue(this.discountDetails.gender);
+            this.editDiscountForm.controls["dicountOn"].setValue(this.discountDetails.offer.type); // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
 
             this.setradio(this.discountDetails.offer.type);
             this.urlImage = true;
@@ -12382,7 +12396,7 @@
 
       typeSelected(e) {
         console.log(e);
-        this.editDiscountForm.get('bannerImage').enable(); //  this.previewImage = ''
+        this.editDiscountForm.get("bannerImage").enable(); //  this.previewImage = ''
 
         this.urlImage = false;
       }
@@ -12395,8 +12409,8 @@
           for (let j = 0; j < selectedList.length; j++) {
             if (selectedList[j] === this.categoryList[i].id) {
               let body = {
-                'id': this.categoryList[i].id,
-                'name': this.categoryList[i].name
+                id: this.categoryList[i].id,
+                name: this.categoryList[i].name
               };
               temp.push(body);
             }
@@ -12408,8 +12422,12 @@
 
       lookUpForSubCategory(ls, la) {
         this.selectedSubcategoryList = ls;
-        this.categoryId = la.id;
-        this.selectedCategory = la;
+
+        if (la) {
+          this.categoryId = la.id;
+          this.selectedCategory = this.categoryId;
+        }
+
         this.getAllSubcategory(this.categoryId);
       }
 
@@ -12437,48 +12455,48 @@
       }
 
       ngAfterViewChecked() {
-        let done = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['startDate'].value);
+        let done = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["startDate"].value);
         let today = done.date();
         let thisMonth = done.month();
         let thisYear = done.year();
         let temp = new Date(thisYear, thisMonth, today + 1);
-        this.endTommorow = moment__WEBPACK_IMPORTED_MODULE_4__(temp).format('YYYY-MM-DD');
+        this.endTommorow = moment__WEBPACK_IMPORTED_MODULE_4__(temp).format("YYYY-MM-DD");
       }
 
       ngAfterContentChecked() {
         this.categoryDropDownSettings = {
           singleSelection: this.singleCategorySelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.subcategoryDropDownSettings = {
           singleSelection: this.singleSubCategorySelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.vendorDropDownSettings = {
           singleSelection: this.singleVendorSelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
         this.productDropDownSettings = {
           singleSelection: this.singleProductSelection,
-          idField: 'id',
-          textField: 'name',
-          selectAllText: 'Select All',
-          unSelectAllText: 'UnSelect All',
+          idField: "id",
+          textField: "name",
+          selectAllText: "Select All",
+          unSelectAllText: "UnSelect All",
           itemsShowLimit: 10,
           allowSearchFilter: true
         };
@@ -12514,7 +12532,7 @@
                       var height = img.height;
                       var width = img.width;
 
-                      if (this.editDiscountForm.get('type').value == 'Home Banner') {
+                      if (this.editDiscountForm.get("type").value == "Home Banner") {
                         if (width !== 1920 || height !== 1080) {
                           this.commonService.errorToast("Image size should be 1920*1080");
                           imageOk = false; // this.pushImage();
@@ -12529,7 +12547,7 @@
                         }
                       }
 
-                      if (this.editDiscountForm.get('type').value == 'Home') {
+                      if (this.editDiscountForm.get("type").value == "Home") {
                         // width / height != 16 / 4
                         if (height !== 360 || width != 1280) {
                           this.commonService.errorToast("Image size should be 1280*360");
@@ -12545,7 +12563,7 @@
                         }
                       }
 
-                      if (this.editDiscountForm.get('type').value == 'Offer' || this.editDiscountForm.get('type').value == 'Popup') {
+                      if (this.editDiscountForm.get("type").value == "Offer" || this.editDiscountForm.get("type").value == "Popup") {
                         if (height !== 360 || width !== 360) {
                           this.commonService.errorToast("Image size should be a 360*360");
                           imageOk = false; // this.pushImage();
@@ -12559,9 +12577,7 @@
                           return imageOk;
                         }
                       }
-                    }; // this.previewImage = event.target.result;
-                    // this.editDiscountForm.controls['bannerImage'].patchValue(this.imageFile);
-
+                    };
                   };
                 }
 
@@ -12574,7 +12590,7 @@
       }
 
       goToofferdeals() {
-        this.router.navigate(['offerdeals']);
+        this.router.navigate(["offerdeals"]);
       }
 
       onCategorySelect(item) {
@@ -12616,8 +12632,8 @@
             if (res.data) {
               for (let i = 0; i < res.data.length; i++) {
                 let body = {
-                  'id': res.data[i].id,
-                  'name': res.data[i].name
+                  id: res.data[i].id,
+                  name: res.data[i].name
                 };
                 temp.push(body);
               } // this.editDiscountForm.controls['disount'].setValue('category');
@@ -12641,13 +12657,13 @@
             if (res.data) {
               for (let i = 0; i < res.data.length; i++) {
                 let body = {
-                  'id': res.data[i]._id,
-                  'name': res.data[i].name
+                  id: res.data[i]._id,
+                  name: res.data[i].name
                 };
                 temp.push(body);
               }
 
-              this.setradio('product');
+              this.setradio("product");
             }
           }
         });
@@ -12673,8 +12689,8 @@
               if (res.data) {
                 for (let i = 0; i < res.data.length; i++) {
                   let body = {
-                    'id': res.data[i].id,
-                    'name': res.data[i].name
+                    id: res.data[i].id,
+                    name: res.data[i].name
                   };
                   temp.push(body);
                 }
@@ -12690,8 +12706,8 @@
                 for (let j = 0; j < this.selectedSubcategoryList.length; j++) {
                   if (this.selectedSubcategoryList[j] === this.subCategoryList[i].id) {
                     let body = {
-                      'id': this.subCategoryList[i].id,
-                      'name': this.subCategoryList[i].name
+                      id: this.subCategoryList[i].id,
+                      name: this.subCategoryList[i].name
                     };
                     temp1.push(body);
                   }
@@ -12724,8 +12740,8 @@
               if (res.data) {
                 for (let i = 0; i < res.data.length; i++) {
                   let body = {
-                    'id': res.data[i]._id,
-                    'name': res.data[i].name
+                    id: res.data[i]._id,
+                    name: res.data[i].name
                   };
                   temp.push(body);
                 }
@@ -12741,8 +12757,8 @@
                 for (let j = 0; j < this.selectedVendorList.length; j++) {
                   if (this.selectedVendorList[j] === this.vendorList[i].id) {
                     let body = {
-                      'id': this.vendorList[i].id,
-                      'name': this.vendorList[i].name
+                      id: this.vendorList[i].id,
+                      name: this.vendorList[i].name
                     };
                     temp1.push(body);
                   }
@@ -12769,18 +12785,18 @@
 
         if (this.selectedSubCategory) {
           let body = {
-            'categories': [this.selectedCategory],
-            'subCategories': [this.selectedSubCategory]
+            categories: [this.selectedCategory],
+            subCategories: [this.selectedSubCategory]
           };
-          this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
+          this.apiService.getProductsforBanner(1, 10000, "active", true, "", this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
             if (res.success) {
               console.log("ProductList", res);
 
               if (res.data) {
                 for (let i = 0; i < res.data.length; i++) {
                   let body = {
-                    'id': res.data[i].id,
-                    'name': res.data[i].name
+                    id: res.data[i].id,
+                    name: res.data[i].name
                   };
                   temp.push(body);
                 }
@@ -12796,8 +12812,8 @@
                 for (let j = 0; j < this.selectedProductList.length; j++) {
                   if (this.selectedProductList[j] === this.productList[i].id) {
                     let body = {
-                      'id': this.productList[i].id,
-                      'name': this.productList[i].name
+                      id: this.productList[i].id,
+                      name: this.productList[i].name
                     };
                     temp1.push(body);
                   }
@@ -12818,15 +12834,19 @@
       }
 
       checkBanner() {
+        console.clear();
         this.submitted = true;
-        console.log(this.editDiscountForm);
-        let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
+        let checkOffer = this.editDiscountForm.controls["dicountOn"].value;
+        console.log("Type", checkOffer);
 
         if (checkOffer == "category") {
           if (this.submitted && this.editDiscountForm.valid) {
             if (this.selectedItem.length > 0) {
+              console.log("selectedItem", this.selectedItem);
               this.typeCategory(checkOffer, this.selectedItem);
             } else {
+              console.log("selectedItem", this.selectedCategoryItem);
+
               if (this.selectedCategoryItem.length > 0) {
                 let selectedCategory = [];
 
@@ -12842,12 +12862,14 @@
           }
         }
 
-        if (checkOffer == 'subCategory') {
+        if (checkOffer == "subCategory") {
           if (this.submitted && this.editDiscountForm.valid) {
             if (this.selectedItem.length > 0) {
+              console.log("selectedItem", this.selectedItem);
               this.typeSubcategory(checkOffer, this.selectedItem);
             } else {
               let selectedSubCategory = [];
+              console.log("selectedItem", this.selectedSubcategoryItem);
 
               for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
                 selectedSubCategory.push(this.selectedSubcategoryItem[i].id);
@@ -12858,7 +12880,7 @@
           }
         }
 
-        if (checkOffer == 'brand') {
+        if (checkOffer == "brand") {
           if (this.submitted && this.editDiscountForm.valid) {
             if (this.selectedItem.length > 0) {
               this.typeVendor(checkOffer, this.selectedItem);
@@ -12874,7 +12896,7 @@
           }
         }
 
-        if (checkOffer == 'product') {
+        if (checkOffer == "product") {
           if (this.submitted && this.editDiscountForm.valid) {
             if (this.selectedItem.length > 0) {
               this.typeProduct(checkOffer, this.selectedItem);
@@ -12892,114 +12914,116 @@
       }
 
       typeCategory(checkOffer, selectedCategoryItem) {
-        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["startDate"].value).toLocaleString();
+        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["endDate"].value).toLocaleString();
         let offer = {
-          'list': selectedCategoryItem,
-          'type': checkOffer
+          list: selectedCategoryItem,
+          type: checkOffer
         };
         const body = new FormData();
-        body.append('id', this.id);
-        body.append('name', this.editDiscountForm.controls['name'].value);
-        body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
+        body.append("id", this.id);
+        body.append("name", this.editDiscountForm.controls["name"].value);
+        body.append("name_ar", this.editDiscountForm.controls["name_ar"].value);
 
         if (this.images) {
-          body.append('image', new Blob([this.images], {
-            type: 'image/*'
+          body.append("image", new Blob([this.images], {
+            type: "image/*"
           }), this.images.name);
         }
 
-        body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-        body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value));
-        body.append('type', this.editDiscountForm.controls['type'].value);
-        body.append('discount', this.editDiscountForm.controls['disount'].value);
-        body.append('offer', JSON.stringify(offer));
-        body.append('startDate', JSON.stringify(startDate));
-        body.append('endDate', JSON.stringify(endDate));
+        body.append("gender", JSON.stringify(this.editDiscountForm.controls["gender"].value));
+        body.append("availableLocation", JSON.stringify(this.editDiscountForm.get("availableLocation").value));
+        body.append("type", this.editDiscountForm.controls["type"].value);
+        body.append("discount", this.editDiscountForm.controls["disount"].value);
+        body.append("offer", JSON.stringify(offer));
+        body.append("startDate", JSON.stringify(startDate));
+        body.append("endDate", JSON.stringify(endDate));
         this.editBanner(body);
       }
 
       typeSubcategory(checkOffer, selectedSubcategoryItem) {
-        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+        console.log("this.selectedCategory", this.selectedCategory);
+        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["startDate"].value).toLocaleString();
+        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["endDate"].value).toLocaleString();
         let offer = {
-          'list': selectedSubcategoryItem,
-          'type': checkOffer
+          list: selectedSubcategoryItem,
+          type: checkOffer
         };
         const body = new FormData();
-        body.append('id', this.id);
-        body.append('category', this.selectedCategory);
-        body.append('name', this.editDiscountForm.controls['name'].value);
-        body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
+        body.append("id", this.id);
+        body.append("category", this.selectedCategory);
+        body.append("name", this.editDiscountForm.controls["name"].value);
+        body.append("name_ar", this.editDiscountForm.controls["name_ar"].value);
 
         if (this.images) {
-          body.append('image', this.images, this.images.name);
+          body.append("image", this.images, this.images.name);
         }
 
-        body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-        body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value));
-        body.append('type', this.editDiscountForm.controls['type'].value);
-        body.append('discount', this.editDiscountForm.controls['disount'].value);
-        body.append('offer', JSON.stringify(offer));
-        body.append('startDate', JSON.stringify(startDate));
-        body.append('endDate', JSON.stringify(endDate));
+        body.append("gender", JSON.stringify(this.editDiscountForm.controls["gender"].value));
+        body.append("availableLocation", JSON.stringify(this.editDiscountForm.get("availableLocation").value));
+        body.append("type", this.editDiscountForm.controls["type"].value);
+        body.append("discount", this.editDiscountForm.controls["disount"].value);
+        body.append("offer", JSON.stringify(offer));
+        body.append("startDate", JSON.stringify(startDate));
+        body.append("endDate", JSON.stringify(endDate));
         this.editBanner(body);
       }
 
       typeVendor(checkOffer, selectedVendorItem) {
-        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+        //vendor is reused as brand
+        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["startDate"].value).toLocaleString();
+        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["endDate"].value).toLocaleString();
         let offer = {
-          'list': selectedVendorItem,
-          'type': 'brand'
+          list: selectedVendorItem,
+          type: "brand"
         };
         const body = new FormData();
-        body.append('id', this.id);
-        body.append('category', this.selectedCategory);
-        body.append('subCategory', this.selectedSubCategory);
-        body.append('name', this.editDiscountForm.controls['name'].value);
-        body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-        body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-        body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value));
+        body.append("id", this.id);
+        body.append("category", this.selectedCategory);
+        body.append("subCategory", this.selectedSubCategory);
+        body.append("name", this.editDiscountForm.controls["name"].value);
+        body.append("name_ar", this.editDiscountForm.controls["name_ar"].value);
+        body.append("gender", JSON.stringify(this.editDiscountForm.controls["gender"].value));
+        body.append("availableLocation", JSON.stringify(this.editDiscountForm.get("availableLocation").value));
 
         if (this.images) {
-          body.append('image', this.images, this.images.name);
+          body.append("image", this.images, this.images.name);
         }
 
-        body.append('type', this.editDiscountForm.controls['type'].value);
-        body.append('discount', this.editDiscountForm.controls['disount'].value);
-        body.append('offer', JSON.stringify(offer));
-        body.append('startDate', JSON.stringify(startDate));
-        body.append('endDate', JSON.stringify(endDate));
+        body.append("type", this.editDiscountForm.controls["type"].value);
+        body.append("discount", this.editDiscountForm.controls["disount"].value);
+        body.append("offer", JSON.stringify(offer));
+        body.append("startDate", JSON.stringify(startDate));
+        body.append("endDate", JSON.stringify(endDate));
         this.editBanner(body);
       }
 
       typeProduct(checkOffer, selectedItem) {
-        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+        let startDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["startDate"].value).toLocaleString();
+        let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls["endDate"].value).toLocaleString();
         let offer = {
-          'list': selectedItem,
-          'type': checkOffer
+          list: selectedItem,
+          type: checkOffer
         };
         const body = new FormData();
-        body.append('id', this.id);
-        body.append('category', this.selectedCategory);
-        body.append('subCategory', this.selectedSubCategory);
-        body.append('brand', this.selectedBrand);
-        body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-        body.append('availableLocation', JSON.stringify(this.editDiscountForm.get('availableLocation').value));
-        body.append('name', this.editDiscountForm.controls['name'].value);
-        body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
+        body.append("id", this.id);
+        body.append("category", this.selectedCategory);
+        body.append("subCategory", this.selectedSubCategory);
+        body.append("brand", this.selectedBrand);
+        body.append("gender", JSON.stringify(this.editDiscountForm.controls["gender"].value));
+        body.append("availableLocation", JSON.stringify(this.editDiscountForm.get("availableLocation").value));
+        body.append("name", this.editDiscountForm.controls["name"].value);
+        body.append("name_ar", this.editDiscountForm.controls["name_ar"].value);
 
         if (this.images) {
-          body.append('image', this.images, this.images.name);
+          body.append("image", this.images, this.images.name);
         }
 
-        body.append('type', this.editDiscountForm.controls['type'].value);
-        body.append('discount', this.editDiscountForm.controls['disount'].value);
-        body.append('offer', JSON.stringify(offer));
-        body.append('startDate', JSON.stringify(startDate));
-        body.append('endDate', JSON.stringify(endDate));
+        body.append("type", this.editDiscountForm.controls["type"].value);
+        body.append("discount", this.editDiscountForm.controls["disount"].value);
+        body.append("offer", JSON.stringify(offer));
+        body.append("startDate", JSON.stringify(startDate));
+        body.append("endDate", JSON.stringify(endDate));
         this.editBanner(body);
       }
 
@@ -13016,7 +13040,7 @@
 
           if (res.success) {
             this.progress = false;
-            this.router.navigateByUrl('offerdeals');
+            this.router.navigateByUrl("offerdeals");
           } else {
             this.progress = false;
             this.commonService.errorToast(res.message);
@@ -13041,7 +13065,7 @@
     }];
 
     EditdiscountComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: 'app-editdiscount',
+      selector: "app-editdiscount",
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./editdiscount.component.html */
       "./node_modules/raw-loader/dist/cjs.js!./src/app/editdiscount/editdiscount.component.html")).default,
@@ -26957,8 +26981,16 @@
         return this.http.get(this.apiEndPoints.getAllCategory, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('All Product')));
       }
 
+      getAllCategoriesPage(page) {
+        return this.http.get("".concat(this.apiEndPoints.getAllCategory) + page, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('All Product')));
+      }
+
       getAllCategoriesForPanel() {
         return this.http.get(this.apiEndPoints.getAllCategoryForDiscount, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('All Product')));
+      }
+
+      getAllCategoriesForPanelStatic(page) {
+        return this.http.get("".concat(this.apiEndPoints.getAllCategoryForDiscount) + page, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('All Product')));
       }
 
       getAllSubCategoriesForDiscount(parentId) {
@@ -27359,6 +27391,10 @@
         this.toaster.errorToastr(message, "", {
           maxShown: 1
         });
+      }
+
+      closeTost() {
+        this.toaster.dismissAllToastr();
       }
 
       getNotification() {

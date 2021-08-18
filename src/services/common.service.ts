@@ -35,7 +35,9 @@ export class CommonService {
       maxShown: 1
     });
   }
-
+closeTost(){
+  this.toaster.dismissAllToastr()
+}
 
   isNewNotification = new BehaviorSubject<boolean>(false);
   notificationCount = new BehaviorSubject<number>(0)

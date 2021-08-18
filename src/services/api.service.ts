@@ -638,10 +638,23 @@ export class ApiService {
         catchError(this.handleError<any>('All Product'))
       );
   }
-
+  getAllCategoriesPage(page) {
+    return this.http
+      .get<any>(`${this.apiEndPoints.getAllCategory}`+page, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('All Product'))
+      );
+  }
   getAllCategoriesForPanel() {
     return this.http
       .get<any>(this.apiEndPoints.getAllCategoryForDiscount, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('All Product'))
+      );
+  }
+  getAllCategoriesForPanelStatic(page) {
+    return this.http
+      .get<any>(`${this.apiEndPoints.getAllCategoryForDiscount}`+page, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );
