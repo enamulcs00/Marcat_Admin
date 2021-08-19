@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
@@ -40,9 +40,7 @@ export class AddproductComponent implements OnInit {
   selectedSubcategory: any;
   productId: string;
   geofenceList: any;
-
-
-
+  @ViewChild('imaageUpload',{static:false})imaageUpload :ElementRef;
 
   constructor(private router: Router, private apiService: ApiService,
     private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
@@ -128,9 +126,10 @@ export class AddproductComponent implements OnInit {
 
   }
   deleteLocally(i) {
-
     this.urls.splice(i, 1);
     this.images.splice(i, 1)
+    console.log('URLS Delet',this.urls);
+    
   }
 
   generateProductId(roles) {
@@ -404,57 +403,60 @@ console.log("images",this.images[i],'index',i);
     this.router.navigate(['/product'])
   }
 
-  // readUrl(event: any) {
-  //   let imageOk: boolean = true
-  //   var img = new Image;
-  //   let sefl = this
-  //   let tempfile: any
-  //   if (event.target.files && event.target.files[0]) {
-  //     var filesAmount = event.target.files.length;
-  //     for (let i = 0; i < event.target.files.length; i++) {
-  //       let name = event.target.files[i].name;
-  //       tempfile = event.target.files[i]
-  //       var reader = new FileReader();
-  //       let toasterService = this.commonService
-  //       reader.readAsDataURL(event.target.files[i])
-  //       reader.onload = (event: any) => {
-  //         img.src = event.target.result;
-  //         let temp = {
-  //           name: name,
-  //           image: event.target.result
-  //         }
-  //          img.onload = () => {
-  //           var height = img.height;
-  //           var width = img.width;
-  //           if (height != width) {
-  //             toasterService.errorToast("Image should be a Square size");
-  //             imageOk = false
-  //             // this.pushImage();
-  //             return imageOk
-  //           } else {
-  //             toasterService.successToast("Image Size is Ok");
-  //             imageOk = true
-  //             this.urls.push(temp);
-  //             this.images.push(tempfile);
-  //             console.log('Images',this.urls,this.images,temp,tempfile);
-              
-  //             // this.addProductForm.controls['image'].patchValue(this.images)
-  //             return imageOk
-  //           }
+  readUrl(event: any) {
+    let imageOk: boolean = true
+    var img = new Image;
+    let sefl = this
+    let tempfile: any
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < event.target.files.length; i++) {
+        let name = event.target.files[i].name;
+        tempfile = event.target.files[i]
+        var reader = new FileReader();
+        let toasterService = this.commonService
+        reader.readAsDataURL(event.target.files[i])
+        reader.onload = (event: any) => {
+          img.src = event.target.result;
+          let temp = {
+            name: name,
+            image: event.target.result
+          }
+           img.onload = () => {
+            var height = img.height;
+            var width = img.width;
+            if (height != width) {
+              toasterService.errorToast("Image should be a Square size");
+              imageOk = false
+              // this.pushImage();
+              return imageOk
+            } else {
+              toasterService.successToast("Image Size is Ok");
+              imageOk = true
+              this.urls.push(temp);
+              this.images.push(tempfile);
+              this.urls.length<6?this.urls.push(temp):(this.commonService.closeTost(),this.commonService.errorToast('Maximum 6 images can be uploaded'));
+              //  var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+                const uniqArray = [...new Map(this.urls.map(item => [item.name, item])).values()]
+               this.urls = uniqArray
+               console.log('URLs',this.urls);
+               this.imaageUpload.nativeElement.value = ''
+               
+              return imageOk
+            }
 
-  //         };
-  //       }
-  //     }
-  //   }
-  // }
+          };
+        }
+      }
+    }
+  }
 
 
   back() {
     history.back();
   }
-  readUrl(e) {
-    let temp = []
-
+  readUrlXtra(e) {
+    let temp = [];
     if (e.target.files && e.target.files[0]) {
       for (let i = 0; i < e.target.files.length; i++) {
         var reader = new FileReader();
@@ -467,11 +469,17 @@ console.log("images",this.images[i],'index',i);
             image: event.target.result
           }
           this.urls.length<6?this.urls.push(body):(this.commonService.closeTost(),this.commonService.errorToast('Maximum 6 images can be uploaded'));
-         var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+        //  var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+        
+          const uniqArray = [...new Map(this.urls.map(item => [item.name, item])).values()]
          this.urls = uniqArray
+         console.log('URLs',this.urls);
+         this.imaageUpload.nativeElement.value = ''
+         e.target.files = [];
          };
       }
     } else {
+      this.imaageUpload.nativeElement = ''
       this.commonService.errorToast('Only Document can be uploaded')
     }
 

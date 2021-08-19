@@ -507,7 +507,7 @@
                                 <label>Image<span class="red">*</span></label>
                                 <div class="product_image_upload">
                                     <figure>
-                                        <input type='file' accept="image/*" formControlName="image"
+                                        <input type='file' #imaageUpload accept="image/*" formControlName="image"
                                             (change)="readUrl($event)" placeholder="choosefile" class="images_uploader"
                                             multiple></figure>
 
