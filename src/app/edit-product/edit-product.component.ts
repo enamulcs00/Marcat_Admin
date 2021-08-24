@@ -402,7 +402,7 @@ export class EditProductComponent implements OnInit {
 
 	onSubmit() {
 
-		console.log("check", this.editProductForm)
+		// console.log("check", this.editProductForm)
 		this.submitted = true;
 
 		if (this.submitted && this.editProductForm.valid && (this.previewImage.length > 0 || this.images.length > 0)) {

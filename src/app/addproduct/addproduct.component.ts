@@ -342,9 +342,9 @@ export class AddproductComponent implements OnInit {
 	}
 	progress: boolean
 	onSubmit() {
-		const ImagesArray = [...new Map(this.images.map(item => [item.name, item])).values()]
-		this.images = ImagesArray
-		console.log('URLs', this.images);
+		// const ImagesArray = [...new Map(this.images.map(item => [item.name, item])).values()]
+		// this.images = ImagesArray
+		// console.log('URLs', this.images);
 		this.submitted = true;
 		if (this.submitted && this.addProductForm.valid && this.images.length > 0) {
 			const body = new FormData();
@@ -374,9 +374,8 @@ export class AddproductComponent implements OnInit {
 
 			body.append('specifications_ar', JSON.stringify(this.addProductForm.controls['specification_ar'].value));
 			for (let i in this.images) {
+				console.log('Working this', )
 				body.append('images', this.images[i], this.images[i].name);
-
-
 			}
 			body.append('highlights', this.addProductForm.controls['highlights'].value)
 			body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
