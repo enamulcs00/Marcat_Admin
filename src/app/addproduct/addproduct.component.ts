@@ -343,11 +343,11 @@ export class AddproductComponent implements OnInit {
   }
   progress: boolean
   onSubmit() {
-console.log('Form status',this.addProductForm.valid, this.images,"Img len",this.images.length);
-
-    this.submitted = true;
-
-    if (this.submitted && this.addProductForm.valid && this.images.length > 0) {
+    const ImagesArray = [...new Map(this.images.map(item => [item.name, item])).values()]
+               this.images = ImagesArray
+               console.log('URLs',this.images);
+  this.submitted = true;
+ if (this.submitted && this.addProductForm.valid && this.images.length > 0) {
       const body = new FormData();
       body.append('productId', this.productId);
       body.append('seller', this.sellerId)
@@ -376,7 +376,7 @@ console.log('Form status',this.addProductForm.valid, this.images,"Img len",this.
       body.append('specifications_ar', JSON.stringify(this.addProductForm.controls['specification_ar'].value));
       for (let i in this.images) {
         body.append('images', this.images[i], this.images[i].name);
-console.log("images",this.images[i],'index',i);
+
 
       }
       body.append('highlights', this.addProductForm.controls['highlights'].value)
@@ -462,6 +462,7 @@ console.log("images",this.images[i],'index',i);
         var reader = new FileReader();
         let name = e.target.files[i].name;
         this.images.push(e.target.files[i]);
+        console.log("Images",this.images);
         reader.readAsDataURL(e.target.files[i]);
         reader.onload = (event: any) => {
           let body = {
@@ -470,6 +471,7 @@ console.log("images",this.images[i],'index',i);
           }
           this.urls.length<6?this.urls.push(body):(this.commonService.closeTost(),this.commonService.errorToast('Maximum 6 images can be uploaded'));
         //  var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+        console.log("Images4",this.images);
         
           const uniqArray = [...new Map(this.urls.map(item => [item.name, item])).values()]
          this.urls = uniqArray

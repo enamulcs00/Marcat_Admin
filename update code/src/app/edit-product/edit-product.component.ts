@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormArray, FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MoreThan } from "src/services/moreThanValidator";
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: "./edit-product.component.html",
   styleUrls: ["./edit-product.component.scss"],
 })
-export class EditProductComponent implements OnInit {
+export class EditProductComponent implements OnInit,AfterViewInit {
   name = "Angular 4";
   urls = [];
   editProductForm: FormGroup;
@@ -42,7 +42,7 @@ export class EditProductComponent implements OnInit {
   sellerDetails: any;
   imageURl: string;
   flagImageEditted: boolean;
-  previewImage: [];
+  previewImage:any [];
   tempSelectedCategoryId: any;
   progress: boolean;
   productData: any;
@@ -71,7 +71,13 @@ export class EditProductComponent implements OnInit {
 
     this.getAllGeofence();
   }
-
+ngAfterViewInit(){
+debugger
+  let uniqArray = [...new Map(this.previewImage.map(item => [item.image, item])).values()]
+  this.previewImage = uniqArray;
+  console.log("called from View",this.previewImage);
+  
+}
   ngOnInit() {
     this.getProduct(this.id);
 
@@ -206,7 +212,10 @@ export class EditProductComponent implements OnInit {
     this.setSpecifications_ar(data.specifications_ar);
     this.setSearchKeywords(data.searchKeyword);
     this.previewImage = data.images;
-
+    let uniqArray =[...new Map(this.previewImage.map(item => [item.image, item])).values()]
+    this.previewImage = uniqArray;
+    console.log('Uniq',uniqArray,'Prev',this.previewImage);
+    
   }
 
   specification(): FormArray {
@@ -368,9 +377,12 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
 
-    if (
+    const ImagesArray = [...new Map(this.images.map(item => [item.name, item])).values()]
+               this.images = ImagesArray
+              
+    this.submitted = true;
+if (
       this.submitted &&
       this.editProductForm.valid &&
       (this.previewImage.length > 0 || this.images.length > 0)
