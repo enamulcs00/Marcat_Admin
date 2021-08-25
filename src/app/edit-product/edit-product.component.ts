@@ -433,7 +433,8 @@ export class EditProductComponent implements OnInit {
 			body.append('searchKeyword', JSON.stringify(this.editProductForm.controls['aliases'].value));
 			body.append('specifications_ar', JSON.stringify(this.editProductForm.controls['specification_ar'].value));
 			for (let i = 0; i < this.images.length; i++) {
-				body.append('images', this.images[i], this.images[i].name);
+				console.log("ddas",this.images[i], Math.random().toString().split('.')[1]+this.images[i].name);
+				body.append('images', this.images[i], Math.random().toString().split('.')[1]+this.images[i].name);
 			}
 			body.append('highlights', this.editProductForm.controls['highlights'].value)
 			body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value)
@@ -473,7 +474,7 @@ export class EditProductComponent implements OnInit {
 			for (let i = 0; i < filesAmount; i++) {
 				let name = event.target.files[i].name;
 				tempfile = event.target.files[i]
-				console.log("check image", event.target.files[i].size);
+				// console.log("check image", event.target.files[i].size);
 				var reader = new FileReader();
 				let toasterService = this.commonService
 

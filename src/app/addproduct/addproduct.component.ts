@@ -374,8 +374,9 @@ export class AddproductComponent implements OnInit {
 
 			body.append('specifications_ar', JSON.stringify(this.addProductForm.controls['specification_ar'].value));
 			for (let i in this.images) {
-				console.log('Working this', )
-				body.append('images', this.images[i], this.images[i].name);
+				console.log('Working this', this.urls[i]);
+				console.log("sss",this.images[i].name);
+				body.append('images', this.images[i],  Math.random().toString().split('.')[1]+this.images[i].name);
 			}
 			body.append('highlights', this.addProductForm.controls['highlights'].value)
 			body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
@@ -454,35 +455,34 @@ export class AddproductComponent implements OnInit {
 	back() {
 		history.back();
 	}
-	readUrlXtra(e) {
-		let temp = [];
-		if (e.target.files && e.target.files[0]) {
-			for (let i = 0; i < e.target.files.length; i++) {
-				var reader = new FileReader();
-				let name = e.target.files[i].name;
-				this.images.push(e.target.files[i]);
-				console.log("Images", this.images);
-				reader.readAsDataURL(e.target.files[i]);
-				reader.onload = (event: any) => {
-					let body = {
-						name: name,
-						image: event.target.result
-					}
-					this.urls.length < 6 ? this.urls.push(body) : (this.commonService.closeTost(), this.commonService.errorToast('Maximum 6 images can be uploaded'));
-					//  var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
-					console.log("Images4", this.images);
+	// readUrlXtra(e) {
+	// 	let temp = [];
+	// 	if (e.target.files && e.target.files[0]) {
+	// 		for (let i = 0; i < e.target.files.length; i++) {
+	// 			var reader = new FileReader();
+	// 			let name = e.target.files[i].name;
+	// 			this.images.push(e.target.files[i]);
+	// 			console.log("Images", this.images);
+	// 			reader.readAsDataURL(e.target.files[i]);
+	// 			reader.onload = (event: any) => {
+	// 				let body = {
+	// 					name: name,
+	// 					image: event.target.result
+	// 				}
+	// 				this.urls.length < 6 ? this.urls.push(body) : (this.commonService.closeTost(), this.commonService.errorToast('Maximum 6 images can be uploaded'));
+	// 				//  var uniqArray = Array.from(new Map(this.urls.map(e=>[e.name, e])).values());
+	// 				console.log("Images4", this.images);
 
-					const uniqArray = [...new Map(this.urls.map(item => [item.name, item])).values()]
-					this.urls = uniqArray
-					console.log('URLs', this.urls);
-					this.imaageUpload.nativeElement.value = ''
-					e.target.files = [];
-				};
-			}
-		} else {
-			this.imaageUpload.nativeElement = ''
-			this.commonService.errorToast('Only Document can be uploaded')
-		}
-
-	}
+	// 				const uniqArray = [...new Map(this.urls.map(item => [item.name, item])).values()]
+	// 				this.urls = uniqArray
+	// 				console.log('URLs', this.urls);
+	// 				this.imaageUpload.nativeElement.value = ''
+	// 				e.target.files = [];
+	// 			};
+	// 		}
+	// 	} else {
+	// 		this.imaageUpload.nativeElement = ''
+	// 		this.commonService.errorToast('Only Document can be uploaded')
+	// 	}
+	// }
 }
