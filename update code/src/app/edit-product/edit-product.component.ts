@@ -72,7 +72,7 @@ export class EditProductComponent implements OnInit,AfterViewInit {
     this.getAllGeofence();
   }
 ngAfterViewInit(){
-debugger
+
   let uniqArray = [...new Map(this.previewImage.map(item => [item.image, item])).values()]
   this.previewImage = uniqArray;
   console.log("called from View",this.previewImage);
