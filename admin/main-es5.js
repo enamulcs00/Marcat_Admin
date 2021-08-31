@@ -4382,6 +4382,7 @@
       }
 
       onCategorySelect(item) {
+        console.log("called ,onCategorySelect", item);
         const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
         if (index < 0) this.selectedCategoryItem.push(item);
       }
@@ -4402,6 +4403,8 @@
       }
 
       onSelectAll(items) {
+        console.log('All sel', items);
+
         for (let i = 0; i < items.length; i++) {
           this.selectedItem.push(items[i].id);
         }
@@ -4542,7 +4545,7 @@
             this.productList = temp;
           });
         } else {
-          this.commonService.errorToast("PLease select a vendor First");
+          this.commonService.errorToast("Please select a vendor First");
         }
       }
 
@@ -4555,6 +4558,7 @@
       }
 
       checkBanner() {
+        console.log('Len of selectedCategoryItem', this.selectedCategoryItem, 'This', this);
         this.submitted = true;
         let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
 
@@ -4585,17 +4589,16 @@
             if (this.selectedItem.length > 0) {
               this.typeSubcategory(checkOffer, this.selectedItem);
             } else {
-              if (this.selectedCategoryItem.length > 0) {
-                let selectedSubCategory = [];
+              // if (this.selectedCategoryItem.length > 0) {
+              let selectedSubCategory = [];
 
-                for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
-                  selectedSubCategory.push(this.selectedSubcategoryItem[i].id);
-                }
-
-                this.typeSubcategory(checkOffer, selectedSubCategory);
-              } else {
-                this.commonService.errorToast("Please Select a Sub-category ");
+              for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
+                selectedSubCategory.push(this.selectedSubcategoryItem[i].id);
               }
+
+              this.typeSubcategory(checkOffer, selectedSubCategory); // } else {
+              //   this.commonService.errorToast("Please Select a Sub-category ")
+              // }
             }
           }
         }

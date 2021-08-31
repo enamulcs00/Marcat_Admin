@@ -2967,6 +2967,7 @@ let AddoffersComponent = class AddoffersComponent {
         this.router.navigate(['offerdeals']);
     }
     onCategorySelect(item) {
+        console.log("called ,onCategorySelect", item);
         const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
         if (index < 0)
             this.selectedCategoryItem.push(item);
@@ -2987,6 +2988,7 @@ let AddoffersComponent = class AddoffersComponent {
             this.selectedProductItem.push(item);
     }
     onSelectAll(items) {
+        console.log('All sel', items);
         for (let i = 0; i < items.length; i++) {
             this.selectedItem.push(items[i].id);
         }
@@ -3115,7 +3117,7 @@ let AddoffersComponent = class AddoffersComponent {
             });
         }
         else {
-            this.commonService.errorToast("PLease select a vendor First");
+            this.commonService.errorToast("Please select a vendor First");
         }
     }
     productSelected(id) {
@@ -3125,6 +3127,7 @@ let AddoffersComponent = class AddoffersComponent {
         this.addDiscountForm.get('bannerImage').enable();
     }
     checkBanner() {
+        console.log('Len of selectedCategoryItem', this.selectedCategoryItem, 'This', this);
         this.submitted = true;
         let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
         if (checkOffer == "category") {
@@ -3155,16 +3158,15 @@ let AddoffersComponent = class AddoffersComponent {
                     this.typeSubcategory(checkOffer, this.selectedItem);
                 }
                 else {
-                    if (this.selectedCategoryItem.length > 0) {
-                        let selectedSubCategory = [];
-                        for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
-                            selectedSubCategory.push(this.selectedSubcategoryItem[i].id);
-                        }
-                        this.typeSubcategory(checkOffer, selectedSubCategory);
+                    // if (this.selectedCategoryItem.length > 0) {
+                    let selectedSubCategory = [];
+                    for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
+                        selectedSubCategory.push(this.selectedSubcategoryItem[i].id);
                     }
-                    else {
-                        this.commonService.errorToast("Please Select a Sub-category ");
-                    }
+                    this.typeSubcategory(checkOffer, selectedSubCategory);
+                    // } else {
+                    //   this.commonService.errorToast("Please Select a Sub-category ")
+                    // }
                 }
             }
         }

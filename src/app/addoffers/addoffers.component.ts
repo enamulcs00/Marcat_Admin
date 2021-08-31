@@ -353,9 +353,11 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   onCategorySelect(item: any) {
+console.log("called ,onCategorySelect",item);
 
     const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedCategoryItem.push(item);
+
 
   }
 
@@ -377,6 +379,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
+console.log('All sel',items);
 
     for (let i = 0; i < items.length; i++) {
       this.selectedItem.push(items[i].id)
@@ -491,9 +494,7 @@ let url = `?page=1&count=700`
   selectedSubCategory = ''
   subCategorySelected(id) {
     this.selectedSubCategory = id
-
     this.getAllVendor();
-
   }
 
   getAllVendor() {
@@ -563,7 +564,7 @@ let url = `?page=1&count=700`
         this.productList = temp
       });
     } else {
-      this.commonService.errorToast("PLease select a vendor First")
+      this.commonService.errorToast("Please select a vendor First")
     }
 
   }
@@ -579,6 +580,7 @@ let url = `?page=1&count=700`
   }
 
   checkBanner() {
+console.log('Len of selectedCategoryItem',this.selectedCategoryItem,'This',this);
 
     this.submitted = true
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
@@ -610,15 +612,15 @@ let url = `?page=1&count=700`
         if (this.selectedItem.length > 0) {
           this.typeSubcategory(checkOffer, this.selectedItem);
         } else {
-          if (this.selectedCategoryItem.length > 0) {
+          // if (this.selectedCategoryItem.length > 0) {
             let selectedSubCategory = [];
             for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
               selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
             }
             this.typeSubcategory(checkOffer, selectedSubCategory);
-          } else {
-            this.commonService.errorToast("Please Select a Sub-category ")
-          }
+          // } else {
+          //   this.commonService.errorToast("Please Select a Sub-category ")
+          // }
         }
       }
 
